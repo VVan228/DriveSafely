@@ -1,0 +1,49 @@
+.myModal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: none;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+.myModalContent {
+    position: relative;
+    padding: 25px;
+    background: #292929;
+    /*border-radius: .7rem;*/
+    min-width: 250px;
+}
+
+.myModal.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.closeBtn {
+    transition: .3s;
+    content: 'x';
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #B9110F;
+    border: none;
+    padding: 10px 10px;
+    font-weight: 900;
+    font-size: 24px;
+    position: absolute;
+    right: -20px;
+    top: -20px;
+}
+
+.myModalContent:has(.closeBtn:hover) {
+    transition: .3s ease-in-out;
+    opacity: 0.5;
+}
