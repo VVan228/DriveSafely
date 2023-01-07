@@ -1,0 +1,26 @@
+.myInput{
+    width: 100%;
+    margin: 5px 0;
+    padding: 5px 15px;
+    /*border-radius: .5rem;*/
+    background: transparent;
+    border: 3px solid transparent;
+    color: #ECA553;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+    transition: .3s ease-in-out;
+}
+
+.myInput:hover{
+    /*box-shadow: 0px 0px 10px #ECA553;*/
+    border: 3px solid #ECA553;
+}
+
+.myInput:focus {
+    border: 3px solid #ECA553;
+    background-color: #ECA553;
+    color: inherit;
+}
