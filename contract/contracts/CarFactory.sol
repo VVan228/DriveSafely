@@ -1,7 +1,8 @@
 pragma solidity ^0.8.13;
 import "../node_modules/@openzeppelin/contracts/utils/Strings.sol";
+import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 
-contract CarFactory {
+contract CarFactory is Ownable {
 
     uint defaultHorsePowersLow = 90;
     uint defaultHorsePowersUp = 101;
@@ -14,7 +15,7 @@ contract CarFactory {
 
     struct Car {
         string model;
-        bytes32 vin;
+        uint vin;
         uint engineId;
         uint chassisId;
         uint8 carLevel;
@@ -45,14 +46,17 @@ contract CarFactory {
     mapping (uint => address) public carToOwner;
     mapping (uint => address) public engineToOwner;
     mapping (uint => address) public chassisToOwner;
-    mapping (address => bool) public OwnerHasCar;
+
+    mapping (address => uint) ownerCarCount;
+    mapping (address => uint) ownerEngineCount;
+    mapping (address => uint) ownerChassisCount;
 
     function createCar() public {
-        require(OwnerHasCar[msg.sender] == false);
+        require(ownerCarCount[msg.sender] == 0);
 
         string memory model = "model"; //TODO
         string memory key = string(abi.encodePacked(model,Strings.toString(block.timestamp))); 
-        bytes32 vin = keccak256(abi.encodePacked((key)));
+        uint vin = uint(keccak256(abi.encodePacked((key))));
 
         uint engineId = _generateDefaultEngine(); 
         uint chassisId = _generateDefaultChassis();
@@ -60,7 +64,7 @@ contract CarFactory {
         uint id = cars.length;
         cars.push(Car(model, vin, engineId, chassisId, 1, 0, 0, 0));
         carToOwner[id] = msg.sender;
-        OwnerHasCar[msg.sender] = true;
+        ownerCarCount[msg.sender]++;
     }
 
 
@@ -69,6 +73,7 @@ contract CarFactory {
         uint16 randConsumtion = (uint16) (defaultConsumtionLow + block.timestamp % (defaultConsumtionUp - defaultConsumtionLow));
         uint id = engineCounter++;
         engines.push(Engine(id, randHorsePowers, randConsumtion));
+        ownerEngineCount[msg.sender]++;
         engineToOwner[id] = msg.sender;
         return id;
     }
@@ -76,7 +81,8 @@ contract CarFactory {
     function _generateDefaultChassis() private returns(uint) {
         uint32 randDurability = (uint32)(defaultDurabilityLow + block.timestamp % (defaultDurabilityUp - defaultDurabilityLow));
         uint id = chassisCounter++;
-        chassis.push(Chassis(id, randDurability, 0));
+        chassis.push(Chassis(id, randDurability, randDurability));
+        ownerChassisCount[msg.sender]++;
         chassisToOwner[id] = msg.sender;
         return id;
     }

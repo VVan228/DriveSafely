@@ -11,27 +11,16 @@ contract FuelStationFactory{
         uint8 productionPerHour;
     }
 
+
     FuelStation[] public stations;
 
-    mapping (address => uint) public ownerToFuelStation;
-
-    function getFuelStation() public view returns(uint, uint8, uint8){
-        address ad = msg.sender;
-        uint stationId = ownerToFuelStation[ad];
-        require(stationId>0, "user has no fuel station???");
-        require(stationId<=stations.length, "invalid id");
-        FuelStation memory station = stations[stationId-1];
-        return (station.id, station.capacity, station.productionPerHour);
-    }
+    mapping (uint => address) public fuelStationToOwner;
 
     function createFuelStation() public{
         address ad = msg.sender;
-        uint stationId = ownerToFuelStation[ad];
-        require(stationId==0, "user already has station");
-        stations.push(FuelStation(stations.length+1, defaultCapacity, defaultProduction));
         uint id = stations.length;
-        stations[id-1].id = id;
-        ownerToFuelStation[ad] = id;
+        stations.push(FuelStation(id, defaultCapacity, defaultProduction));
+        fuelStationToOwner[id] = ad;
     }
 
 }
