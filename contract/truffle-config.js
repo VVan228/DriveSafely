@@ -21,7 +21,7 @@
 // require('dotenv').config();
 // const mnemonic = process.env["MNEMONIC"];
 // const infuraProjectId = process.env["INFURA_PROJECT_ID"];
- 
+
 // const HDWalletProvider = require('@truffle/hdwallet-provider');
 
 module.exports = {
@@ -54,10 +54,10 @@ module.exports = {
     //   chain_id: 5
     // }
     development: {
-        host: "192.168.0.232",     // Localhost (default: none)
-        port: 7545,            // Standard Ethereum port (default: none)
-        network_id: "*",       // Any network (default: none)
-       }
+      host: "192.168.0.232",     // Localhost (default: none)
+      port: 7545,            // Standard Ethereum port (default: none)
+      network_id: "*",       // Any network (default: none)
+    }
   },
 
   // Set default mocha options here, use special reporters etc.
