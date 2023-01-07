@@ -1,0 +1,13 @@
+.navItem {
+    color: #282c34 !important;
+    text-decoration: none !important;
+}
+
+.navLink {
+    color: #282c34;
+    text-decoration: none;
+}
+
+.navLink.active {
+    color: #B9110F !important;
+}

@@ -3,9 +3,17 @@ import classes from './MyButton.module.css';
 
 const MyButton = ({children, ...props}) => {
     return (
-        <button {...props} className={[classes.myBtn, props.className].join(' ')}>
-            <p>{children}</p>
-        </button>
+        props.shadow ?
+            <button {...props} className={[classes.myBtn, props.className].join(' ')}
+                    style={{
+                        color: props.textColor,
+                        backgroundColor: props.backgroundColor}}>
+                <p>{children}</p>
+            </button> :
+            <button {...props} className={[classes.myBtn, props.className].join(' ')}
+                    style={{color: props.textColor, backgroundColor: props.backgroundColor}}>
+                <p>{children}</p>
+            </button>
     );
 };
 

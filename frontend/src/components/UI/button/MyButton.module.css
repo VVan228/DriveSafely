@@ -1,6 +1,6 @@
 .myBtn {
-    color: white;
-    background-color: #CF2624;
+    /*color: white;*/
+    /*background-color: #CF2624;*/
     border: none;
     cursor: pointer;
     -webkit-transform: skew(-30deg);
@@ -26,7 +26,7 @@
 
 .myBtn:hover {
     border-radius: .5rem;
-    box-shadow: -10px 10px 0 #B9110F;
+    /*box-shadow: -10px 10px 0 #B9110F;*/
     transform: translate(10px, -10px);
     /*margin-top: 1rem;*/
 }
@@ -43,7 +43,7 @@
 }
 
 .myBtn--layout {
-    background-color: #B9110F;
+    /*background-color: #B9110F;*/
     position: absolute;
     width: 100%;
     height: 100%;
@@ -56,5 +56,10 @@
     src: local('Inter'), url('Inter-VariableFont_slnt,wght.ttf') format('truetype');
     /* other formats include: 'woff2', 'truetype, 'opentype',
                               'embedded-opentype', and 'svg' */
+}
+
+.myIconBtn {
+    border: none;
+    background-color: transparent;
 }
 
