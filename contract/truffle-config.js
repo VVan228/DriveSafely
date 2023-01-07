@@ -53,6 +53,11 @@ module.exports = {
     //   network_id: 5,       // Goerli's id
     //   chain_id: 5
     // }
+    development: {
+        host: "192.168.0.232",     // Localhost (default: none)
+        port: 7545,            // Standard Ethereum port (default: none)
+        network_id: "*",       // Any network (default: none)
+       }
   },
 
   // Set default mocha options here, use special reporters etc.
