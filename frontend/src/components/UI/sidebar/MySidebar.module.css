@@ -1,0 +1,28 @@
+.leftSidebar {
+    float: left;
+    left: -200px;
+}
+
+.rightSidebar {
+    float: right;
+    right: -200px;
+    -webkit-transform: skew(15deg);
+}
+
+.mySidebar {
+    position: absolute;
+    /*padding: 5%;*/
+    width: 30%;
+    height: 100%;
+    background-color: #282c34;
+    color: white;
+    -webkit-transform: skew(-15deg);
+    -moz-transform: skew(-15deg);
+    -o-transform: skew(-15deg);
+}
+
+.mySidebar > * {
+    -webkit-transform: skew(15deg);
+    -moz-transform: skew(15deg);
+    -o-transform: skew(15deg);
+}

@@ -8,5 +8,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="956b58f059" level="application" />
+    <orderEntry type="library" name="bootstrap" level="application" />
+    <orderEntry type="library" name="bootstrap-icons" level="application" />
+    <orderEntry type="library" name="primeicons" level="application" />
+    <orderEntry type="library" name="primereact" level="application" />
   </component>
 </module>

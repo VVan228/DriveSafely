@@ -1,6 +1,6 @@
 .myBtn {
-    /*color: white;*/
-    /*background-color: #CF2624;*/
+    color: white;
+    background-color: #CF2624;
     border: none;
     cursor: pointer;
     -webkit-transform: skew(-30deg);
@@ -9,6 +9,14 @@
     padding: .5rem 1.5rem;
     transition: .3s ease-in-out;
     margin-top: .5rem;
+}
+
+.myBtnRed {
+
+}
+
+.myBtnYellow {
+    background-color: #ECA553;
 }
 
 .myBtn p {
@@ -61,5 +69,19 @@
 .myIconBtn {
     border: none;
     background-color: transparent;
+}
+
+.MyIconButton > p {
+    margin: 0!important;
+}
+
+.itemToggleButton {
+    border: 0;
+    border-radius: 50%;
+    background-color: #ECA553;
+    color: white;
+    padding: 5px;
+    width: 4em;
+    height: 4em;
 }
 

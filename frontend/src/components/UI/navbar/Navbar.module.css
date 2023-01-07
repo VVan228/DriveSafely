@@ -3,11 +3,52 @@
     text-decoration: none !important;
 }
 
-.navLink {
+.navLink:not(.rotatingIcon) {
     color: #282c34;
     text-decoration: none;
+    transition: .3s;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.navLink:not(.rotatingIcon):hover {
+    background-color: #ECA553;
+    color: white;
+    padding: 30px;
 }
 
 .navLink.active {
     color: #B9110F !important;
+}
+
+.navLink.active {
+    color: #B9110F !important;
+}
+
+.rotatingIcon {
+    background-color: #B9110F;
+    animation: rotate 5s infinite;
+    border-radius: 50%;
+    padding: 20px;
+    transition: .3s;
+}
+
+.rotatingIcon > * > i {
+   color: white;
+}
+
+.navLink > i {
+    font-size: 2em;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

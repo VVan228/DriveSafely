@@ -10,7 +10,7 @@ const MyIconButton = ({children, ...props}) => {
                 color: props.color
             }}
         >
-            <p>{children}</p>
+            {children}
         </button>
     );
 };

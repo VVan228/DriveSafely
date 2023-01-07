@@ -4,7 +4,7 @@ import PostPage from "../pages/PostPage";
 import Login from "../pages/Login";
 import Competitions from "../pages/Competitions";
 import Wallet from "../pages/Wallet";
-import Inventory from "../pages/Inventory";
+import Inventory from "../pages/Inventory/Inventory";
 import Marketplace from "../pages/Marketplace";
 
 export const privateRoutes = [
