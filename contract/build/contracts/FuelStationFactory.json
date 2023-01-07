@@ -4945,12 +4945,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x06436b40030557ca69c545783fF1e6F9081e3209",
-      "transactionHash": "0xb7c83c47312fa86d1ff01e55e968867c702c96770ff8583d8c57d3b4d38a6361"
+      "address": "0x6874A3aE394b86C1c4dfCb47680ff46cf7496387",
+      "transactionHash": "0x9225903f72603525776e8639b47827151d8dff729506939fa968c5e958f40e51"
     }
   },
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-01-07T10:21:05.522Z",
+  "updatedAt": "2023-01-07T12:32:38.602Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

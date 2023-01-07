@@ -3,14 +3,25 @@ import "../node_modules/@openzeppelin/contracts/utils/Strings.sol";
 
 contract CarFactory {
 
-    uint defaultHorsePowersLow = 90;
-    uint defaultHorsePowersUp = 101;
+    uint defaultHorsePowersLow;
+    uint defaultHorsePowersUp;
    
-    uint defaultConsumtionLow = 18;
-    uint defaultConsumtionUp = 21;
+    uint defaultConsumtionLow;
+    uint defaultConsumtionUp;
   
-    uint defaultDurabilityLow = 100000;
-    uint defaultDurabilityUp = 120001; 
+    uint defaultDurabilityLow;
+    uint defaultDurabilityUp; 
+
+    constructor() {
+         defaultHorsePowersLow = 90;
+         defaultHorsePowersUp = 101;
+   
+         defaultConsumtionLow = 18;
+         defaultConsumtionUp = 21;
+  
+         defaultDurabilityLow = 100000;
+         defaultDurabilityUp = 120001;
+    }
 
     struct Car {
         string model;
