@@ -33,7 +33,7 @@ contract CarHelper is CarFactory {
     }
 
 
-    function getFuelStationByOwner(address _owner) public view returns(uint){
+    function getFuelStationByOwner(address _owner) public view returns(FuelStation memory){
         uint resId;
         for (uint i = 0; i < stations.length; i++) {
             if (fuelStationToOwner[i] == _owner) {
@@ -41,27 +41,27 @@ contract CarHelper is CarFactory {
                break;
             }
         }
-        return resId;
+        return stations[resId];
     }
 
-    function getEnginesByOwner(address _owner) public view returns(uint[] memory) {
-        uint[] memory result = new uint[](ownerEngineCount[_owner]);
+    function getEnginesByOwner(address _owner) public view returns(Engine[] memory) {
+        Engine[] memory result = new Engine[](ownerEngineCount[_owner]);
         uint counter = 0;
         for (uint i = 0; i < engines.length; i++) {
             if (engineToOwner[i] == _owner) {
-                result[counter] = i;
+                result[counter] = engines[i];
                 counter++;
             }
         }
         return result;
     }
 
-    function getChassisByOwner(address _owner) public view returns(uint[] memory) {
-        uint[] memory result = new uint[](ownerEngineCount[_owner]);
+    function getChassisByOwner(address _owner) public view returns(Chassis[] memory) {
+        Chassis[] memory result = new Chassis[](ownerEngineCount[_owner]);
         uint counter = 0;
         for (uint i = 0; i < chassis.length; i++) {
             if (chassisToOwner[i] == _owner) {
-                result[counter] = i;
+                result[counter] = chassis[i];
                 counter++;
             }
         }

@@ -5,15 +5,15 @@ import "./RaceHandler.sol";
 contract CarRacing is RaceHandler{
 
     function _isEnoughFuel(uint _carId, uint8 duration) private returns(bool){
-        uint stationId = getFuelStationByOwner(carToOwner[_carId]);
-        _refreshFuel(stationId);
+        FuelStation memory station = getFuelStationByOwner(carToOwner[_carId]);
+        _refreshFuel(station.id);
         uint engineId = cars[_carId].engineId;
         uint8 liters= 1;
         if (engines[engineId].consumtion * duration >= 10)
             liters = duration * engines[engineId].consumtion / 10;
 
-        if (stations[stationId].currentFullness >= liters) {
-            stations[stationId].currentFullness -= liters;
+        if (stations[station.id].currentFullness >= liters) {
+            stations[station.id].currentFullness -= liters;
             return true;
         }
         else
