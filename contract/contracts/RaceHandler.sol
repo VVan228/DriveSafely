@@ -12,9 +12,7 @@ contract RaceHandler is CarHelper{
     }
 
     Cross[] crosses;
-
-
-
+    
     mapping(address => uint) playersToRooms;
     mapping(address => uint) playersToCars;
     struct OpenedRoom{

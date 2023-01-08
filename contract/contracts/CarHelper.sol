@@ -7,8 +7,9 @@ contract CarHelper is CarFactory {
     uint capacityCoef = 0.00001 ether;
     uint productionPerHourCoef = 0.0002 ether;
     uint horsePowersCoef = 0.000015 ether;
-    uint consumtionCoef = 0.1 ether;
+    uint consumtionCoef = 0.005 ether;
     uint durabilityCoef = 0.0000000001 ether;
+    uint levelUpCost = 0.001 ether;
 
     modifier onlyOwnerOfCar(uint _carId) {
         require(msg.sender == carToOwner[_carId]);
@@ -94,13 +95,20 @@ contract CarHelper is CarFactory {
     }
 
     function upgradeConsumtion(uint _engineId, uint8 _counts) external payable onlyOwnerOfEngine(_engineId) {
-        require(msg.value == (_counts ** 2 / engines[_engineId].consumtion * consumtionCoef));
+        require(msg.value == consumtionCoef * 2**(10 - engines[_engineId].consumtion));
         engines[_engineId].consumtion -= _counts; 
     }
 
     function upgradeDurability(uint _chassisId, uint8 _counts) external payable onlyOwnerOfChassis(_chassisId) {
         require(msg.value == (_counts * chassis[_chassisId].durability * durabilityCoef));
         chassis[_chassisId].durability += _counts; 
+    }
+
+    function levelUp(uint _carId) external payable {
+        require(msg.value == levelUpCost * (cars[_carId].carLevel/10) && cars[_carId].winCountOnCurrentLevel >= (cars[_carId].carLevel + 1));
+        cars[_carId].carLevel++;
+        cars[_carId].winCountOnCurrentLevel = 0;
+        cars[_carId].lossCountOnCurrentLevel = 0;
     }
 
 

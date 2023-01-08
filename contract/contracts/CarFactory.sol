@@ -8,18 +8,16 @@ contract CarFactory is Ownable, FuelStationFactory {
     uint defaultHorsePowersLow;
     uint defaultHorsePowersUp;
    
-    uint defaultConsumtionLow;
-    uint defaultConsumtionUp;
+    uint8 defaultConsumtion;
   
     uint defaultDurabilityLow;
     uint defaultDurabilityUp; 
 
     constructor() {
-         defaultHorsePowersLow = 90;
-         defaultHorsePowersUp = 101;
+         defaultHorsePowersLow = 80;
+         defaultHorsePowersUp = 91;
    
-         defaultConsumtionLow = 18;
-         defaultConsumtionUp = 21;
+         defaultConsumtion = 10;
   
          defaultDurabilityLow = 100000;
          defaultDurabilityUp = 120001;
@@ -39,7 +37,7 @@ contract CarFactory is Ownable, FuelStationFactory {
     struct Engine {
         uint id;
         uint16 horsePowers;
-        uint16 consumtion;
+        uint8 consumtion;
     }
 
     struct Chassis {
@@ -82,9 +80,9 @@ contract CarFactory is Ownable, FuelStationFactory {
 
     function _generateDefaultEngine() private returns (uint){
         uint16 randHorsePowers = (uint16)(defaultHorsePowersLow + block.timestamp % (defaultHorsePowersUp - defaultHorsePowersLow));
-        uint16 randConsumtion = (uint16) (defaultConsumtionLow + block.timestamp % (defaultConsumtionUp - defaultConsumtionLow));
+        // uint16 randConsumtion = (uint16) (defaultConsumtionLow + block.timestamp % (defaultConsumtionUp - defaultConsumtionLow));
         uint id = engineCounter++;
-        engines.push(Engine(id, randHorsePowers, randConsumtion));
+        engines.push(Engine(id, randHorsePowers, defaultConsumtion));
         ownerEngineCount[msg.sender]++;
         engineToOwner[id] = msg.sender;
         return id;
