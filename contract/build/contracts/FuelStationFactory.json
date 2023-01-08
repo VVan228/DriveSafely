@@ -18,8 +18,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -58,8 +57,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -1392,15 +1390,15 @@
     "absolutePath": "project:/contracts/FuelStationFactory.sol",
     "exportedSymbols": {
       "FuelStationFactory": [
-        1437
+        1510
       ]
     },
-    "id": 1438,
+    "id": 1511,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1375,
+        "id": 1448,
         "literals": [
           "solidity",
           "^",
@@ -1417,9 +1415,9 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 1437,
+        "id": 1510,
         "linearizedBaseContracts": [
-          1437
+          1510
         ],
         "name": "FuelStationFactory",
         "nameLocation": "67:18:6",
@@ -1427,12 +1425,12 @@
         "nodes": [
           {
             "constant": false,
-            "id": 1378,
+            "id": 1451,
             "mutability": "mutable",
             "name": "defaultCapacity",
             "nameLocation": "98:15:6",
             "nodeType": "VariableDeclaration",
-            "scope": 1437,
+            "scope": 1510,
             "src": "92:26:6",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1441,7 +1439,7 @@
               "typeString": "uint8"
             },
             "typeName": {
-              "id": 1376,
+              "id": 1449,
               "name": "uint8",
               "nodeType": "ElementaryTypeName",
               "src": "92:5:6",
@@ -1452,7 +1450,7 @@
             },
             "value": {
               "hexValue": "3630",
-              "id": 1377,
+              "id": 1450,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -1470,12 +1468,12 @@
           },
           {
             "constant": false,
-            "id": 1381,
+            "id": 1454,
             "mutability": "mutable",
             "name": "defaultProduction",
             "nameLocation": "130:17:6",
             "nodeType": "VariableDeclaration",
-            "scope": 1437,
+            "scope": 1510,
             "src": "124:27:6",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1484,7 +1482,7 @@
               "typeString": "uint8"
             },
             "typeName": {
-              "id": 1379,
+              "id": 1452,
               "name": "uint8",
               "nodeType": "ElementaryTypeName",
               "src": "124:5:6",
@@ -1495,7 +1493,7 @@
             },
             "value": {
               "hexValue": "35",
-              "id": 1380,
+              "id": 1453,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -1513,16 +1511,16 @@
           },
           {
             "canonicalName": "FuelStationFactory.FuelStation",
-            "id": 1392,
+            "id": 1465,
             "members": [
               {
                 "constant": false,
-                "id": 1383,
+                "id": 1456,
                 "mutability": "mutable",
                 "name": "id",
                 "nameLocation": "189:2:6",
                 "nodeType": "VariableDeclaration",
-                "scope": 1392,
+                "scope": 1465,
                 "src": "184:7:6",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -1531,7 +1529,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 1382,
+                  "id": 1455,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "184:4:6",
@@ -1544,12 +1542,12 @@
               },
               {
                 "constant": false,
-                "id": 1385,
+                "id": 1458,
                 "mutability": "mutable",
                 "name": "capacity",
                 "nameLocation": "207:8:6",
                 "nodeType": "VariableDeclaration",
-                "scope": 1392,
+                "scope": 1465,
                 "src": "201:14:6",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -1558,7 +1556,7 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 1384,
+                  "id": 1457,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
                   "src": "201:5:6",
@@ -1571,12 +1569,12 @@
               },
               {
                 "constant": false,
-                "id": 1387,
+                "id": 1460,
                 "mutability": "mutable",
                 "name": "productionPerHour",
                 "nameLocation": "231:17:6",
                 "nodeType": "VariableDeclaration",
-                "scope": 1392,
+                "scope": 1465,
                 "src": "225:23:6",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -1585,7 +1583,7 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 1386,
+                  "id": 1459,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
                   "src": "225:5:6",
@@ -1598,12 +1596,12 @@
               },
               {
                 "constant": false,
-                "id": 1389,
+                "id": 1462,
                 "mutability": "mutable",
                 "name": "currentFullness",
                 "nameLocation": "264:15:6",
                 "nodeType": "VariableDeclaration",
-                "scope": 1392,
+                "scope": 1465,
                 "src": "258:21:6",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -1612,7 +1610,7 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 1388,
+                  "id": 1461,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
                   "src": "258:5:6",
@@ -1625,12 +1623,12 @@
               },
               {
                 "constant": false,
-                "id": 1391,
+                "id": 1464,
                 "mutability": "mutable",
                 "name": "lastUpdate",
                 "nameLocation": "294:10:6",
                 "nodeType": "VariableDeclaration",
-                "scope": 1392,
+                "scope": 1465,
                 "src": "289:15:6",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -1639,7 +1637,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 1390,
+                  "id": 1463,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "289:4:6",
@@ -1654,49 +1652,49 @@
             "name": "FuelStation",
             "nameLocation": "162:11:6",
             "nodeType": "StructDefinition",
-            "scope": 1437,
+            "scope": 1510,
             "src": "155:156:6",
             "visibility": "public"
           },
           {
             "constant": false,
             "functionSelector": "92f859db",
-            "id": 1396,
+            "id": 1469,
             "mutability": "mutable",
             "name": "stations",
             "nameLocation": "339:8:6",
             "nodeType": "VariableDeclaration",
-            "scope": 1437,
+            "scope": 1510,
             "src": "318:29:6",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_array$_t_struct$_FuelStation_$1392_storage_$dyn_storage",
+              "typeIdentifier": "t_array$_t_struct$_FuelStation_$1465_storage_$dyn_storage",
               "typeString": "struct FuelStationFactory.FuelStation[]"
             },
             "typeName": {
               "baseType": {
-                "id": 1394,
+                "id": 1467,
                 "nodeType": "UserDefinedTypeName",
                 "pathNode": {
-                  "id": 1393,
+                  "id": 1466,
                   "name": "FuelStation",
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 1392,
+                  "referencedDeclaration": 1465,
                   "src": "318:11:6"
                 },
-                "referencedDeclaration": 1392,
+                "referencedDeclaration": 1465,
                 "src": "318:11:6",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_FuelStation_$1392_storage_ptr",
+                  "typeIdentifier": "t_struct$_FuelStation_$1465_storage_ptr",
                   "typeString": "struct FuelStationFactory.FuelStation"
                 }
               },
-              "id": 1395,
+              "id": 1468,
               "nodeType": "ArrayTypeName",
               "src": "318:13:6",
               "typeDescriptions": {
-                "typeIdentifier": "t_array$_t_struct$_FuelStation_$1392_storage_$dyn_storage_ptr",
+                "typeIdentifier": "t_array$_t_struct$_FuelStation_$1465_storage_$dyn_storage_ptr",
                 "typeString": "struct FuelStationFactory.FuelStation[]"
               }
             },
@@ -1705,12 +1703,12 @@
           {
             "constant": false,
             "functionSelector": "594193d7",
-            "id": 1400,
+            "id": 1473,
             "mutability": "mutable",
             "name": "fuelStationToOwner",
             "nameLocation": "387:18:6",
             "nodeType": "VariableDeclaration",
-            "scope": 1437,
+            "scope": 1510,
             "src": "354:51:6",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1719,9 +1717,9 @@
               "typeString": "mapping(uint256 => address)"
             },
             "typeName": {
-              "id": 1399,
+              "id": 1472,
               "keyType": {
-                "id": 1397,
+                "id": 1470,
                 "name": "uint",
                 "nodeType": "ElementaryTypeName",
                 "src": "363:4:6",
@@ -1737,7 +1735,7 @@
                 "typeString": "mapping(uint256 => address)"
               },
               "valueType": {
-                "id": 1398,
+                "id": 1471,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "371:7:6",
@@ -1752,23 +1750,23 @@
           },
           {
             "body": {
-              "id": 1435,
+              "id": 1508,
               "nodeType": "Block",
               "src": "447:230:6",
               "statements": [
                 {
                   "assignments": [
-                    1404
+                    1477
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 1404,
+                      "id": 1477,
                       "mutability": "mutable",
                       "name": "ad",
                       "nameLocation": "465:2:6",
                       "nodeType": "VariableDeclaration",
-                      "scope": 1435,
+                      "scope": 1508,
                       "src": "457:10:6",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -1777,7 +1775,7 @@
                         "typeString": "address"
                       },
                       "typeName": {
-                        "id": 1403,
+                        "id": 1476,
                         "name": "address",
                         "nodeType": "ElementaryTypeName",
                         "src": "457:7:6",
@@ -1790,10 +1788,10 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 1407,
+                  "id": 1480,
                   "initialValue": {
                     "expression": {
-                      "id": 1405,
+                      "id": 1478,
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
@@ -1804,7 +1802,7 @@
                         "typeString": "msg"
                       }
                     },
-                    "id": 1406,
+                    "id": 1479,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1822,17 +1820,17 @@
                 },
                 {
                   "assignments": [
-                    1409
+                    1482
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 1409,
+                      "id": 1482,
                       "mutability": "mutable",
                       "name": "id",
                       "nameLocation": "495:2:6",
                       "nodeType": "VariableDeclaration",
-                      "scope": 1435,
+                      "scope": 1508,
                       "src": "490:7:6",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -1841,7 +1839,7 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 1408,
+                        "id": 1481,
                         "name": "uint",
                         "nodeType": "ElementaryTypeName",
                         "src": "490:4:6",
@@ -1853,21 +1851,21 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 1412,
+                  "id": 1485,
                   "initialValue": {
                     "expression": {
-                      "id": 1410,
+                      "id": 1483,
                       "name": "stations",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1396,
+                      "referencedDeclaration": 1469,
                       "src": "500:8:6",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_array$_t_struct$_FuelStation_$1392_storage_$dyn_storage",
+                        "typeIdentifier": "t_array$_t_struct$_FuelStation_$1465_storage_$dyn_storage",
                         "typeString": "struct FuelStationFactory.FuelStation storage ref[] storage ref"
                       }
                     },
-                    "id": 1411,
+                    "id": 1484,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1889,11 +1887,11 @@
                       {
                         "arguments": [
                           {
-                            "id": 1417,
+                            "id": 1490,
                             "name": "id",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1409,
+                            "referencedDeclaration": 1482,
                             "src": "551:2:6",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
@@ -1901,11 +1899,11 @@
                             }
                           },
                           {
-                            "id": 1418,
+                            "id": 1491,
                             "name": "defaultCapacity",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1378,
+                            "referencedDeclaration": 1451,
                             "src": "555:15:6",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint8",
@@ -1913,11 +1911,11 @@
                             }
                           },
                           {
-                            "id": 1419,
+                            "id": 1492,
                             "name": "defaultProduction",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1381,
+                            "referencedDeclaration": 1454,
                             "src": "572:17:6",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint8",
@@ -1925,11 +1923,11 @@
                             }
                           },
                           {
-                            "id": 1420,
+                            "id": 1493,
                             "name": "defaultCapacity",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1378,
+                            "referencedDeclaration": 1451,
                             "src": "591:15:6",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint8",
@@ -1940,7 +1938,7 @@
                             "arguments": [
                               {
                                 "expression": {
-                                  "id": 1423,
+                                  "id": 1496,
                                   "name": "block",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
@@ -1951,7 +1949,7 @@
                                     "typeString": "block"
                                   }
                                 },
-                                "id": 1424,
+                                "id": 1497,
                                 "isConstant": false,
                                 "isLValue": false,
                                 "isPure": false,
@@ -1972,7 +1970,7 @@
                                   "typeString": "uint256"
                                 }
                               ],
-                              "id": 1422,
+                              "id": 1495,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": true,
@@ -1984,14 +1982,14 @@
                                 "typeString": "type(uint32)"
                               },
                               "typeName": {
-                                "id": 1421,
+                                "id": 1494,
                                 "name": "uint32",
                                 "nodeType": "ElementaryTypeName",
                                 "src": "608:6:6",
                                 "typeDescriptions": {}
                               }
                             },
-                            "id": 1425,
+                            "id": 1498,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
@@ -2030,18 +2028,18 @@
                               "typeString": "uint32"
                             }
                           ],
-                          "id": 1416,
+                          "id": 1489,
                           "name": "FuelStation",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1392,
+                          "referencedDeclaration": 1465,
                           "src": "539:11:6",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_struct$_FuelStation_$1392_storage_ptr_$",
+                            "typeIdentifier": "t_type$_t_struct$_FuelStation_$1465_storage_ptr_$",
                             "typeString": "type(struct FuelStationFactory.FuelStation storage pointer)"
                           }
                         },
-                        "id": 1426,
+                        "id": 1499,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -2052,7 +2050,7 @@
                         "src": "539:93:6",
                         "tryCall": false,
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_FuelStation_$1392_memory_ptr",
+                          "typeIdentifier": "t_struct$_FuelStation_$1465_memory_ptr",
                           "typeString": "struct FuelStationFactory.FuelStation memory"
                         }
                       }
@@ -2060,23 +2058,23 @@
                     "expression": {
                       "argumentTypes": [
                         {
-                          "typeIdentifier": "t_struct$_FuelStation_$1392_memory_ptr",
+                          "typeIdentifier": "t_struct$_FuelStation_$1465_memory_ptr",
                           "typeString": "struct FuelStationFactory.FuelStation memory"
                         }
                       ],
                       "expression": {
-                        "id": 1413,
+                        "id": 1486,
                         "name": "stations",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1396,
+                        "referencedDeclaration": 1469,
                         "src": "525:8:6",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_array$_t_struct$_FuelStation_$1392_storage_$dyn_storage",
+                          "typeIdentifier": "t_array$_t_struct$_FuelStation_$1465_storage_$dyn_storage",
                           "typeString": "struct FuelStationFactory.FuelStation storage ref[] storage ref"
                         }
                       },
-                      "id": 1415,
+                      "id": 1488,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -2085,11 +2083,11 @@
                       "nodeType": "MemberAccess",
                       "src": "525:13:6",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_arraypush_nonpayable$_t_array$_t_struct$_FuelStation_$1392_storage_$dyn_storage_ptr_$_t_struct$_FuelStation_$1392_storage_$returns$__$bound_to$_t_array$_t_struct$_FuelStation_$1392_storage_$dyn_storage_ptr_$",
+                        "typeIdentifier": "t_function_arraypush_nonpayable$_t_array$_t_struct$_FuelStation_$1465_storage_$dyn_storage_ptr_$_t_struct$_FuelStation_$1465_storage_$returns$__$bound_to$_t_array$_t_struct$_FuelStation_$1465_storage_$dyn_storage_ptr_$",
                         "typeString": "function (struct FuelStationFactory.FuelStation storage ref[] storage pointer,struct FuelStationFactory.FuelStation storage ref)"
                       }
                     },
-                    "id": 1427,
+                    "id": 1500,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2104,37 +2102,37 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 1428,
+                  "id": 1501,
                   "nodeType": "ExpressionStatement",
                   "src": "525:108:6"
                 },
                 {
                   "expression": {
-                    "id": 1433,
+                    "id": 1506,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "baseExpression": {
-                        "id": 1429,
+                        "id": 1502,
                         "name": "fuelStationToOwner",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1400,
+                        "referencedDeclaration": 1473,
                         "src": "643:18:6",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_uint256_$_t_address_$",
                           "typeString": "mapping(uint256 => address)"
                         }
                       },
-                      "id": 1431,
+                      "id": 1504,
                       "indexExpression": {
-                        "id": 1430,
+                        "id": 1503,
                         "name": "id",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1409,
+                        "referencedDeclaration": 1482,
                         "src": "662:2:6",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -2155,11 +2153,11 @@
                     "nodeType": "Assignment",
                     "operator": "=",
                     "rightHandSide": {
-                      "id": 1432,
+                      "id": 1505,
                       "name": "ad",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1404,
+                      "referencedDeclaration": 1477,
                       "src": "668:2:6",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -2172,14 +2170,14 @@
                       "typeString": "address"
                     }
                   },
-                  "id": 1434,
+                  "id": 1507,
                   "nodeType": "ExpressionStatement",
                   "src": "643:27:6"
                 }
               ]
             },
             "functionSelector": "224370f0",
-            "id": 1436,
+            "id": 1509,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -2187,25 +2185,25 @@
             "nameLocation": "421:17:6",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1401,
+              "id": 1474,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "438:2:6"
             },
             "returnParameters": {
-              "id": 1402,
+              "id": 1475,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "447:0:6"
             },
-            "scope": 1437,
+            "scope": 1510,
             "src": "412:265:6",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
           }
         ],
-        "scope": 1438,
+        "scope": 1511,
         "src": "58:622:6",
         "usedErrors": []
       }
@@ -2216,16 +2214,9 @@
     "name": "solc",
     "version": "0.8.13+commit.abaa5c0e.Emscripten.clang"
   },
-  "networks": {
-    "5777": {
-      "events": {},
-      "links": {},
-      "address": "0xDf341fB6E49DddDC494A3e43B160FC0c719a3e72",
-      "transactionHash": "0x85a873a46d7fdf8b2ed61f9382426274b2de507972f56136b0ca56d039ecc656"
-    }
-  },
+  "networks": {},
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-01-08T14:23:14.147Z",
+  "updatedAt": "2023-01-08T15:51:32.155Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

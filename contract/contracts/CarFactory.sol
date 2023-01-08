@@ -24,6 +24,7 @@ contract CarFactory is Ownable, FuelStationFactory {
         uint mileage;
         uint winCountOnCurrentLevel;
         uint lossCountOnCurrentLevel;
+        uint id;
     }
 
     struct Engine {
@@ -77,7 +78,7 @@ contract CarFactory is Ownable, FuelStationFactory {
         uint chassisId = _generateDefaultChassis();
 
         uint id = cars.length;
-        cars.push(Car(model, vin, engineId, chassisId, 1, 0, 0, 0));
+        cars.push(Car(model, vin, engineId, chassisId, 1, 0, 0, 0, id));
         carToOwner[id] = msg.sender;
         ownerCarCount[msg.sender]++;
     }

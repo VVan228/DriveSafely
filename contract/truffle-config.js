@@ -57,7 +57,10 @@ module.exports = {
       host: "192.168.0.232",     // Localhost (default: none)
       port: 7545,            // Standard Ethereum port (default: none)
       network_id: "*",       // Any network (default: none)
+      //gas: 6721975
+      
     }
+  
   },
 
   // Set default mocha options here, use special reporters etc.

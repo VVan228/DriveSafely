@@ -32,6 +32,16 @@ contract CarHelper is CarFactory {
         _;
     }
 
+    function switchEngine(uint carId, uint engineId) public onlyOwnerOfEngine(engineId) onlyOwnerOfCar(carId){
+        require(cars[carId].engineId != engineId, "same engine");
+        cars[carId].engineId = engineId;
+    }
+
+    function switchChassis(uint carId, uint chassisId) public onlyOwnerOfChassis(chassisId) onlyOwnerOfCar(carId){
+        require(cars[carId].chassisId != chassisId, "same chassis");
+        cars[carId].chassisId = chassisId;
+    }
+
 
     function getFuelStationByOwner(address _owner) public view returns(FuelStation memory){
         uint resId;

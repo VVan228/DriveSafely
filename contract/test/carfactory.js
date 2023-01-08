@@ -35,7 +35,6 @@ contract('CarHelper', (accounts) => {
     it('fuel station is default', async () => {
         const instance = await CarHelper.deployed();
         const station = await instance.getFuelStationByOwner(accounts[0]);
-        // assert.equal(station, 0);
         assert.equal(station.capacity, 60);
         assert.equal(station.productionPerHour, 5);
     });

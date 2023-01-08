@@ -1,16 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
 
-import "../node_modules/@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "./CarRacing.sol";
 
 contract TokenOwnership is CarRacing{
-    using SafeMath for uint256;
 
     mapping (uint => address) carApprovals;
     mapping (uint => address) engineApprovals;
     mapping (uint => address) chassisApprovals;
 
+    constructor(){}
 
     function balanceOfCars(address _owner) external view returns (uint256) {
         return ownerCarCount[_owner];
@@ -22,8 +21,8 @@ contract TokenOwnership is CarRacing{
         require(cars[_tokenId].engineId == 0, "engine must be empty");
         require(cars[_tokenId].chassisId == 0, "chassis must be empty");
         require(ownerCarCount[_from]>0, "it is your last car");
-        ownerCarCount[_to] = ownerCarCount[_to].add(1);
-        ownerCarCount[_from] = ownerCarCount[_from].sub(1);
+        ownerCarCount[_to]++;// = ownerCarCount[_to].add(1);
+        ownerCarCount[_from]--;// = ownerCarCount[_from].sub(1);
         carToOwner[_tokenId] = _to;
     }
     function transferCarFrom(address _from, address _to, uint256 _tokenId) external payable {
@@ -42,8 +41,14 @@ contract TokenOwnership is CarRacing{
         return engineToOwner[_tokenId];
     }
     function _transferEngine(address _from, address _to, uint256 _tokenId) private {
-        ownerEngineCount[_to] = ownerEngineCount[_to].add(1);
-        ownerEngineCount[_from] = ownerEngineCount[_from].sub(1);
+        ownerEngineCount[_to]++;// = ownerEngineCount[_to].add(1);
+        ownerEngineCount[_from]--;// = ownerEngineCount[_from].sub(1);
+        Car[] memory cars = getCarsByOwner(_from);
+        for(uint i = 0; i<cars.length; i++){
+            if(cars[i].engineId == _tokenId){
+                cars[i].engineId = 0;
+            }
+        }
         engineToOwner[_tokenId] = _to;
     }
     function transferEngineFrom(address _from, address _to, uint256 _tokenId) external payable {
@@ -62,8 +67,14 @@ contract TokenOwnership is CarRacing{
         return chassisToOwner[_tokenId];
     }
     function _transferChassis(address _from, address _to, uint256 _tokenId) private {
-        ownerChassisCount[_to] = ownerChassisCount[_to].add(1);
-        ownerChassisCount[_from] = ownerChassisCount[_from].sub(1);
+        ownerChassisCount[_to]++;// = ownerChassisCount[_to].add(1);
+        ownerChassisCount[_from]--;// = ownerChassisCount[_from].sub(1);
+        Car[] memory cars = getCarsByOwner(_from);
+        for(uint i = 0; i<cars.length; i++){
+            if(cars[i].chassisId == _tokenId){
+                cars[i].chassisId = 0;
+            }
+        }
         chassisToOwner[_tokenId] = _to;
     }
     function transferChassisFrom(address _from, address _to, uint256 _tokenId) external payable {
