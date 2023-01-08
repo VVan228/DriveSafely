@@ -14,15 +14,6 @@ contract CarFactory is Ownable, FuelStationFactory {
     uint defaultDurabilityLow;
     uint defaultDurabilityUp; 
 
-    constructor() {
-         defaultHorsePowersLow = 80;
-         defaultHorsePowersUp = 91;
-   
-         defaultConsumtion = 10;
-  
-         defaultDurabilityLow = 100000;
-         defaultDurabilityUp = 120001;
-    }
 
     struct Car {
         string model;
@@ -47,8 +38,8 @@ contract CarFactory is Ownable, FuelStationFactory {
         uint32 resource;
     }
 
-    uint engineCounter = 0;
-    uint chassisCounter = 0;
+    uint engineCounter = 1;
+    uint chassisCounter = 1;
 
     Car[] public cars;
     Engine[] public engines;
@@ -58,9 +49,22 @@ contract CarFactory is Ownable, FuelStationFactory {
     mapping (uint => address) public engineToOwner;
     mapping (uint => address) public chassisToOwner;
 
-    mapping (address => uint) ownerCarCount;
+    mapping (address => uint) public ownerCarCount;
     mapping (address => uint) ownerEngineCount;
     mapping (address => uint) ownerChassisCount;
+
+
+    constructor() {
+         defaultHorsePowersLow = 80;
+         defaultHorsePowersUp = 91;
+   
+         defaultConsumtion = 10;
+  
+         defaultDurabilityLow = 100000;
+         defaultDurabilityUp = 120001;
+         engines.push();
+         chassis.push();
+    }
 
     function createCar() public {
         require(ownerCarCount[msg.sender] == 0);
