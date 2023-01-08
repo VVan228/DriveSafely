@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import MySidebar from "../components/UI/sidebar/MySidebar";
 import ContractService from "../API/ContractService";
 import {AuthContext} from "../context";
+import {faker} from "@faker-js/faker";
 
 const Factory = () => {
 

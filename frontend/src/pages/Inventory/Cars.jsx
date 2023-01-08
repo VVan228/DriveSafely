@@ -2,10 +2,12 @@ import React, {useContext, useEffect, useState} from 'react';
 import ItemToggleButton from "../../components/UI/button/ItemToggleButton";
 import {AuthContext} from "../../context";
 import ContractService from "../../API/ContractService";
+import Loader from "../../components/UI/loader/Loader";
 
 const Cars = ({...props}) => {
 
     const [currentCarIndex, setCurrentCarIndex] = useState(0)
+    const {isLoading} = useContext(AuthContext)
 
     const toggleItem = (array, index) => {
         if (index > -1 && index != array.length) {
@@ -43,8 +45,18 @@ const Cars = ({...props}) => {
     7 - поражения (на уровне)
     */
 
+    if (!props.cars[currentCarIndex]) {
+        return null;
+    }
+
     const tmp = props.cars
     console.log(`${typeof tmp}: ${tmp}`)
+
+
+    if (isLoading) {
+        return <Loader/>
+    }
+
     return (
         <div className="row flex-nowrap align-items-center w-100 justify-content-center px-3">
             <ItemToggleButton

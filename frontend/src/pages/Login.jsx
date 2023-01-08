@@ -58,7 +58,7 @@ const Login = () => {
                 <div className="row d-flex justify-content-center">
                     <p className="text-center h4 text-muted">{account !== null ? account : ""}</p>
                     <MyButton type="button" className="col-auto" onClick={account !== null ? login : connectWallet}>
-                        {account !== null ? `Продолжить` : "Подключить кошелёк используя MetaMask"}
+                        {account !== null ? `Продолжить` : "Подключить MetaMask"}
                     </MyButton>
                 </div>
             </form>

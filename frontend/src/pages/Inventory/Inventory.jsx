@@ -1,19 +1,18 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {TabView, TabPanel} from 'primereact/tabview';
 import Cars from "./Cars";
 import Engines from "./Engines";
 import Chasisses from "./Chasisses";
 import MySidebar from "../../components/UI/sidebar/MySidebar";
-import classes from './Inventory.module.css';
 import MyButton from "../../components/UI/button/MyButton";
 import {AuthContext} from "../../context";
 import ContractService from "../../API/ContractService";
+import Loader from "../../components/UI/loader/Loader";
 
 
 const Inventory = () => {
 
     const [activeIndex, setActiveIndex] = useState(0);
-    const {contract} = useContext(AuthContext)
+    const {contract, isLoading} = useContext(AuthContext)
     const [cars, setCars] = useState([])
     const [engines, setEngines] = useState([])
     const [chassises, setChassises] = useState([])
@@ -21,23 +20,17 @@ const Inventory = () => {
     useEffect(() => {
         const getCars = async () => {
             const owner = await ContractService.getUserAddress()
-            const tmpCars = await contract.getCarsByOwner(owner)
-            setCars(tmpCars)
-            return tmpCars;
+            return await contract.getCarsByOwner(owner);
         }
 
         const getEngines = async () => {
             const owner = await ContractService.getUserAddress()
-            const tmpEngines = await contract.getEnginesByOwner(owner)
-            setEngines(tmpEngines)
-            return tmpEngines;
+            return await contract.getEnginesByOwner(owner);
         }
 
         const getChassises = async () => {
             const owner = await ContractService.getUserAddress()
-            const tmpChassises = await contract.getChassisByOwner(owner)
-            setChassises(tmpChassises)
-            return tmpChassises;
+            return await contract.getChassisByOwner(owner);
         }
         getCars().then(r => setCars(r))
         getEngines().then(r => setEngines(r))
@@ -51,6 +44,10 @@ const Inventory = () => {
         <Engines engines={engines}/>,
         <Chasisses chassises={chassises}/>
     ]
+
+    if (isLoading) {
+        return <Loader/>
+    }
 
     return (
         <div className="w-100 h-100">
