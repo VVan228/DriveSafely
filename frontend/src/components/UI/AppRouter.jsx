@@ -12,7 +12,7 @@ import {CSSTransition, TransitionGroup} from 'react-transition-group';
 const AppRouter = (props) => {
 
     const {isAuth, setIsAuth, isLoading} = useContext(AuthContext);
-    console.log(isAuth)
+    // console.log(isAuth)
 
     if (isLoading) {
         return <Loader/>

@@ -9,6 +9,7 @@ import Web3 from 'web3';
 
 function App() {
     const [isAuth, setIsAuth] = useState(false);
+    const [isMetamaskSet, setIsMetamaskSet] = useState(false);
     const [isLoading, setisLoading] = useState(true);
 
     useEffect(()=>{
@@ -22,7 +23,9 @@ function App() {
         <AuthContext.Provider value={{
             isAuth,
             setIsAuth,
-            isLoading
+            isMetamaskSet,
+            setIsMetamaskSet,
+            isLoading,
         }}>
             <BrowserRouter>
                 <Navbar/>
