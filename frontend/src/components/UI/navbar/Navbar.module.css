@@ -1,23 +1,22 @@
+.nav {
+    overflow: hidden;
+}
+
 .navItem {
-    color: #282c34 !important;
     text-decoration: none !important;
-}
-
-.navLink:not(.rotatingIcon) {
-    color: #282c34;
-    text-decoration: none;
-    transition: .3s;
+    padding: 20px;
     border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    transition: .3s;
 }
 
-
-.navLink:not(.rotatingIcon):hover {
-    background-color: #ECA553;
+.navItem:hover > * {
     color: white;
-    padding: 30px;
+    transform: scale(0.4);
+}
+
+.navItem:hover {
+    background-color: #ECA553;
+    transform: scale(3);
 }
 
 .navLink.active {
@@ -30,14 +29,20 @@
 
 .rotatingIcon {
     background-color: #B9110F;
-    animation: rotate 5s infinite;
-    border-radius: 50%;
-    padding: 20px;
-    transition: .3s;
+    animation: rotate 2s infinite alternate;
 }
 
 .rotatingIcon > * > i {
-   color: white;
+    color: white;
+}
+
+.navLink {
+    color: #282c34;
+    text-decoration: none;
+    transition: .3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .navLink > i {

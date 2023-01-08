@@ -6,7 +6,6 @@ const ItemToggleButton = (props) => {
         <button {...props}
             className={classes.itemToggleButton}
         >
-            {<i className={['pi pi-angle-',props.side].join("")}/>}
         </button>
     );
 };

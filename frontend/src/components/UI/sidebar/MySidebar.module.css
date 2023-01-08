@@ -1,28 +1,36 @@
 .leftSidebar {
-    float: left;
-    left: -200px;
+    /*float: left;*/
+    /*left: -200px;*/
+    clip-path: polygon(0 0, 100% 0, 75% 100%, 0% 100%);
 }
 
 .rightSidebar {
-    float: right;
-    right: -200px;
-    -webkit-transform: skew(15deg);
+    /*float: right;*/
+    /*right: -200px;*/
+    /*-webkit-transform: skew(15deg);*/
+    clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%);
 }
 
 .mySidebar {
-    position: absolute;
+    /*position: absolute;*/
     /*padding: 5%;*/
     width: 30%;
     height: 100%;
     background-color: #282c34;
     color: white;
-    -webkit-transform: skew(-15deg);
-    -moz-transform: skew(-15deg);
-    -o-transform: skew(-15deg);
+    position: relative;
+    transition: 1s;
+    /*-webkit-transform: skew(-15deg);*/
+    /*-moz-transform: skew(-15deg);*/
+    /*-o-transform: skew(-15deg);*/
 }
 
 .mySidebar > * {
-    -webkit-transform: skew(15deg);
-    -moz-transform: skew(15deg);
-    -o-transform: skew(15deg);
+    /*-webkit-transform: skew(15deg);*/
+    /*-moz-transform: skew(15deg);*/
+    /*-o-transform: skew(15deg);*/
+}
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    color: #B9110F!important;
+    border-color: #B9110F!important;
 }

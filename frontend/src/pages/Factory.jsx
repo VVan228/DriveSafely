@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Wallet = () => {
+const Factory = () => {
     return (
         <div>
-            кошелёк
+            Фабрика
         </div>
     );
 };
 
-export default Wallet;
+export default Factory;

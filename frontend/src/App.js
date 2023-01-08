@@ -3,6 +3,8 @@ import {BrowserRouter, Route, Link, Switch} from "react-router-dom";
 import Navbar from "./components/UI/navbar/Navbar";
 import AppRouter from "./components/UI/AppRouter";
 import {AuthContext} from "./context";
+import WOW from 'wowjs';
+import Web3 from 'web3';
 
 
 function App() {

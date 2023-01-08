@@ -14,11 +14,10 @@ const Inventory = () => {
 
     return (
         <div className="w-100 h-100">
-
             <div className="h-100 text-center d-flex flex-row justify-content-center">
-                <MySidebar side="left">
+                <MySidebar side="left" className="d-flex align-items-center">
                     <div className="d-flex flex-column align-items-center justify-content-center col-3 w-100">
-                        <MyButton onClick={() => setActiveIndex(0)}>Машинки</MyButton>
+                        <MyButton onClick={() => setActiveIndex(0)}>Машины</MyButton>
                         <MyButton onClick={() => setActiveIndex(1)}>Двигатели</MyButton>
                         <MyButton onClick={() => setActiveIndex(2)}>Шасси</MyButton>
                     </div>
@@ -28,7 +27,7 @@ const Inventory = () => {
                     {pages[activeIndex]}
                 </div>
                 <MySidebar side="right">
-                    <div>правый сайдбар</div>
+                    <div></div>
                 </MySidebar>
             </div>
         </div>
