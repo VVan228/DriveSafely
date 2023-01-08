@@ -1,8 +1,9 @@
 pragma solidity ^0.8.13;
 import "../node_modules/@openzeppelin/contracts/utils/Strings.sol";
 import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
+import "./FuelStationFactory.sol";
 
-contract CarFactory is Ownable {
+contract CarFactory is Ownable, FuelStationFactory {
 
     uint defaultHorsePowersLow;
     uint defaultHorsePowersUp;

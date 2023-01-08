@@ -1,9 +1,8 @@
 pragma solidity ^0.8.13;
 
 import "./CarFactory.sol";
-import "./FuelStationFactory.sol";
 
-contract CarHelper is CarFactory, FuelStationFactory {
+contract CarHelper is CarFactory {
 
     uint capacityCoef = 0.00001 ether;
     uint productionPerHourCoef = 0.0002 ether;
@@ -67,12 +66,12 @@ contract CarHelper is CarFactory, FuelStationFactory {
         return result;
     }
 
-    function getCarsByOwner(address _owner) public view returns(uint[] memory) {
-        uint[] memory result = new uint[](ownerCarCount[_owner]);
+    function getCarsByOwner(address _owner) public view returns(Car[] memory) {
+        Car[] memory result = new Car[](ownerCarCount[_owner]);
         uint counter = 0;
         for (uint i = 0; i < chassis.length; i++) {
             if (carToOwner[i] == _owner) {
-                result[counter] = i;
+                result[counter] = cars[i];
                 counter++;
             }
         }
