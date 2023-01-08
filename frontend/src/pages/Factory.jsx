@@ -1,46 +1,40 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import MySidebar from "../components/UI/sidebar/MySidebar";
-import Constants from "../constants.js";
-import {ethers} from "ethers";
-import login from "./Login";
 import ContractService from "../API/ContractService";
+import {AuthContext} from "../context";
 
 const Factory = () => {
 
-    const [provider, setProvider] = useState(null)
-    const [signer, setSigner] = useState(null)
-    const [contract, setContract] = useState(null)
-
-    const updateEthers = () => {
-        let tempProvider = new ethers.providers.Web3Provider(window.ethereum)
-        setProvider(tempProvider)
-        console.log("provider: ", provider)
-
-        let tempSigner = tempProvider.getSigner();
-        setSigner(tempSigner)
-        console.log("signer: ", signer)
-
-        let tempContract = new ethers.Contract(Constants.CONTRACT_ADDRESS, Constants.ABI, tempSigner);
-        setContract(tempContract)
-        console.log("contract: ", contract)
-    }
-
-    const getSomething = async () => {
-        const owner = ContractService.getUserAddress()
-        console.log(contract.getCarsByOwner(owner))
-        // console.log(contract)
-        // await contract.createCar();
-    }
+    const {contract} = useContext(AuthContext)
+    const [factory, setFactory] = useState({})
 
     useEffect(() => {
-        updateEthers();
-        getSomething();
+
+        const getSomething = async () => {
+            const owner = await ContractService.getUserAddress()
+            // contract.createCar(faker.vehicle.vehicle())
+            return await contract.getFuelStationByOwner(owner);
+            // cars.forEach(car => {
+            //     console.log(car["model"])
+            // })
+        }
+
+        getSomething().then(r => {
+            console.log(r)
+            setFactory(r)
+        })
+
+        console.log(factory)
+
     }, [])
 
 
     return (
-        <div className="w-100 h-100 d-flex justify-content-between align-items-center">
-            <MySidebar side="left" color="#fff" width="60%">
+        <div className="w-100 h-100 d-flex justify-content-between align-items-center text-dark">
+            <MySidebar side="left" color="#fff" width="60%" className="d-flex align-items-center">
+                <div className="d-flex flex-column align-items-center justify-content-center col-3 w-100 text-dark">
+                    {factory.toString()}
+                </div>
             </MySidebar>
             <MySidebar side="right" width="40%">
             </MySidebar>

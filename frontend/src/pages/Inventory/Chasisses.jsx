@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Chasisses = () => {
+const Chasisses = ({...props}) => {
     return (
         <div>
             тут шасси

@@ -1,18 +1,36 @@
 import React, {useEffect, useState} from 'react';
-import {BrowserRouter, Route, Link, Switch} from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 import Navbar from "./components/UI/navbar/Navbar";
 import AppRouter from "./components/UI/AppRouter";
 import {AuthContext} from "./context";
-import WOW from 'wowjs';
-import Web3 from 'web3';
+import {ethers} from "ethers";
+import Constants from "./constants";
 
 
 function App() {
     const [isAuth, setIsAuth] = useState(false);
     const [isMetamaskSet, setIsMetamaskSet] = useState(false);
     const [isLoading, setisLoading] = useState(true);
+    const [provider, setProvider] = useState(new ethers.providers.Web3Provider(window.ethereum))
+    const [signer, setSigner] = useState(provider.getSigner())
+    const [contract, setContract] = useState(new ethers.Contract(Constants.CONTRACT_ADDRESS, Constants.ABI, signer))
+
+    const updateEthers = () => {
+        let tempProvider = new ethers.providers.Web3Provider(window.ethereum)
+        setProvider(tempProvider)
+        console.log("provider: ", provider)
+
+        let tempSigner = tempProvider.getSigner();
+        setSigner(tempSigner)
+        console.log("signer: ", signer)
+
+        let tempContract = new ethers.Contract(Constants.CONTRACT_ADDRESS, Constants.ABI, tempSigner);
+        setContract(tempContract)
+        console.log("contract: ", contract)
+    }
 
     useEffect(()=>{
+        updateEthers()
         if(localStorage.getItem('auth')) {
             setIsAuth(true)
         }
@@ -26,6 +44,7 @@ function App() {
             isMetamaskSet,
             setIsMetamaskSet,
             isLoading,
+            contract
         }}>
             <BrowserRouter>
                 <Navbar/>

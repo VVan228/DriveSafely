@@ -6,6 +6,7 @@ import Competitions from "../pages/Competitions";
 import Factory from "../pages/Factory";
 import Inventory from "../pages/Inventory/Inventory";
 import Marketplace from "../pages/Marketplace";
+import Cars from "../pages/Inventory/Cars";
 
 export const privateRoutes = [
     {path: '/about', component: <About/>, exact: true},

@@ -194,7 +194,13 @@
     "type": "function"
   },
   {
-    "inputs": [],
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "model",
+        "type": "string"
+      }
+    ],
     "name": "createCar",
     "outputs": [],
     "stateMutability": "nonpayable",
@@ -445,9 +451,36 @@
     "name": "getFuelStationByOwner",
     "outputs": [
       {
-        "internalType": "uint256",
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint8",
+            "name": "capacity",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint8",
+            "name": "productionPerHour",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint8",
+            "name": "currentFullness",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint256",
+            "name": "lastUpdate",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct FuelStationFactory.FuelStation",
         "name": "",
-        "type": "uint256"
+        "type": "tuple"
       }
     ],
     "stateMutability": "view",

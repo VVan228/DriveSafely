@@ -26,7 +26,7 @@ const Navbar = () => {
         {to: '/inventory', className: classes.navItem, title: "Гараж", icon: "pi pi-car"},
         {to: '/competitions', className: [classes.navItem, classes.rotatingIcon].join(" "), title: "Соревнования", icon: "fa-solid fa-gear"},
         {to: '/marketplace', className: classes.navItem, title: "Магазин", icon: "pi pi-shopping-bag"},
-        {to: '/login', className: classes.navItem, title: "Выйти", icon: "pi pi-sign-out", onClick: {logout}},
+        {to: '/login', className: classes.navItem, title: "Выйти", icon: "pi pi-sign-out", onclick: {logout}},
     ]
 
 
@@ -39,7 +39,7 @@ const Navbar = () => {
                     {navbarItems.map((item, index) =>
                         <div key={index}>
                             <NavbarItem to={item.to} className={item.className} title={item.title}
-                                        onClick={item.onClick}>
+                                        onClick={item.onclick}>
                                 <i className={item.icon}></i>
                             </NavbarItem>
                         </div>

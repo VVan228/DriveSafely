@@ -3,7 +3,7 @@ import ItemToggleButton from "../../components/UI/button/ItemToggleButton";
 import engine from "./engine.svg";
 
 
-const Engines = () => {
+const Engines = ({...props}) => {
 
     const img = <img src={engine} height="300" alt="engine"/>;
 
@@ -22,13 +22,13 @@ const Engines = () => {
     const [currentEngineIndex, setCurrentEngineIndex] = useState(0)
 
     const toggleItem = (array, index) => {
-        if (index > -1 && index != array.length) {
+        if (index > -1 && index !== array.length) {
             setCurrentEngineIndex(index)
         }
     }
 
     return (
-        <div className="row flex-nowrap align-items-center w-100 justify-content-center">
+        <div className="row flex-nowrap align-items-center w-100 justify-content-center px-3">
 
              <ItemToggleButton
                 style={{
