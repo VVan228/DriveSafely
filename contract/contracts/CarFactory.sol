@@ -66,10 +66,10 @@ contract CarFactory is Ownable, FuelStationFactory {
          chassis.push();
     }
 
-    function createCar() public {
+    function createCar(string memory model) public {
         require(ownerCarCount[msg.sender] == 0);
 
-        string memory model = "model"; //TODO
+        //string memory model = "model"; //TODO
         string memory key = string(abi.encodePacked(model,Strings.toString(block.timestamp))); 
         uint vin = uint(keccak256(abi.encodePacked((key))));
 
