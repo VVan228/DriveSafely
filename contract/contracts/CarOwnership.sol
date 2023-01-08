@@ -7,7 +7,6 @@ import "../node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 
 contract CarOwnership is ERC721, Ownable{
-
     TokenOwnership tokenOwnership;
 
     constructor() ERC721("CarBucks", "CBX"){}
