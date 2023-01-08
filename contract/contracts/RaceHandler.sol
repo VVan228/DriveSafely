@@ -3,8 +3,9 @@ pragma solidity ^0.8.13;
 import "../node_modules/@openzeppelin/contracts/utils/Counters.sol";
 import "../node_modules/@openzeppelin/contracts/utils/Strings.sol";
 import "./PDDLib.sol";
+import "./CarHelper.sol";
 
-contract RaceHandler{
+contract RaceHandler is CarHelper{
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
