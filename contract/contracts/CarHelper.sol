@@ -42,6 +42,15 @@ contract CarHelper is CarFactory {
         cars[carId].chassisId = chassisId;
     }
 
+    function detachEngine(uint carId, uint engineId) public onlyOwnerOfEngine(engineId) onlyOwnerOfCar(carId){
+        require(cars[carId].engineId == engineId, "engine is not attached");
+        cars[carId].engineId = 0;
+    }
+    function detachChassis(uint carId, uint chassisId) public onlyOwnerOfChassis(chassisId) onlyOwnerOfCar(carId){
+        require(cars[carId].chassisId == chassisId, "engine is not attached");
+        cars[carId].chassisId = 0;
+    }
+
 
     function getFuelStationByOwner(address _owner) public view returns(FuelStation memory){
         uint resId;
@@ -81,7 +90,7 @@ contract CarHelper is CarFactory {
     function getCarsByOwner(address _owner) public view returns(Car[] memory) {
         Car[] memory result = new Car[](ownerCarCount[_owner]);
         uint counter = 0;
-        for (uint i = 0; i < chassis.length; i++) {
+        for (uint i = 0; i < cars.length; i++) {
             if (carToOwner[i] == _owner) {
                 result[counter] = cars[i];
                 counter++;

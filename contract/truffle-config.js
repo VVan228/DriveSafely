@@ -72,6 +72,13 @@ module.exports = {
   compilers: {
     solc: {
       version: "0.8.13",      // Fetch exact version from solc-bin
+      settings: {    //need to add "settings" before "optimizer" for latest truffle version
+        optimizer: {
+          enabled: true, // enable the optimizer
+          runs: 200,
+        },
+        evmVersion: "berlin",
+      },
     }
   }
 };

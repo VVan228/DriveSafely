@@ -7,16 +7,14 @@ const CarRacing = artifacts.require("./CarRacing.sol");
 const TokenOwnership = artifacts.require("./TokenOwnership.sol");
 
 async function doDeploy(deployer, network) {
-  // await deployer.deploy(FuelStationFactory);
-  // await deployer.deploy(CarFactory);
-  // await deployer.deploy(CarHelper);
+  await deployer.deploy(FuelStationFactory);
+  await deployer.deploy(CarFactory);
+  await deployer.deploy(CarHelper);
   await deployer.deploy(PDDLib);
-  // await deployer.link(PDDLib, RaceHandler);
-  // await deployer.deploy(RaceHandler);
   await deployer.link(PDDLib, CarRacing);
   await deployer.deploy(CarRacing);
-  // await deployer.link(PDDLib, TokenOwnership);
-  // await deployer.deploy(TokenOwnership);
+  await deployer.link(PDDLib, TokenOwnership);
+  await deployer.deploy(TokenOwnership);
 };
 
 module.exports = (deployer, network) => {
