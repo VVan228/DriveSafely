@@ -21,7 +21,7 @@
 // require('dotenv').config();
 // const mnemonic = process.env["MNEMONIC"];
 // const infuraProjectId = process.env["INFURA_PROJECT_ID"];
- 
+
 // const HDWalletProvider = require('@truffle/hdwallet-provider');
 
 module.exports = {
@@ -53,6 +53,14 @@ module.exports = {
     //   network_id: 5,       // Goerli's id
     //   chain_id: 5
     // }
+    development: {
+      host: "192.168.0.232",     // Localhost (default: none)
+      port: 7545,            // Standard Ethereum port (default: none)
+      network_id: "*",       // Any network (default: none)
+      //gas: 6721975
+      
+    }
+  
   },
 
   // Set default mocha options here, use special reporters etc.
@@ -64,6 +72,13 @@ module.exports = {
   compilers: {
     solc: {
       version: "0.8.13",      // Fetch exact version from solc-bin
+      settings: {    //need to add "settings" before "optimizer" for latest truffle version
+        optimizer: {
+          enabled: true, // enable the optimizer
+          runs: 200,
+        },
+        evmVersion: "berlin",
+      },
     }
   }
 };
