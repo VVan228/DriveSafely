@@ -1,5 +1,10 @@
 .nav {
     overflow: hidden;
+    transition: .3s;
+}
+
+.nav:has(.rotatingIcon:hover) {
+    /*background-color: #aa7537 !important;*/
 }
 
 .navItem {
@@ -27,13 +32,13 @@
     color: #B9110F !important;
 }
 
-.rotatingIcon {
+.navItem:has(img) {
     background-color: #B9110F;
-    animation: rotate 2s infinite alternate;
+    /*animation: pulse 1s infinite alternate;*/
 }
 
-.rotatingIcon > * > i {
-    color: white;
+.navItem:has(img) > * > img {
+    animation: rotate 1s infinite alternate;
 }
 
 .navLink {
@@ -55,5 +60,22 @@
     }
     to {
         transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 #ECA553;
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px #ECA553;
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 #ECA553;
     }
 }

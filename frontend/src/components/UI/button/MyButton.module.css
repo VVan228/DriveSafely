@@ -79,6 +79,9 @@
 }
 
 .itemToggleButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 0;
     border-radius: 50%;
     background-color: #ECA553;

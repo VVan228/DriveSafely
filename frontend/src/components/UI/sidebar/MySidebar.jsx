@@ -14,7 +14,7 @@ const MySidebar = ({children, ...props}) => {
         <div
             {...props}
             ref={sidebar}
-            className={[props.side === "left" ? classes.leftSidebar : classes.rightSidebar, classes.mySidebar, "d-flex align-items-center"].join(" ")}
+            className={[props.side === "left" ? classes.leftSidebar : classes.rightSidebar, classes.mySidebar, "d-flex align-items-center", `justify-content-${props.align}`].join(" ")}
             style={props.side === "left" ? {
                 left: position,
                 backgroundColor: props.color,

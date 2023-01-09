@@ -1,7 +1,6 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import ItemToggleButton from "../../components/UI/button/ItemToggleButton";
 import {AuthContext} from "../../context";
-import ContractService from "../../API/ContractService";
 import Loader from "../../components/UI/loader/Loader";
 
 const Cars = ({...props}) => {
@@ -20,7 +19,6 @@ const Cars = ({...props}) => {
     }
 
     const images = importAll(require.context('../cars', false, /\.(png|jpe?g|svg)$/));
-    console.log(images)
 
     const getCarImage = (vin) => {
         let sum = vin.toString().split('').reduce(function(a, b) {
@@ -46,7 +44,7 @@ const Cars = ({...props}) => {
     */
 
     if (!props.cars[currentCarIndex]) {
-        return null;
+        return <Loader/>;
     }
 
     const tmp = props.cars

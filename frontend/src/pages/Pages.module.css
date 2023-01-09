@@ -7,6 +7,7 @@
     width: 70%;
     height: 100%;
     padding: 2px;
+    z-index: 100;
 }
 
 .bottomSphere {
@@ -14,13 +15,20 @@
     bottom: 0;
     left: 10%;
     clip-path: ellipse(49% 25% at 50% 100%);
-    background-color: #292929;
+    background-color: #282c34;
     z-index: -80;
     height: 100%;
     width: 80%;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    padding-bottom: 2rem;
 }
 
 .toggleButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 0;
     border-radius: 50%;
     background-color: #292929;
@@ -32,10 +40,24 @@
 
 .worldImageContainer {
     /*position: absolute;*/
-    z-index: 100;
-    height: 600px;
-    width: 600px;
+    z-index: 101;
+    height: 700px;
+    width: 700px;
     border-radius: 50%;
     background-size: contain;
     background-repeat: no-repeat;
+    clip-path: circle();
+    cursor: pointer;
+    transition: .3s;
+}
+
+.worldImageContainer:hover {
+    transform: scale(1.25) translate(0, -100px);
+    /*clip-path: none;*/
+    /*width: 100%;*/
+}
+
+.worldImageContainer > img {
+    height: 100%;
+    /*width: 100%;*/
 }

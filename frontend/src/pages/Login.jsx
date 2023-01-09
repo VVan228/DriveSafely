@@ -1,17 +1,13 @@
 import React, {useContext, useEffect, useState} from 'react';
-import MyInput from "../components/UI/input/MyInput";
 import MyButton from "../components/UI/button/MyButton";
-import {AuthContext, MetamaskContext} from "../context";
+import {AuthContext} from "../context";
 import RidingCar from "../components/RidingCar";
 import car1 from "./cars/car1.svg"
 import car2 from "./cars/car2.svg"
 import car3 from "./cars/car5.svg"
 import car4 from "./cars/car9.svg"
-import ReactWOW from 'react-wow'
 import {useNavigate} from "react-router-dom";
-import MetamaskService from "../API/MetamaskService";
-import Constants from "../constants";
-import {ethers} from 'ethers'
+import MySidebar from "../components/UI/sidebar/MySidebar";
 
 
 const Login = () => {
@@ -34,13 +30,12 @@ const Login = () => {
             console.log("Установите MetaMask")
         }
     }
-
-    setIsAuth(false);
-    setIsMetamaskSet(false);
+    // @todo пофиксить логин и разлогин
+    useEffect(()=> {setIsAuth(false)}, [])
     // const {currentPage, setCurrentPage} = useContext(NavbarContext)
     const navigate = useNavigate()
     const login = event => {
-        if (account != null) {
+        if (account != null && isAuth) {
             event.preventDefault()
             setIsAuth(true)
             localStorage.setItem('auth', 'true')
@@ -50,7 +45,8 @@ const Login = () => {
         }
     }
 
-    return (<div className="row h-100">
+    return (
+        <div className="row h-100 justify-content-between">
         <div className="col-4 d-flex flex-column align-items-center justify-content-center wow fadeInLeft">
             <form>
                 {/*<MyInput type="text" placeholder="Логин"/>*/}
@@ -63,12 +59,18 @@ const Login = () => {
                 </div>
             </form>
         </div>
-        <div style={{clipPath: "polygon(25% 0, 100% 0, 100% 100%, 0% 100%)"}}
-             className="col-8 bg-dark d-flex flex-column align-items-center justify-content-center">
+        <MySidebar side="right" width="60%" align="center">
             <div>
+                <h1 className="text-light"
+                    style={{
+                    position: "relative", zIndex: "9000", fontSize: 100, fontWeight: 900, fontFamily: "Arial Black", fontStyle: "italic" }}>
+                    Drive</h1>
+                <h1 className="" style={{
+                    position: "relative", zIndex: "9000", fontSize: 100, fontWeight: 900, color: "#a8d18d", fontFamily: "Arial Black", fontStyle: "italic"
+                }}>Safely!</h1>
                 <RidingCar
-                    right={60}
-                    src={car1}/>
+                right={60}
+                src={car1}/>
                 <RidingCar
                     right={350}
                     src={car2}/>
@@ -78,16 +80,10 @@ const Login = () => {
                 <RidingCar
                     right={1100}
                     src={car4}/>
-                <h1 className="text-light" style={{
-                    position: "relative", zIndex: "9000", fontSize: 100, fontWeight: 900, fontFamily: "Arial Black"
-                }}>Drive</h1>
-                <h1 className="" style={{
-                    position: "relative", zIndex: "9000", fontSize: 100, fontWeight: 900, color: "#a8d18d"
-                }}>Safely!</h1>
 
 
             </div>
-        </div>
+        </MySidebar>
     </div>);
 };
 

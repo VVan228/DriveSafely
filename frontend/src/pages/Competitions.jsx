@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import classes from "./Pages.module.css";
 import WorldPreview from "../components/WorldPreview";
-import city from '../images/cities/city2.jpg'
+import city from '../images/cities/city.jpg'
+import AnimatedPage from "../components/AnimatedPage";
 
 const Competitions = () => {
 
@@ -9,6 +10,8 @@ const Competitions = () => {
     const totalWidth = window.innerWidth * 10
     const [offset, setOffset] = useState(0)
     const [scale, setScale] = useState(1)
+    const [opacity, setOpacity] = useState(1)
+    const [worldContainerBottom, setWorldContainerBottom] = useState("-100%")
     // console.log(totalWidth)
     const worlds = [
         {id: 1},
@@ -24,20 +27,27 @@ const Competitions = () => {
     ]
 
      useEffect(()=>{
-         setScale(0.8)
+         setScale(0.2)
+         setOpacity(0)
          setTimeout(()=>{
+             setOpacity(1)
              setScale(1)
-         }, 100)
+         }, 300)
      }, [offset])
+
+    useEffect(() => {
+        setWorldContainerBottom("10%")
+    }, [window.location])
 
     return (
 
-        <div>
-            <div className={classes.bottomSphere}/>
+        <AnimatedPage>
+            <div className={classes.bottomSphere}>
+            </div>
             <div style={{
                 width: `${totalWidth}px`,
-                height: "100%",
                 left: `${-offset}px`,
+                bottom: worldContainerBottom,
                 position: "absolute",
                 transition: ".3s ease"
             }}
@@ -53,30 +63,30 @@ const Competitions = () => {
                         }}
                         className="d-flex justify-content-center align-items-center"
                     >
-                        <WorldPreview src = {city} level={world.id} style={{transform: `scale(${scale})`}}/>
+                        <WorldPreview src = {city} level={world.id} hueRotate ={360/worlds.length * world.id} style={{transform: `scale(${scale})`, zIndex: 120, opacity: opacity, transition: ".3s"}}/>
                     </div>
                 )}
             </div>
             <div className={classes.toggleBtnsContainer}>
-                <button
+                {offset > 0 ? <button
                     className={classes.toggleButton}
                     onClick={() => {
                         setOffset(offset - window.innerWidth)
                         console.log(offset)
                     }}
                 ><i className="pi pi-angle-left" style={{fontSize: "2em"}}></i>
-                </button>
-                <button
+                </button> : <div></div>}
+                {offset < window.innerWidth * (worlds.length - 1) ? <button
                     className={classes.toggleButton}
                     onClick={() => {
                         setOffset(offset + window.innerWidth)
                         console.log(offset)
                     }}
                 ><i className="pi pi-angle-right" style={{fontSize: "2em"}}></i>
-                </button>
+                </button> : <div></div>}
             </div>
 
-        </div>
+        </AnimatedPage>
     );
 };
 

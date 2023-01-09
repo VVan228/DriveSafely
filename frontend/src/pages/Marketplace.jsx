@@ -15,7 +15,6 @@ const Marketplace = () => {
     return (
         <div className="d-flex justify-content-between align-items-center w-100 h-100 flex-row">
             <MySidebar side="left"></MySidebar>
-            <div>d</div>
         </div>
     );
 };

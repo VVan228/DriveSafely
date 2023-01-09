@@ -1,1 +1,22 @@
-<?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg enable-background="new 0 0 50 50" height="50px" id="Layer_1" version="1.1" viewBox="0 0 50 50" width="50px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="  M34.504,33.568c-1.801,1.994-4.219,3.42-6.952,3.975" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/><path d="  M37.074,20.751c0.469,1.33,0.725,2.76,0.725,4.249c0,1.49-0.256,2.922-0.726,4.253" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/><path d="  M27.558,12.458c2.731,0.555,5.147,1.98,6.946,3.975" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/><path d="  M15.609,16.305c1.78-1.922,4.145-3.297,6.812-3.843" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/><path d="  M12.892,29.154c-0.447-1.303-0.69-2.7-0.69-4.154c0-1.453,0.242-2.849,0.688-4.15" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/><path d="  M22.576,37.568c-2.748-0.525-5.183-1.931-7.002-3.91" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/><rect fill="none" height="50" width="50"/><path d="  M24.998,7C34.925,7,43,15.074,43,25s-8.075,18-18.002,18C15.072,43,7,34.926,7,25S15.072,7,24.998,7 M25,1C11.746,1,1,11.745,1,25  s10.746,24,24,24s24-10.745,24-24S38.254,1,25,1L25,1z" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/><path d="  M27.299,42.435l0.5-9.719c0.916-0.334,1.747-0.827,2.48-1.444l8.638,4.695 M10.83,35.938l8.833-4.713  c0.767,0.657,1.646,1.17,2.618,1.513l0.576,9.697 M8.594,17.959l8.318,5.597c-0.083,0.471-0.146,0.948-0.146,1.444  s0.062,0.973,0.146,1.444l-8.389,5.645 M22.857,7.565l-0.576,9.697c-0.973,0.342-1.852,0.855-2.618,1.512l-8.709-4.646   M39.179,13.892l-8.899,4.837c-0.733-0.618-1.564-1.111-2.48-1.445l-0.5-9.719 M41.256,32.115l-8.174-5.593  c0.095-0.496,0.155-1.002,0.155-1.522s-0.061-1.026-0.155-1.522l8.15-5.577" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/><circle cx="25" cy="25" fill="none" r="3" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"/></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st1{display:none;fill:none;}
+</style>
+<path class="st0" d="M34.5,33.6c-1.8,2-4.2,3.4-7,4"/>
+<path class="st0" d="M37.1,20.8c0.5,1.3,0.7,2.8,0.7,4.2c0,1.5-0.3,2.9-0.7,4.3"/>
+<path class="st0" d="M27.6,12.5c2.7,0.6,5.1,2,6.9,4"/>
+<path class="st0" d="M15.6,16.3c1.8-1.9,4.1-3.3,6.8-3.8"/>
+<path class="st0" d="M12.9,29.2c-0.4-1.3-0.7-2.7-0.7-4.2c0-1.5,0.2-2.8,0.7-4.1"/>
+<path class="st0" d="M22.6,37.6c-2.7-0.5-5.2-1.9-7-3.9"/>
+<rect y="0" class="st1" width="50" height="50"/>
+<path class="st0" d="M25,7c9.9,0,18,8.1,18,18s-8.1,18-18,18c-9.9,0-18-8.1-18-18S15.1,7,25,7 M25,1C11.7,1,1,11.7,1,25
+	s10.7,24,24,24s24-10.7,24-24S38.3,1,25,1L25,1z"/>
+<path class="st0" d="M27.3,42.4l0.5-9.7c0.9-0.3,1.7-0.8,2.5-1.4l8.6,4.7 M10.8,35.9l8.8-4.7c0.8,0.7,1.6,1.2,2.6,1.5l0.6,9.7
+	 M8.6,18l8.3,5.6c-0.1,0.5-0.1,0.9-0.1,1.4s0.1,1,0.1,1.4l-8.4,5.6 M22.9,7.6l-0.6,9.7c-1,0.3-1.9,0.9-2.6,1.5L11,14.1 M39.2,13.9
+	l-8.9,4.8c-0.7-0.6-1.6-1.1-2.5-1.4l-0.5-9.7 M41.3,32.1l-8.2-5.6c0.1-0.5,0.2-1,0.2-1.5s-0.1-1-0.2-1.5l8.2-5.6"/>
+<circle class="st0" cx="25" cy="25" r="3"/>
+</svg>

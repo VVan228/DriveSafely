@@ -8,41 +8,43 @@ import Constants from "./constants";
 
 
 function App() {
+
     const [isAuth, setIsAuth] = useState(false);
-    const [isMetamaskSet, setIsMetamaskSet] = useState(false);
-    const [isLoading, setisLoading] = useState(true);
+    const [account, setAccount] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+
     const [provider, setProvider] = useState(new ethers.providers.Web3Provider(window.ethereum))
     const [signer, setSigner] = useState(provider.getSigner())
     const [contract, setContract] = useState(new ethers.Contract(Constants.CONTRACT_ADDRESS, Constants.ABI, signer))
 
-    const updateEthers = () => {
-        let tempProvider = new ethers.providers.Web3Provider(window.ethereum)
-        setProvider(tempProvider)
-        console.log("provider: ", provider)
+    // const updateEthers = () => {
+    //     let tempProvider = new ethers.providers.Web3Provider(window.ethereum)
+    //     setProvider(tempProvider)
+    //     console.log("provider: ", provider)
+    //
+    //     let tempSigner = tempProvider.getSigner();
+    //     setSigner(tempSigner)
+    //     console.log("signer: ", signer)
+    //
+    //     let tempContract = new ethers.Contract(Constants.CONTRACT_ADDRESS, Constants.ABI, tempSigner);
+    //     setContract(tempContract)
+    //     console.log("contract: ", contract)
+    // }
 
-        let tempSigner = tempProvider.getSigner();
-        setSigner(tempSigner)
-        console.log("signer: ", signer)
-
-        let tempContract = new ethers.Contract(Constants.CONTRACT_ADDRESS, Constants.ABI, tempSigner);
-        setContract(tempContract)
-        console.log("contract: ", contract)
-    }
-
-    useEffect(()=>{
-        updateEthers()
-        if(localStorage.getItem('auth')) {
+    useEffect(() => {
+        // updateEthers()
+        if (localStorage.getItem('auth')) {
             setIsAuth(true)
         }
-        setisLoading(false)
+        setIsLoading(false)
     }, [])
 
     return (
         <AuthContext.Provider value={{
+            account,
+            setAccount,
             isAuth,
             setIsAuth,
-            isMetamaskSet,
-            setIsMetamaskSet,
             isLoading,
             contract
         }}>

@@ -1,32 +1,27 @@
 import React, {useContext, useState} from 'react';
-import {Link, NavLink} from "react-router-dom";
-import MyButton from "../button/MyButton";
 import {AuthContext} from "../../../context";
-import MyIconButton from "../button/MyIconButton";
 import NavbarItem from "./NavbarItem";
 import classes from "./Navbar.module.css";
-import {Image} from 'primereact/image';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faWheelchair} from "@fortawesome/free-solid-svg-icons";
+import wheelIcon from "../../../icons/wheel.svg"
 
 const Navbar = () => {
 
-    const {isAuth, setIsAuth} = useContext(AuthContext)
+    const {isAuth, setIsAuth, account} = useContext(AuthContext)
     const {currentPage, setCurrentPage} = useState(0)
 
-    const logout = event => {
-        event.preventDefault()
-        localStorage.removeItem('auth')
+    const logout = () => {
+        localStorage.setItem('auth', 'false')
         setIsAuth(false)
+        setAccount
         console.log(isAuth)
     }
 
     const navbarItems = [
-        {to: '/factory', className: classes.navItem, title: "Фабрика", icon: "pi pi-box"},
-        {to: '/inventory', className: classes.navItem, title: "Гараж", icon: "pi pi-car"},
-        {to: '/competitions', className: [classes.navItem, classes.rotatingIcon].join(" "), title: "Соревнования", icon: "fa-solid fa-gear"},
-        {to: '/marketplace', className: classes.navItem, title: "Магазин", icon: "pi pi-shopping-bag"},
-        {to: '/login', className: classes.navItem, title: "Выйти", icon: "pi pi-sign-out", onclick: {logout}},
+        {to: '/factory', className: classes.navItem, title: "Фабрика", icon: <i className="pi pi-box"></i>},
+        {to: '/inventory', className: classes.navItem, title: "Гараж", icon: <i className="pi pi-car"></i>},
+        {to: '/competitions', className: classes.navItem, title: "Соревнования", icon: <img src={wheelIcon} style={{width: "50px", height: "50px"}}></img>},
+        {to: '/marketplace', className: classes.navItem, title: "Магазин", icon: <i className="pi pi-shopping-bag"></i>, onclick: {}},
+        {to: '/login', className: classes.navItem, title: "Выйти", icon: <i className="pi pi-sign-out"></i>, onclick: () => logout()},
     ]
 
 
@@ -40,7 +35,7 @@ const Navbar = () => {
                         <div key={index}>
                             <NavbarItem to={item.to} className={item.className} title={item.title}
                                         onClick={item.onclick}>
-                                <i className={item.icon}></i>
+                                {item.icon}
                             </NavbarItem>
                         </div>
                     )}

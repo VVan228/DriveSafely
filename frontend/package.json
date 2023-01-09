@@ -13,6 +13,7 @@
     "animate.css": "^4.1.1",
     "axios": "^1.2.2",
     "ethers": "^5.7.2",
+    "framer-motion": "^8.2.4",
     "primeicons": "^6.0.1",
     "primereact": "^8.7.3",
     "react": "^18.2.0",

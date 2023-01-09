@@ -1,14 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import App from './App';
-import Web3 from 'web3';
-import Constants from "./constants";
-import  contractJson from './API/CarRacing.json';
+import {createRoot} from "react-dom/client";
 
-ReactDOM.render(
-    <App></App>,
-    document.getElementById('root')
-);
+createRoot(document.getElementById('root')).render(<App/>); // createRoot(container!) if you use TypeScript
 
 // var driveSafely, userAccount, web3;
 //

@@ -32,12 +32,11 @@ const Inventory = () => {
             const owner = await ContractService.getUserAddress()
             return await contract.getChassisByOwner(owner);
         }
+
         getCars().then(r => setCars(r))
         getEngines().then(r => setEngines(r))
         getChassises().then(r => setChassises(r))
-        console.log(cars)
     }, [])
-
 
     const pages = [
         <Cars cars={cars}/>,
