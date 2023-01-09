@@ -1,8 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import classes from "./Pages.module.css";
 import WorldPreview from "../components/WorldPreview";
 import city from '../images/cities/city.jpg'
 import AnimatedPage from "../components/AnimatedPage";
+import {AuthContext} from "../context";
+import {useFetching} from "../hooks/useFetching";
+import ContractService from "../API/ContractService";
 
 const Competitions = () => {
 
@@ -12,6 +15,36 @@ const Competitions = () => {
     const [scale, setScale] = useState(1)
     const [opacity, setOpacity] = useState(1)
     const [worldContainerBottom, setWorldContainerBottom] = useState("-100%")
+
+
+    const {contract, isLoading} = useContext(AuthContext)
+    const [cars, setCars] = useState([])
+    const [engines, setEngines] = useState([])
+    const [chassis, setChassis] = useState([])
+
+
+    const [fetchCars, isCarsLoading, carsError] = useFetching(async () => {
+            const owner = await ContractService.getUserAddress()
+            const response = await contract.getCarsByOwner(owner)
+            setCars(response)
+        }
+    )
+
+    const [fetchEngines, isEnginesLoading, enginesError] = useFetching(async () => {
+            const owner = await ContractService.getUserAddress()
+            const response = await contract.getEnginesByOwner(owner)
+            setEngines(response)
+        }
+    )
+
+    const [fetchChassis, isChassisLoading, chassisError] = useFetching(async () => {
+            const owner = await ContractService.getUserAddress()
+            const response = await contract.getChassisByOwner(owner)
+            setChassis(response)
+        }
+    )
+
+
     // console.log(totalWidth)
     const worlds = [
         {id: 1},
@@ -39,9 +72,16 @@ const Competitions = () => {
         setWorldContainerBottom("10%")
     }, [window.location])
 
-    return (
+    useEffect(
+        () => {
+            fetchCars()
+            fetchEngines()
+            fetchChassis()
+        }, []
+    )
 
-        <AnimatedPage>
+    return (
+        <div className={classes.competitionsContainer}>
             <div className={classes.bottomSphere}>
             </div>
             <div style={{
@@ -86,7 +126,7 @@ const Competitions = () => {
                 </button> : <div></div>}
             </div>
 
-        </AnimatedPage>
+        </div>
     );
 };
 

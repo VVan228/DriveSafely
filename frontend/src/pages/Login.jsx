@@ -31,7 +31,7 @@ const Login = () => {
         }
     }
     // @todo пофиксить логин и разлогин
-    useEffect(()=> {setIsAuth(false)}, [])
+    // useEffect(()=> {setIsAuth(false)}, [])
     // const {currentPage, setCurrentPage} = useContext(NavbarContext)
     const navigate = useNavigate()
     const login = event => {

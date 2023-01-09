@@ -1,3 +1,5 @@
+
+
 .toggleBtnsContainer {
     position: fixed;
     display: flex;
@@ -8,6 +10,7 @@
     height: 100%;
     padding: 2px;
     z-index: 100;
+    transition: .3s;
 }
 
 .bottomSphere {
@@ -23,6 +26,7 @@
     align-items: end;
     justify-content: center;
     padding-bottom: 2rem;
+    transition: .3s .1s ;
 }
 
 .toggleButton {
@@ -52,7 +56,7 @@
 }
 
 .worldImageContainer:hover {
-    transform: scale(1.25) translate(0, -100px);
+    transform: scale(1.25);
     /*clip-path: none;*/
     /*width: 100%;*/
 }
@@ -60,4 +64,21 @@
 .worldImageContainer > img {
     height: 100%;
     /*width: 100%;*/
+}
+
+.competitionsContainer:has(.worldImageContainer:hover) > .bottomSphere {
+    bottom: -100%;
+}
+
+.competitionsContainer:has(.worldImageContainer:hover) > .toggleBtnsContainer {
+   opacity: 0;
+}
+
+.yellowText {
+    color: #ECA553;
+}
+
+.bigText {
+    font-size: 50px;
+    text-overflow: ellipsis;
 }
