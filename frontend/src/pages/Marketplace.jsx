@@ -3,6 +3,7 @@ import {useState} from "react";
 import MyButton from "../components/UI/button/MyButton";
 import {ethers} from "ethers"
 import MySidebar from "../components/UI/sidebar/MySidebar";
+import Navbar from "../components/UI/navbar/Navbar";
 
 const Marketplace = () => {
 
@@ -13,7 +14,8 @@ const Marketplace = () => {
 
 
     return (
-        <div className="d-flex justify-content-between align-items-center w-100 h-100 flex-row">
+        <div className="row p-0 h-100 text-center d-flex flex-row justify-content-between">
+            <Navbar/>
             <MySidebar side="left"></MySidebar>
         </div>
     );

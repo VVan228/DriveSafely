@@ -9,6 +9,7 @@ import ContractService from "../../API/ContractService";
 import Loader from "../../components/UI/loader/Loader";
 import {useFetching} from "../../hooks/useFetching";
 import PostService from "../../API/PostService";
+import Navbar from "../../components/UI/navbar/Navbar";
 // import {Car} from "../../utils/cars";
 
 
@@ -67,6 +68,7 @@ const Inventory = () => {
     }
     return (
             <div className="row p-0 h-100 text-center d-flex flex-row justify-content-between">
+                <Navbar/>
                 <MySidebar side="left" align="start" className="col-4 d-flex align-items-center" width="30%">
                     <div className="d-flex flex-column align-items-center justify-content-center col-3 w-100">
                         <MyButton onClick={() => setActiveIndex(0)}>Машины</MyButton>

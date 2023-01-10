@@ -9,12 +9,24 @@
     padding: .5rem 1.5rem;
     transition: .3s ease-in-out;
     margin-top: .5rem;
-    box-shadow: 0px 00px 0 #B9110F;
+    /*box-shadow: 0px 00px 0 #B9110F;*/
 }
 
-.myBtnRed {
-
+.mySecondaryButton {
+    background-color: #282e38;
+    color: white;
 }
+
+.mySuccessButton {
+    background-color: #188754;
+    color: white;
+}
+
+.myWarningButton {
+    background-color: #ECA553;
+    color: white;
+}
+
 
 .myBtnYellow {
     background-color: #ECA553;
@@ -37,6 +49,7 @@
     border-radius: .5rem;
     background-color: #ECA553;
     box-shadow: -10px 10px 0 #c98c47;
+    color: white;
     transform: translate(10px, -10px);
     margin-top: 1rem;
 }

@@ -86,3 +86,17 @@
 .textItalic {
     font-style: italic !important;
 }
+
+.raceBackground {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    background-color: #a9d18e;
+}
+
+.testDot {
+    width: 2px;
+    height: 2px;
+    background-color: #fff;
+    position: absolute;
+}

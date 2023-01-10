@@ -22,7 +22,7 @@ const getHue = (vin) => {
 export default class Car {
 
     constructor(model, vin, engineId, chassisId, level, mileage, winsCount, lossCount, id) {
-        this.model = model;
+        this.model = getDummyName(model);
         this.vin = vin;
         this.engineId = engineId
         this.chassisId = chassisId
@@ -70,22 +70,24 @@ export const convertCarsToJsObject = async (carsArray) => {
 
 
 
-export const getDummyCars = async (length) => {
-    setTimeout(()=>{
+export const getDummyCars = (length) => {
+
         let dummyCars = []
         for (let i = 0; i < length; i++) {
             dummyCars.push(new Car(
-                faker.vehicle.vehicle(), //название
+                    getDummyName(faker.vehicle.vehicle()), //название
                 `${getRandomInt(100000000, 999999999)}`, //vin
                 getRandomInt(100000000, 999999999), //id двигателя
                 getRandomInt(100000000, 999999999), //id шасси
                 getRandomInt(1, 100), //уровень
                 getRandomInt(0, 9999999), //пробег
                 getRandomInt(0, 90), //количество побед
-                getRandomInt(0, 90)) //количество поражений
+                getRandomInt(0, 90),
+                    i),//количество поражений
+                //id
             )
         }
-        return dummyCars}, 1000)
+        return dummyCars
 }
 
 
@@ -109,6 +111,40 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function getDummyName(name) {
+export function getDummyName(name) {
     return camelCase(name.toLowerCase().split("").reverse().join(""))
+}
+
+export const addZerosToId = (id, targetLength) => {
+    if (!id) {
+        return null;
+    }
+    if (id.length < targetLength) {
+        let resId = "";
+        for (let i=0; i<targetLength - id.length; i++) {
+            resId += '0'
+        }
+        return resId + id;
+    }
+}
+
+export const getLevelUpCost = (currentLevel) => {
+    return (parseInt(currentLevel)/10 + 1) * 0.001
+}
+
+export const getUniqueCarImage = (car) => {
+    return <img
+        style={{
+            filter: `hue-rotate(${getHue(car.vin)}deg)`
+        }}
+        src={getCarImage(car.vin)}
+        alt=""/>
+}
+
+export const getCarsOnLevel = (cars, minLevel, maxLevel) => {
+    let newCars = []
+    cars.forEach(car => {
+        if (car.level >= minLevel && car.level <= maxLevel) newCars.push(car)
+    })
+    return newCars
 }

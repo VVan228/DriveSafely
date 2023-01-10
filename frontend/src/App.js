@@ -39,6 +39,7 @@ function App() {
         setIsLoading(false)
     }, [])
 
+
     return (
         <AuthContext.Provider value={{
             account,
@@ -49,7 +50,7 @@ function App() {
             contract
         }}>
             <BrowserRouter>
-                <Navbar/>
+                {/*<Navbar/>*/}
                 <AppRouter className="w-100 h-100"/>
             </BrowserRouter>
         </AuthContext.Provider>

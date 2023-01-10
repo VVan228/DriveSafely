@@ -2,7 +2,7 @@ import DriveSafely_abi from './API/DriveSafely_abi.json'
 
 export default class Constants {
 
-    static CONTRACT_ADDRESS = "0x794B8A631235630C395006b76be293586aBb40e2"
+    static CONTRACT_ADDRESS = "0x995B259BefB381De2279c6d6992805151b04ab92"
     static ABI = DriveSafely_abi
 
 }
