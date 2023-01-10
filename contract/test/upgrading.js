@@ -1,12 +1,5 @@
 const CarHelper = artifacts.require("CarHelper");
 
-const capacityCoef = 0.00001;
-const productionPerHourCoef = 0.0002;
-const horsePowersCoef = 0.000015;
-const consumtionCoef = 0.005;
-const durabilityCoef = 0.0000000001;
-const levelUpCost = 0.001;
-
 const counts = 50;
 
 contract('CarUpgrade', (accounts) => {
@@ -18,12 +11,12 @@ contract('CarUpgrade', (accounts) => {
         const stations = await instance.getFuelStationByOwner(accounts[0]);
         // checking balance
         // not enough balance
-        const oldBalance = counts * stations[0].capacity * capacityCoef;
-        assert.equal(accounts[0].balance < oldBalance, true);
+        const oldBalance = counts * stations[0].capacity * CarHelper.capacityCoef;
+        assert.equal(accounts[0].balance < oldBalance, true); // TODO???
 
         // upgrade capacity
         const newCapacity = cars[0].capacity + counts;
-        cars[0].upgradeCapacity(0, 50);
+        cars[0].upgradeCapacity(0, counts);
         assert.equal(cars[0].capacity, newCapacity);
     });
 
@@ -31,8 +24,11 @@ contract('CarUpgrade', (accounts) => {
         const instance = await CarHelper.deployed();
         await instance.createCar("car1",{from:accounts[0]});
         const cars = await instance.getCarsByOwner(accounts[0]);
-        const newProductionPerHour = cars[0].productionPerHour + 50;
-        cars[0].upgradeProductionPerHour(0, 50);
+
+
+        // upgrade production per hour
+        const newProductionPerHour = cars[0].productionPerHour + counts;
+        cars[0].upgradeProductionPerHour(0, counts);
         assert.equal(cars[0].productionPerHour, newProductionPerHour);
     });
 
@@ -40,8 +36,11 @@ contract('CarUpgrade', (accounts) => {
         const instance = await CarHelper.deployed();
         await instance.createCar("car1",{from:accounts[0]});
         const cars = await instance.getCarsByOwner(accounts[0]);
-        const newHorsePowers = cars[0].horsePowers + 50;
-        cars[0].upgradeHorsePowers(0, 50);
+
+
+        // upgrade horse powers
+        const newHorsePowers = cars[0].horsePowers + counts;
+        cars[0].upgradeHorsePowers(0, counts);
         assert.equal(cars[0].horsePowers, newHorsePowers);
     });
 
@@ -49,8 +48,11 @@ contract('CarUpgrade', (accounts) => {
         const instance = await CarHelper.deployed();
         await instance.createCar("car1",{from:accounts[0]});
         const cars = await instance.getCarsByOwner(accounts[0]);
-        const newConsumtion = cars[0].consumtion + 50;
-        cars[0].upgradeConsumtion(0, 50);
+
+
+        // upgrade consumtion
+        const newConsumtion = cars[0].consumtion + counts;
+        cars[0].upgradeConsumtion(0, counts);
         assert.equal(cars[0].consumtion, newConsumtion);
     });
 
@@ -58,8 +60,11 @@ contract('CarUpgrade', (accounts) => {
         const instance = await CarHelper.deployed();
         await instance.createCar("car1",{from:accounts[0]});
         const cars = await instance.getCarsByOwner(accounts[0]);
-        const newDurability = cars[0].durability + 50;
-        cars[0].upgradeDurability(0, 50);
+
+
+        // upgrade durability
+        const newDurability = cars[0].durability + counts;
+        cars[0].upgradeDurability(0, counts);
         assert.equal(cars[0].durability, newDurability);
     });
 
