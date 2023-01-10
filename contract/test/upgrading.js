@@ -42,11 +42,17 @@ contract('CarHelper', (accounts) => {
         assert.equal(cars[0].durability, newDurability);
     });
 
-    it('level is up', async () => {
+    it('level increased by 1', async () => {
         const instance = await CarHelper.deployed();
         const cars = await instance.getCarsByOwner(accounts[0]);
         const newLevel = cars[0].carLevel+1;
         levelUp(0);
+        // level increased by 1
         assert.equal(cars[0].carLevel, newLevel);
+        // reset win counter
+        assert.equal(cars[0].winCountOnCurrentLevel, 0);
+        // reset defeat counter
+        assert.equal(cars[0].lossCountOnCurrentLevel, 0);
     });
+
 });
