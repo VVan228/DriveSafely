@@ -1,6 +1,6 @@
 const CarHelper = artifacts.require("CarHelper");
 
-contract('CarHelper', (accounts) => {
+contract('CarUpgrade', (accounts) => {
 
     it('capacity is changed', async () => {
         const instance = await CarHelper.deployed();

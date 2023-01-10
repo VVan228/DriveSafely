@@ -60,7 +60,6 @@ module.exports = {
       //gas: 6721975
       
     }
-  
   },
 
   // Set default mocha options here, use special reporters etc.
