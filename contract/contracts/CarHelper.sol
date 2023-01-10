@@ -90,7 +90,7 @@ contract CarHelper is CarFactory {
     }
 
     function getChassisByOwner(address _owner) public view returns(Chassis[] memory) {
-        Chassis[] memory result = new Chassis[](ownerEngineCount[_owner]);
+        Chassis[] memory result = new Chassis[](ownerChassisCount[_owner]);
         uint counter = 0;
         for (uint i = 0; i < chassis.length; i++) {
             if (chassisToOwner[i] == _owner) {
@@ -151,11 +151,6 @@ contract CarHelper is CarFactory {
         cars[_carId].carLevel++;
         cars[_carId].winCountOnCurrentLevel = 0;
         cars[_carId].lossCountOnCurrentLevel = 0;
-    }
-
-    function getCost(uint _carId) public view returns(uint){
-        uint r = levelUpCost * (cars[_carId].carLevel/10 + 1);
-        return r;
     }
 
 }

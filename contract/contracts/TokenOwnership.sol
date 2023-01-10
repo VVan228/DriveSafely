@@ -5,9 +5,9 @@ import "./CarRacing.sol";
 
 contract TokenOwnership is CarRacing{
 
-    mapping (uint => address) carApprovals;
-    mapping (uint => address) engineApprovals;
-    mapping (uint => address) chassisApprovals;
+    mapping (uint => address) public carApprovals;
+    mapping (uint => address) public engineApprovals;
+    mapping (uint => address) public chassisApprovals;
 
 
     function balanceOfCars(address _owner) external view returns (uint256) {
@@ -44,25 +44,22 @@ contract TokenOwnership is CarRacing{
         return engineToOwner[_tokenId];
     }
     function _transferEngine(address _from, address _to, uint256 _tokenId) private {
-        Car[] memory carr = getCarsByOwner(_from);
-        bool flag = false;
-        if(carr.length>0){
-            for(uint i = 0; i<carr.length; i++){
-                if(carr[i].engineId == _tokenId){
-                    detachEngine(carr[i].id, carr[i].engineId);
-                }
+        Car[] memory cars = getCarsByOwner(_from);
+        
+        for(uint i = 0; i<cars.length; i++){
+            if(cars[i].engineId == _tokenId){
+                cars[i].engineId = 0;
             }
-            require(!flag, "engine not erased");
         }
-
         ownerEngineCount[_to]++;// = ownerEngineCount[_to].add(1);
         ownerEngineCount[_from]--;// = ownerEngineCount[_from].sub(1);
         engineToOwner[_tokenId] = _to;
     }
     function transferEngineFrom(address _from, address _to, uint256 _tokenId) external payable {
-        require (engineToOwner[_tokenId] == _from || engineApprovals[_tokenId] == msg.sender);
+        require (engineToOwner[_tokenId] == _from);
         _transferEngine(_from, _to, _tokenId);
     }
+
     function approveEngine(address _approved, uint256 _tokenId) external payable onlyOwnerOfEngine(_tokenId) {
         engineApprovals[_tokenId] = _approved;
     }
@@ -85,8 +82,8 @@ contract TokenOwnership is CarRacing{
         }
         chassisToOwner[_tokenId] = _to;
     }
-    function transferChassisFrom(address _from, address _to, uint256 _tokenId) external payable {
-        require (chassisToOwner[_tokenId] == _from || chassisApprovals[_tokenId] == msg.sender);
+    function transferChassisFrom(address _from, address _to, uint256 _tokenId) external {
+        require (chassisToOwner[_tokenId] == _from);
         _transferChassis(_from, _to, _tokenId);
     }
     function approveChassis(address _approved, uint256 _tokenId) external payable onlyOwnerOfChassis(_tokenId) {

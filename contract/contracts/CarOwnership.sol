@@ -21,13 +21,28 @@ contract CarOwnership is ERC721, Ownable{
     function ownerOf(uint256 _tokenId) override public view returns (address){
         return tokenOwnership.ownerOfCar(_tokenId);
     }
+
+     function getApproved(uint256 _tokenId) override public view returns(address) {
+        return tokenOwnership.carApprovals(_tokenId);
+    }
+
     function transferFrom(address _from, address _to, uint256 _tokenId) override public {
+        require(getApproved(_tokenId) == _to, "you didn't pay for the token!");
         tokenOwnership.transferCarFrom(_from, _to, _tokenId);
         emit Transfer(_from, _to, _tokenId);
     }
-    function approve(address _approved, uint256 _tokenId) override public{
-        tokenOwnership.approveCar(_approved, _tokenId);
-        emit Approval(msg.sender, _approved, _tokenId);
+
+    function buyFromMarketplace(uint256 _tokenId) public payable{
+        require(tokenOwnership.carToPrice(_tokenId)!=0, "not for sale!");
+        require(msg.value == tokenOwnership.carToPrice(_tokenId), "val wrong");
+        require(ownerOf(_tokenId) != msg.sender, "cant buy yours");
+
+        tokenOwnership.approveCar(msg.sender, _tokenId);
+        emit Approval(ownerOf(_tokenId), msg.sender, _tokenId);
+
+        payable(ownerOf(_tokenId)).transfer(msg.value);
+        transferFrom(ownerOf(_tokenId), msg.sender, _tokenId);
     }
+    
 
 }
