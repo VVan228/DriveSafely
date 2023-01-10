@@ -6,6 +6,7 @@ import AnimatedPage from "../components/AnimatedPage";
 import {AuthContext} from "../context";
 import {useFetching} from "../hooks/useFetching";
 import ContractService from "../API/ContractService";
+import {getDummyCars} from "../utils/cars";
 
 const Competitions = () => {
 
@@ -13,7 +14,8 @@ const Competitions = () => {
     const totalWidth = window.innerWidth * 10
     const [offset, setOffset] = useState(0)
     const [scale, setScale] = useState(1)
-    const [opacity, setOpacity] = useState(1)
+    const [worldOpacity, setWorldOpacity] = useState(1)
+    const [buttonsOpacity, setButtonsOpacity] = useState(1)
     const [worldContainerBottom, setWorldContainerBottom] = useState("-100%")
 
 
@@ -25,7 +27,8 @@ const Competitions = () => {
 
     const [fetchCars, isCarsLoading, carsError] = useFetching(async () => {
             const owner = await ContractService.getUserAddress()
-            const response = await contract.getCarsByOwner(owner)
+            // const response = await contract.getCarsByOwner(owner)
+            const response = await getDummyCars(100)
             setCars(response)
         }
     )
@@ -59,14 +62,14 @@ const Competitions = () => {
         {id: 10},
     ]
 
-     useEffect(()=>{
-         setScale(0.2)
-         setOpacity(0)
-         setTimeout(()=>{
-             setOpacity(1)
-             setScale(1)
-         }, 300)
-     }, [offset])
+    useEffect(() => {
+        setScale(0.2)
+        setWorldOpacity(0)
+        setTimeout(() => {
+            setWorldOpacity(1)
+            setScale(1)
+        }, 300)
+    }, [offset])
 
     useEffect(() => {
         setWorldContainerBottom("10%")
@@ -103,7 +106,21 @@ const Competitions = () => {
                         }}
                         className="d-flex justify-content-center align-items-center"
                     >
-                        <WorldPreview src = {city} level={world.id} hueRotate ={360/worlds.length * world.id} style={{transform: `scale(${scale})`, zIndex: 120, opacity: opacity, transition: ".3s"}}/>
+                        <WorldPreview
+                            src={city}
+                            level={world.id}
+                            hueRotate={360 / worlds.length * world.id}
+                            style={{
+                                transform: `scale(${scale})`,
+                                zIndex: 120,
+                                opacity: worldOpacity,
+                                transition: ".3s"
+                            }}
+                            onClick={()=>{
+                                console.log("clicked on world", world.id)
+                                setWorldContainerBottom("-100%")
+                            }}
+                        />
                     </div>
                 )}
             </div>

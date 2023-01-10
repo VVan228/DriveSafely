@@ -65,7 +65,6 @@ const Inventory = () => {
     if (isLoading) {
         return <Loader/>
     }
-
     return (
             <div className="row p-0 h-100 text-center d-flex flex-row justify-content-between">
                 <MySidebar side="left" align="start" className="col-4 d-flex align-items-center" width="30%">

@@ -14,7 +14,7 @@ const Factory = () => {
 
         const getSomething = async () => {
             const owner = await ContractService.getUserAddress()
-            // contract.createCar(faker.vehicle.vehicle())
+            contract.createCar(faker.vehicle.vehicle())
             return await contract.getFuelStationByOwner(owner);
             // cars.forEach(car => {
             //     console.log(car["model"])

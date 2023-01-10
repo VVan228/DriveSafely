@@ -1,8 +1,12 @@
+import {faker} from "@faker-js/faker";
+import {ethers} from 'ethers'
+
 function importAll(r) {
     return r.keys().map(r);
 }
 
 const images = importAll(require.context('../images/cars', false, /\.(png|jpe?g|svg)$/));
+const useLogging = false;
 
 const getCarImage = (vin) => {
     let sum = vin.toString().split('').reduce(function(a, b) {
@@ -17,37 +21,94 @@ const getHue = (vin) => {
 
 export default class Car {
 
-    constructor(model, vin, engineId, chassisId, level, mileage, winsCount, lossCount) {
+    constructor(model, vin, engineId, chassisId, level, mileage, winsCount, lossCount, id) {
         this.model = model;
         this.vin = vin;
-        this.engineId = engineId;
-        this.chassisId = chassisId;
-        this.level = level;
-        this.mileage = mileage;
-        this.winsCount = winsCount;
-        this.lossCount = lossCount;
+        this.engineId = engineId
+        this.chassisId = chassisId
+        this.level = level
+        this.mileage = mileage
+        this.winsCount = winsCount
+        this.lossCount = lossCount
+        this.id = id;
         this.image = getCarImage(vin)
         this.hue = getHue(vin)
     }
 
 }
 
-export const convertCarToJsObject = (car) => {
+export const convertCarToJsObject = async (car) => {
     /*
-       0 - модель у
+       0 - модель
        1 - vin
        2 - id двигателя
        3 - id шасси
-       4 - уровень у
-       5 - миляж y
+       4 - уровень
+       5 - миляж
        6 - победы (на уровне)
        7 - поражения (на уровне)
+       8 - id машины
    */
-    return new Car(car[0], car[1], car[2], car[3], car[4], car[5], car[6], car[7])
+    car = car.toString().split(",")
+    useLogging && console.log("Given car:", car.toString())
+    const carObject = new Car(car[0], car[1], car[2], car[3], car[4], car[5], car[6], car[7], car[8])
+    useLogging && console.log("Car object:", carObject)
+    return carObject
 }
 
-export const convertCarsToJsObject = (carsArray) => {
+export const convertCarsToJsObject = async (carsArray) => {
+    // console.log(carsArray)
     let convertedArray = []
-    carsArray.forEach(car => convertedArray.push(convertCarToJsObject(car)))
+    for (const car of carsArray) {
+        let convertedCar = await convertCarToJsObject(car)
+        convertedArray.push(convertedCar)
+    }
+    useLogging && console.log("Converted array:", convertedArray)
     return convertedArray;
+}
+
+
+
+
+export const getDummyCars = async (length) => {
+    setTimeout(()=>{
+        let dummyCars = []
+        for (let i = 0; i < length; i++) {
+            dummyCars.push(new Car(
+                faker.vehicle.vehicle(), //название
+                `${getRandomInt(100000000, 999999999)}`, //vin
+                getRandomInt(100000000, 999999999), //id двигателя
+                getRandomInt(100000000, 999999999), //id шасси
+                getRandomInt(1, 100), //уровень
+                getRandomInt(0, 9999999), //пробег
+                getRandomInt(0, 90), //количество побед
+                getRandomInt(0, 90)) //количество поражений
+            )
+        }
+        return dummyCars}, 1000)
+}
+
+
+function camelCase(string) {
+    let camelCased = []
+    string = string;
+    let stringArray = string.toLowerCase().split(" ");
+    stringArray.forEach(word => {
+        camelCased.push(capitalizeFirstLetter(word))
+    })
+    return camelCased.join(" ")
+}
+
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function getDummyName(name) {
+    return camelCase(name.toLowerCase().split("").reverse().join(""))
 }

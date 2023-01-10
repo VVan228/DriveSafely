@@ -7,8 +7,8 @@ const MySidebar = ({children, ...props}) => {
     const [position, setPosition] = useState("-100%")
 
     useEffect(() => {
-        setPosition("0%")
-    }, [window.location])
+        setTimeout(()=>{setPosition("0%")}, 100)
+    }, [])
 
     return (
         <div

@@ -78,6 +78,26 @@
         "type": "uint256"
       }
     ],
+    "name": "carToPrice",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "name": "cars",
     "outputs": [
       {
@@ -184,6 +204,26 @@
     "inputs": [
       {
         "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "chassisToPrice",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
         "name": "roomId",
         "type": "uint256"
       },
@@ -212,8 +252,135 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_model",
+        "type": "string"
+      },
+      {
+        "internalType": "uint16",
+        "name": "_horsePowers",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_consumtion",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint32",
+        "name": "_durability",
+        "type": "uint32"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_carLevel",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_carPrice",
+        "type": "uint256"
+      }
+    ],
+    "name": "createCustomCar",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint32",
+        "name": "_durability",
+        "type": "uint32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_chassisPrice",
+        "type": "uint256"
+      }
+    ],
+    "name": "createCustomChassis",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint16",
+        "name": "_horsePowers",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_consumtion",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_enginePrice",
+        "type": "uint256"
+      }
+    ],
+    "name": "createCustomEngine",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "createFuelStation",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "carId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "chassisId",
+        "type": "uint256"
+      }
+    ],
+    "name": "detachChassis",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "carId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "engineId",
+        "type": "uint256"
+      }
+    ],
+    "name": "detachEngine",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -232,6 +399,26 @@
         "internalType": "address",
         "name": "",
         "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "engineToPrice",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -665,6 +852,46 @@
       }
     ],
     "name": "ownerCarCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "ownerChassisCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "ownerEngineCount",
     "outputs": [
       {
         "internalType": "uint256",
