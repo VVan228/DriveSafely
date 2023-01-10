@@ -101,35 +101,40 @@ contract CarHelper is CarFactory {
 
     function upgradeCapacity(uint _fuelStatonId, uint8 _counts) external payable onlyOwnerOfFuelStation(_fuelStatonId) {
         require(msg.value == (_counts * stations[_fuelStatonId].capacity * capacityCoef));
+        payable(owner()).transfer(msg.value);
         stations[_fuelStatonId].capacity += _counts; 
     }
 
     function upgradeProductionPerHour(uint _fuelStatonId, uint8 _counts) external payable onlyOwnerOfFuelStation(_fuelStatonId) {
         require(msg.value == (_counts * stations[_fuelStatonId].productionPerHour * productionPerHourCoef));
+        payable(owner()).transfer(msg.value);
         stations[_fuelStatonId].productionPerHour += _counts; 
     }
 
     function upgradeHorsePowers(uint _engineId, uint8 _counts) external payable onlyOwnerOfEngine(_engineId) {
         require(msg.value == (_counts * engines[_engineId].horsePowers * horsePowersCoef));
+        payable(owner()).transfer(msg.value);
         engines[_engineId].horsePowers += _counts; 
     }
 
     function upgradeConsumtion(uint _engineId, uint8 _counts) external payable onlyOwnerOfEngine(_engineId) {
         require(msg.value == consumtionCoef * 2**(10 - engines[_engineId].consumtion));
+        payable(owner()).transfer(msg.value);
         engines[_engineId].consumtion -= _counts; 
     }
 
     function upgradeDurability(uint _chassisId, uint8 _counts) external payable onlyOwnerOfChassis(_chassisId) {
         require(msg.value == (_counts * chassis[_chassisId].durability * durabilityCoef));
+        payable(owner()).transfer(msg.value);
         chassis[_chassisId].durability += _counts; 
     }
 
     function levelUp(uint _carId) external payable {
         require(msg.value == levelUpCost * (cars[_carId].carLevel/10) && cars[_carId].winCountOnCurrentLevel >= (cars[_carId].carLevel + 1));
+        payable(owner()).transfer(msg.value);
         cars[_carId].carLevel++;
         cars[_carId].winCountOnCurrentLevel = 0;
         cars[_carId].lossCountOnCurrentLevel = 0;
     }
-
 
 }
