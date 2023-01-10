@@ -15,9 +15,14 @@ function generateRoom(uint crossId, uint numPlayers) public view returns (uint r
     for(uint i=0; i<numPlayers; i++){
         uint carStart = randMod(4 - crossId, crossId, randNonce);
         randNonce++;
-        uint carEnd = randMod(3 - crossId, crossId, randNonce);
+        uint carDirection;
+        if(carStart == 2){
+            carDirection = crossId + randMod(3 - crossId, crossId, randNonce);
+        }else{
+            carDirection = randMod(3 - crossId, crossId, randNonce);
+        }
         randNonce++;
-        carsDirections = carsDirections*100 + (carEnd*10 + carStart);
+        carsDirections = carsDirections*100 + (carDirection*10 + carStart);
     }
    
     roomDNA = carsDirections*1000 + mainRoad2*100 + mainRoad1*10 + crossId;
