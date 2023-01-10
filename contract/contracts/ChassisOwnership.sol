@@ -26,17 +26,16 @@ contract ChassisOwnership is ERC721, Ownable{
         emit Transfer(_from, _to, _tokenId);
     }
 
-    function putOnMarketplace(uint256 _tokenId, uint price) public {
-        require(msg.sender == tokenOwnership.chassisToOwner(_tokenId), "chassis not your >:(");
-        tokenOwnership.putChassisOnMarketplace(_tokenId, price);
-        //setApprovalForAll(owner(), true);
-    }
-
     function buyFromMarketplace(uint256 _tokenId) public payable{
-        //req msg val
-        //req sender!=owner
         //req price!=0
+        require(tokenOwnership.chassisToPrice(_tokenId)!=0, "not for sale!");
+        //req msg val
+        require(msg.value == tokenOwnership.chassisToPrice(_tokenId), "val wrong");
+        //req sender!=owner
+        require(tokenOwnership.chassisToOwner(_tokenId) != msg.sender, "cant buy yours");
+
         payable(tokenOwnership.chassisToOwner(_tokenId)).transfer(msg.value);
+        transferFrom(tokenOwnership.chassisToOwner(_tokenId), msg.sender, _tokenId);
     }
 
 }

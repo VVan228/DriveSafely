@@ -94,7 +94,7 @@ contract TokenOwnership is CarRacing{
     }
 
 
-    function putChassisOnMarketplace(uint chassisId, uint price) public onlyOwner{// onlyOwnerOfChassis(chassisId){
+    function putChassisOnMarketplace(uint chassisId, uint price) public onlyOwnerOfChassis(chassisId){
 
         require(price>0, "invalid price");
         chassisToPrice[chassisId] = price;
@@ -119,7 +119,4 @@ contract TokenOwnership is CarRacing{
         chassisToPrice[carId] = 0;
     }
 
-    // function putOnMarketPlace(uint _carId) public onlyOwnerOfCar(_carId) {
-
-    // }
 }
