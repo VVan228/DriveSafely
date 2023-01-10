@@ -17,15 +17,19 @@ contract TokenOwnership is CarRacing{
         return carToOwner[_tokenId];
     }
     function _transferCar(address _from, address _to, uint256 _tokenId) private {
-        require(cars[_tokenId].engineId == 0, "engine must be empty");
-        require(cars[_tokenId].chassisId == 0, "chassis must be empty");
         require(ownerCarCount[_from]>0, "it is your last car");
+        if(cars[_tokenId].chassisId != 0){
+            cars[_tokenId].chassisId = 0;
+        }
+        if(cars[_tokenId].engineId != 0){
+            cars[_tokenId].engineId = 0;
+        }
         ownerCarCount[_to]++;// = ownerCarCount[_to].add(1);
         ownerCarCount[_from]--;// = ownerCarCount[_from].sub(1);
         carToOwner[_tokenId] = _to;
     }
     function transferCarFrom(address _from, address _to, uint256 _tokenId) external payable {
-        require (carToOwner[_tokenId] == _from || carApprovals[_tokenId] == msg.sender);
+        require (carToOwner[_tokenId] == _from || carToPrice[_tokenId] != 0);
         _transferCar(_from, _to, _tokenId);
     }
     function approveCar(address _approved, uint256 _tokenId) external payable onlyOwnerOfCar(_tokenId) {
@@ -89,6 +93,31 @@ contract TokenOwnership is CarRacing{
         chassisApprovals[_tokenId] = _approved;
     }
 
+
+    function putChassisOnMarketplace(uint chassisId, uint price) public onlyOwner{// onlyOwnerOfChassis(chassisId){
+
+        require(price>0, "invalid price");
+        chassisToPrice[chassisId] = price;
+    }
+    function removeChassisFromMarketplace(uint chassisId) public onlyOwnerOfChassis(chassisId){
+        chassisToPrice[chassisId] = 0;
+    }
+
+    function putEngineOnMarketplace(uint engineId, uint price) public onlyOwnerOfEngine(engineId){
+        require(price>0, "invalid price");
+        chassisToPrice[engineId] = price;
+    }
+    function removeEngineFromMarketplace(uint engineId) public onlyOwnerOfEngine(engineId){
+        chassisToPrice[engineId] = 0;
+    }
+
+    function putCarOnMarketplace(uint carId, uint price) public onlyOwnerOfCar(carId){
+        require(price>0, "invalid price");
+        chassisToPrice[carId] = price;
+    }
+    function removeCarFromMarketplace(uint carId) public onlyOwnerOfCar(carId){
+        chassisToPrice[carId] = 0;
+    }
 
     // function putOnMarketPlace(uint _carId) public onlyOwnerOfCar(_carId) {
 
