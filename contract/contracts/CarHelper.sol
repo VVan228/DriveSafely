@@ -47,7 +47,7 @@ contract CarHelper is CarFactory {
         cars[carId].engineId = 0;
     }
     function detachChassis(uint carId, uint chassisId) public onlyOwnerOfChassis(chassisId) onlyOwnerOfCar(carId){
-        require(cars[carId].chassisId == chassisId, "engine is not attached");
+        require(cars[carId].chassisId == chassisId, "chassis are not attached");
         cars[carId].chassisId = 0;
     }
 

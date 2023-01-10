@@ -11740,12 +11740,12 @@
         }
       },
       "links": {},
-      "address": "0xc2720a7AB5E8094345ca3277c0Ce9794990544D8",
-      "transactionHash": "0x27b9bac3d87049bbb592553affe60f8a56978ff9b9f79a953d0504a01353d4eb"
+      "address": "0xbA80082B1Fa9f9C497C21D18B42Fb77d5B707997",
+      "transactionHash": "0x255dff4be16467fd2022322661fca4192bb5fe96e76891847375b1e7f5d26cf5"
     }
   },
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-01-09T00:14:14.774Z",
+  "updatedAt": "2023-01-10T06:48:35.777Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
