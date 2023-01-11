@@ -23,7 +23,8 @@
         }
       ],
       "stateMutability": "pure",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -47,7 +48,8 @@
         }
       ],
       "stateMutability": "pure",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.13+commit.abaa5c0e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"crossId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"numPlayers\",\"type\":\"uint256\"}],\"name\":\"generateRoom\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"roomDNA\",\"type\":\"uint256\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"roomDNA\",\"type\":\"uint256\"},{\"internalType\":\"uint256[]\",\"name\":\"answer\",\"type\":\"uint256[]\"}],\"name\":\"isCorrectAnswer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"right\",\"type\":\"bool\"}],\"stateMutability\":\"pure\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/PDDLib.sol\":\"PDDLib\"},\"evmVersion\":\"berlin\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/PDDLib.sol\":{\"keccak256\":\"0x9d14670b4ed66be948d8f4fead74096d77095f8ade2e7c2750bd29c72c897c34\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ed5a64461d153d5c711f837c97e89b444e5c0a412370aa5b197a8ef90cf4854d\",\"dweb:/ipfs/Qme9VB8UiKJxL8LVcUYj1Kk1vzTeWTGHWWZLBhYYCjdHSe\"]}},\"version\":1}",
@@ -1692,20 +1694,20 @@
   "sourceMap": "58:323:7:-:0;;;;;;;;;;;;;;;-1:-1:-1;;;58:323:7;;;;;;;;;;;;;;;;;",
   "deployedSourceMap": "58:323:7:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;229:150;;;;;;:::i;:::-;311:10;229:150;;;;;;;;1507:14:21;;1500:22;1482:41;;1470:2;1455:18;229:150:7;;;;;;;;78:146;;;;;;:::i;:::-;215:2;78:146;;;;;;;;1941:25:21;;;1929:2;1914:18;78:146:7;1787:185:21;14:127;75:10;70:3;66:20;63:1;56:31;106:4;103:1;96:15;130:4;127:1;120:15;146:1183;239:6;247;300:2;288:9;279:7;275:23;271:32;268:52;;;316:1;313;306:12;268:52;352:9;339:23;329:33;;381:2;434;423:9;419:18;406:32;457:18;498:2;490:6;487:14;484:34;;;514:1;511;504:12;484:34;552:6;541:9;537:22;527:32;;597:7;590:4;586:2;582:13;578:27;568:55;;619:1;616;609:12;568:55;655:2;642:16;677:2;673;670:10;667:36;;;683:18;;:::i;:::-;729:2;726:1;722:10;761:2;755:9;824:2;820:7;815:2;811;807:11;803:25;795:6;791:38;879:6;867:10;864:22;859:2;847:10;844:18;841:46;838:72;;;890:18;;:::i;:::-;926:2;919:22;976:18;;;1010:15;;;;-1:-1:-1;1052:11:21;;;1048:20;;;1080:19;;;1077:39;;;1112:1;1109;1102:12;1077:39;1136:11;;;;1156:142;1172:6;1167:3;1164:15;1156:142;;;1238:17;;1226:30;;1189:12;;;;1276;;;;1156:142;;;1317:6;1307:16;;;;;;;;146:1183;;;;;:::o;1534:248::-;1602:6;1610;1663:2;1651:9;1642:7;1638:23;1634:32;1631:52;;;1679:1;1676;1669:12;1631:52;-1:-1:-1;;1702:23:21;;;1772:2;1757:18;;;1744:32;;-1:-1:-1;1534:248:21:o",
   "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.13;\n\nlibrary PDDLib{\n    function generateRoom(uint crossId, uint numPlayers) public pure returns (uint roomDNA){\n        // crossId + numPlayers;\n        return 50;\n    }\n    function isCorrectAnswer(uint roomDNA, uint[] memory answer) public pure returns (bool right){\n        // answer[roomDNA];\n        return false;\n    }\n}\n",
-  "sourcePath": "/Users/rdashk/Downloads/isu/DriveSafely/contract/contracts/PDDLib.sol",
+  "sourcePath": "/Users/vvan/Programming/JavaScript/DriveSafely/contract/contracts/PDDLib.sol",
   "ast": {
     "absolutePath": "project:/contracts/PDDLib.sol",
     "exportedSymbols": {
       "PDDLib": [
-        1600
+        1958
       ]
     },
-    "id": 1601,
+    "id": 1959,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1574,
+        "id": 1932,
         "literals": [
           "solidity",
           "^",
@@ -1722,9 +1724,9 @@
         "contractDependencies": [],
         "contractKind": "library",
         "fullyImplemented": true,
-        "id": 1600,
+        "id": 1958,
         "linearizedBaseContracts": [
-          1600
+          1958
         ],
         "name": "PDDLib",
         "nameLocation": "66:6:7",
@@ -1732,14 +1734,14 @@
         "nodes": [
           {
             "body": {
-              "id": 1585,
+              "id": 1943,
               "nodeType": "Block",
               "src": "165:59:7",
               "statements": [
                 {
                   "expression": {
                     "hexValue": "3530",
-                    "id": 1583,
+                    "id": 1941,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -1753,15 +1755,15 @@
                     },
                     "value": "50"
                   },
-                  "functionReturnParameters": 1582,
-                  "id": 1584,
+                  "functionReturnParameters": 1940,
+                  "id": 1942,
                   "nodeType": "Return",
                   "src": "208:9:7"
                 }
               ]
             },
             "functionSelector": "c037e545",
-            "id": 1586,
+            "id": 1944,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -1769,17 +1771,17 @@
             "nameLocation": "87:12:7",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1579,
+              "id": 1937,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1576,
+                  "id": 1934,
                   "mutability": "mutable",
                   "name": "crossId",
                   "nameLocation": "105:7:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1586,
+                  "scope": 1944,
                   "src": "100:12:7",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1788,7 +1790,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1575,
+                    "id": 1933,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "100:4:7",
@@ -1801,12 +1803,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 1578,
+                  "id": 1936,
                   "mutability": "mutable",
                   "name": "numPlayers",
                   "nameLocation": "119:10:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1586,
+                  "scope": 1944,
                   "src": "114:15:7",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1815,7 +1817,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1577,
+                    "id": 1935,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "114:4:7",
@@ -1830,17 +1832,17 @@
               "src": "99:31:7"
             },
             "returnParameters": {
-              "id": 1582,
+              "id": 1940,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1581,
+                  "id": 1939,
                   "mutability": "mutable",
                   "name": "roomDNA",
                   "nameLocation": "157:7:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1586,
+                  "scope": 1944,
                   "src": "152:12:7",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1849,7 +1851,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1580,
+                    "id": 1938,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "152:4:7",
@@ -1863,7 +1865,7 @@
               ],
               "src": "151:14:7"
             },
-            "scope": 1600,
+            "scope": 1958,
             "src": "78:146:7",
             "stateMutability": "pure",
             "virtual": false,
@@ -1871,14 +1873,14 @@
           },
           {
             "body": {
-              "id": 1598,
+              "id": 1956,
               "nodeType": "Block",
               "src": "322:57:7",
               "statements": [
                 {
                   "expression": {
                     "hexValue": "66616c7365",
-                    "id": 1596,
+                    "id": 1954,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -1892,15 +1894,15 @@
                     },
                     "value": "false"
                   },
-                  "functionReturnParameters": 1595,
-                  "id": 1597,
+                  "functionReturnParameters": 1953,
+                  "id": 1955,
                   "nodeType": "Return",
                   "src": "360:12:7"
                 }
               ]
             },
             "functionSelector": "9c63eb2e",
-            "id": 1599,
+            "id": 1957,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -1908,17 +1910,17 @@
             "nameLocation": "238:15:7",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1592,
+              "id": 1950,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1588,
+                  "id": 1946,
                   "mutability": "mutable",
                   "name": "roomDNA",
                   "nameLocation": "259:7:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1599,
+                  "scope": 1957,
                   "src": "254:12:7",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1927,7 +1929,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1587,
+                    "id": 1945,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "254:4:7",
@@ -1940,12 +1942,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 1591,
+                  "id": 1949,
                   "mutability": "mutable",
                   "name": "answer",
                   "nameLocation": "282:6:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1599,
+                  "scope": 1957,
                   "src": "268:20:7",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -1955,7 +1957,7 @@
                   },
                   "typeName": {
                     "baseType": {
-                      "id": 1589,
+                      "id": 1947,
                       "name": "uint",
                       "nodeType": "ElementaryTypeName",
                       "src": "268:4:7",
@@ -1964,7 +1966,7 @@
                         "typeString": "uint256"
                       }
                     },
-                    "id": 1590,
+                    "id": 1948,
                     "nodeType": "ArrayTypeName",
                     "src": "268:6:7",
                     "typeDescriptions": {
@@ -1978,17 +1980,17 @@
               "src": "253:36:7"
             },
             "returnParameters": {
-              "id": 1595,
+              "id": 1953,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1594,
+                  "id": 1952,
                   "mutability": "mutable",
                   "name": "right",
                   "nameLocation": "316:5:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1599,
+                  "scope": 1957,
                   "src": "311:10:7",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1997,7 +1999,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 1593,
+                    "id": 1951,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "311:4:7",
@@ -2011,14 +2013,14 @@
               ],
               "src": "310:12:7"
             },
-            "scope": 1600,
+            "scope": 1958,
             "src": "229:150:7",
             "stateMutability": "pure",
             "virtual": false,
             "visibility": "public"
           }
         ],
-        "scope": 1601,
+        "scope": 1959,
         "src": "58:323:7",
         "usedErrors": []
       }
@@ -2033,12 +2035,13 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xCF477aA6B610b915F8b08006b51C8F071Cb674dc",
-      "transactionHash": "0x4eff42405eca78ca5bf271631480d06ea38a94fc3348982169db11227c150c5b"
+      "address": "0xe1ec668965351648c4029CeB78ba5d2a22aCE262",
+      "transactionHash": "0x1400cc1328707c230406f808667a0b195f1077609c8f741e2373b22fe15120ae"
     }
   },
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-01-10T05:31:53.335Z",
+  "updatedAt": "2023-01-10T17:28:23.769Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {},
