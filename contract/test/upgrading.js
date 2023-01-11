@@ -1,27 +1,24 @@
-const CarHelper = artifacts.require("CarHelper");
+const TokenOwnership = artifacts.require("TokenOwnership");
 
 const counts = 50;
 
 contract('CarUpgrade', (accounts) => {
 
-    it('capacity is changed', async () => {
-        const instance = await CarHelper.deployed();
-        await instance.createCar("car1",{from:accounts[0]});
-        const cars = await instance.getCarsByOwner(accounts[0]);
-        const stations = await instance.getFuelStationByOwner(accounts[0]);
+    it('balance is changed when changing capacity', async () => {
+        const instance = await TokenOwnership.deployed();
+        await instance.createFuelStation({from:accounts[0]});
+        //await instance.createCar("jojo",{from:accounts[0]});
+        const station = await instance.getFuelStationByOwner(accounts[0]);
         // checking balance
         // not enough balance
-        const oldBalance = counts * stations[0].capacity * CarHelper.capacityCoef;
-        assert.equal(accounts[0].balance < oldBalance, true); // TODO???
-
-        // upgrade capacity
-        const newCapacity = cars[0].capacity + counts;
-        cars[0].upgradeCapacity(0, counts);
-        assert.equal(cars[0].capacity, newCapacity);
+        const oldBalance = accounts[0].balance;
+        const count = counts * station.capacity * TokenOwnership.capacityCoef;
+        await instance.upgradeCapacity(station.id, counts, {from:accounts[0], value:count});
+        assert.equal(accounts[0].balance, oldBalance-count);
     });
 
     it('production per hour is changed', async () => {
-        const instance = await CarHelper.deployed();
+        const instance = await TokenOwnership.deployed();
         await instance.createCar("car1",{from:accounts[0]});
         const cars = await instance.getCarsByOwner(accounts[0]);
 
@@ -33,7 +30,7 @@ contract('CarUpgrade', (accounts) => {
     });
 
     it('horse powers is changed', async () => {
-        const instance = await CarHelper.deployed();
+        const instance = await TokenOwnership.deployed();
         await instance.createCar("car1",{from:accounts[0]});
         const cars = await instance.getCarsByOwner(accounts[0]);
 
@@ -45,7 +42,7 @@ contract('CarUpgrade', (accounts) => {
     });
 
     it('consumtion is changed', async () => {
-        const instance = await CarHelper.deployed();
+        const instance = await TokenOwnership.deployed();
         await instance.createCar("car1",{from:accounts[0]});
         const cars = await instance.getCarsByOwner(accounts[0]);
 
@@ -57,7 +54,7 @@ contract('CarUpgrade', (accounts) => {
     });
 
     it('durability is changed', async () => {
-        const instance = await CarHelper.deployed();
+        const instance = await TokenOwnership.deployed();
         await instance.createCar("car1",{from:accounts[0]});
         const cars = await instance.getCarsByOwner(accounts[0]);
 
@@ -69,7 +66,7 @@ contract('CarUpgrade', (accounts) => {
     });
 
     it('level increased by 1', async () => {
-        const instance = await CarHelper.deployed();
+        const instance = await TokenOwnership.deployed();
         await instance.createCar("car1",{from:accounts[0]});
         const cars = await instance.getCarsByOwner(accounts[0]);
         levelUp(0);

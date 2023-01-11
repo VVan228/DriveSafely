@@ -1,15 +1,15 @@
-const CarHelper = artifacts.require("CarHelper");
+const TokenOwnership = artifacts.require("TokenOwnership");
 
 contract('CarHelper', (accounts) => {
     it('creates one car', async () => {
-        const instance = await CarHelper.deployed();
+        const instance = await TokenOwnership.deployed();
         await instance.createCar("Lamburgeruini",{from:accounts[0]});
         const cars = await instance.getCarsByOwner(accounts[0]);
         assert.equal(cars[0].model, "Lamburgeruini");
     });
 
     it('creates car and only one', async () => {
-        const instance = await CarHelper.deployed();
+        const instance = await TokenOwnership.deployed();
         try{
             await instance.createCar("Luigig",{from:accounts[0]});
         }catch(e){}
@@ -21,7 +21,7 @@ contract('CarHelper', (accounts) => {
     });
 
     it('chassis and engine are default', async () => {
-        const instance = await CarHelper.deployed();
+        const instance = await TokenOwnership.deployed();
         const cars = await instance.getCarsByOwner(accounts[0]);
         const chassisId = cars[0].chassisId;
         const engineId = cars[0].engineId;
@@ -33,7 +33,8 @@ contract('CarHelper', (accounts) => {
     });
 
     it('fuel station is default', async () => {
-        const instance = await CarHelper.deployed();
+        const instance = await TokenOwnership.deployed();
+        await instance.createFuelStation({from:accounts[0]});
         const station = await instance.getFuelStationByOwner(accounts[0]);
         assert.equal(station.capacity, 60);
         assert.equal(station.productionPerHour, 5);

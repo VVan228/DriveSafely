@@ -5,7 +5,7 @@ library PDDLib{
 
 
     function generateRoom(uint crossId, uint numPlayers) public view returns (uint roomDNA){
-        uint randNonce = 0;
+        /*uint randNonce = 0;
         uint mainRoad1;
         uint mainRoad2;
         uint carsDirections = 0;
@@ -29,14 +29,14 @@ library PDDLib{
         }
     
         roomDNA = carsDirections*1000 + mainRoad2*100 + mainRoad1*10 + crossId;
-        
+        */
     }
-
+/*
     function randMod(uint _modulus,uint _crossId, uint _randNonce) private pure returns(uint) {
         return uint(keccak256(_crossId, _randNonce)) % _modulus;
-    }
+    }*/
     function isCorrectAnswer(uint roomDNA, uint[] memory answer) public view returns (bool){
-        uint crossId;
+        /*uint crossId;
         (crossId, roomDNA) = getNextDnaValue(roomDNA);
         uint mainRoad1;
         (mainRoad1, roomDNA) = getNextDnaValue(roomDNA);
@@ -118,9 +118,9 @@ library PDDLib{
             }
 
             roadCarsIndices[myRoadIndex] = remove(roadCarsIndices[myRoadIndex], 0);
-        }
+        }*/
         return true;
-    }
+    }/*
     function remove(uint[] array, uint index) private pure returns(uint[]) {
         if (index >= array.length) return;
 
@@ -139,5 +139,5 @@ library PDDLib{
     function getNextDnaValue(uint _dna) internal returns(uint value, uint dna){
         value = _dna % 10; 
         dna = _dna / 10;
-    }
+    }*/
 }
