@@ -101,7 +101,7 @@ contract CarHelper is CarFactory {
 
     function upgradeCapacity(uint _fuelStatonId, uint8 _counts) external payable onlyOwnerOfFuelStation(_fuelStatonId) {
         require(msg.value == (_counts * stations[_fuelStatonId].capacity * capacityCoef));
-        stations[_fuelStatonId].capacity += _counts;
+        stations[_fuelStatonId].capacity += _counts; 
     }
 
     function upgradeProductionPerHour(uint _fuelStatonId, uint8 _counts) external payable onlyOwnerOfFuelStation(_fuelStatonId) {
