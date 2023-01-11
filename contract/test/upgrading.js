@@ -4,7 +4,7 @@ const counts = 50;
 
 contract('Upgrading', (accounts) => {
 
-    it('capacity is changed', async () => {
+    it('balance is changed', async () => {
         const instance = await CarHelper.deployed();
         await instance.createFuelStation({from:accounts[0]});
         const station = await instance.getFuelStationByOwner(accounts[0]);
