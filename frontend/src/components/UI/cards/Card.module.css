@@ -1,0 +1,100 @@
+.myCard {
+    background-color: #282c34;
+    color: #fff;
+    width: 30%;
+    /*height: 100px;*/
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    padding: 5%;
+    transition: .3s;
+    /*clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);*/
+}
+
+.myCard:hover {
+    background-color: #ECA553;
+    color: white;
+    box-shadow: -20px 20px 0 #c98c47;
+    /*height: 400px;*/
+    transform: translate(20px, -20px);
+    /*margin: 1rem;*/
+}
+
+.myCard > * > img {
+    /*position: absolute;*/
+    /*z-index: 9000;*/
+    transform: translate(0, 10%);
+    transition: .3s;
+    animation: flying 1s infinite alternate;
+    /*opacity: 0;*/
+}
+
+.myCard:hover > * > img {
+    transform: translate(0, -10%);
+    animation: none;
+    opacity: 1;
+}
+
+.description {
+    /*width: 12%;*/
+    transform: translate(0, 0%);
+    text-align: center;
+    transition: .3s;
+}
+
+.myCard:hover > * > .description {
+    transform: translate(0, 10%);
+}
+
+.selectCarButton {
+    opacity: 0;
+    transition: .3s;
+}
+
+.myCard:hover > * > .selectCarButton {
+    opacity: 1;
+}
+
+.myCard:hover:has(.selectCarButton:hover) {
+    box-shadow: none;
+    background-color: inherit;
+}
+
+.myCard:hover:has(.selectCarButton:hover) > * > img {
+    transform: translate(0, -20%) scale(1.2);
+}
+
+.navLink {
+    text-decoration: none;
+    color: white;
+    background-color: #CF2624;
+    border: none;
+    cursor: pointer;
+    -webkit-transform: skew(-30deg);
+    -moz-transform: skew(-30deg);
+    -o-transform: skew(-30deg);
+    padding: .5rem 1.5rem;
+    transition: .3s;
+    margin-top: .5rem;
+    /*box-shadow: 0px 00px 0 #B9110F;*/
+}
+
+@keyframes flying {
+    0% {
+        transform: translateY(10%);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+
+@keyframes flying2 {
+    0% {
+        transform: translateY(10%);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
+}
