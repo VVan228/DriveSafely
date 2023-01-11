@@ -10,12 +10,16 @@ contract TokenOwnership is CarRacing{
     address engineOwnership;
     address carOwnership;
 
-    constructor(address _chassisOwnership, address _engineOwnership, address _carOwnership){
+    // constructor(address _chassisOwnership, address _engineOwnership, address _carOwnership){
+    //     chassisOwnership = _chassisOwnership;
+    //     engineOwnership = _engineOwnership;
+    //     carOwnership = _carOwnership;
+    // }
+    function init(address _chassisOwnership, address _engineOwnership, address _carOwnership) public onlyOwner{
         chassisOwnership = _chassisOwnership;
         engineOwnership = _engineOwnership;
         carOwnership = _carOwnership;
     }
-
 
     function balanceOfCars(address _owner) external view returns (uint256) {
         return ownerCarCount[_owner];
