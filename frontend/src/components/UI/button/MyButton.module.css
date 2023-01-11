@@ -9,6 +9,27 @@
     padding: .5rem 1.5rem;
     transition: .3s ease-in-out;
     margin-top: .5rem;
+    /*box-shadow: 0px 00px 0 #B9110F;*/
+}
+
+.mySecondaryButton {
+    background-color: #282e38;
+    color: white;
+}
+
+.mySuccessButton {
+    background-color: #188754;
+    color: white;
+}
+
+.myWarningButton {
+    background-color: #ECA553;
+    color: white;
+}
+
+
+.myBtnYellow {
+    background-color: #ECA553;
 }
 
 .myBtn p {
@@ -26,13 +47,16 @@
 
 .myBtn:hover {
     border-radius: .5rem;
-    box-shadow: -10px 10px 0 #B9110F;
+    background-color: #ECA553;
+    box-shadow: -10px 10px 0 #c98c47;
+    color: white;
     transform: translate(10px, -10px);
-    /*margin-top: 1rem;*/
+    margin-top: 1rem;
 }
+
 .myBtn:hover p {
     margin: 0;
-    font-family: 'Inter';
+    font-family: 'Inter', serif;
     font-style: normal;
     font-weight: 900;
     font-size: 24px;
@@ -43,7 +67,7 @@
 }
 
 .myBtn--layout {
-    background-color: #B9110F;
+    /*background-color: #B9110F;*/
     position: absolute;
     width: 100%;
     height: 100%;
@@ -56,5 +80,27 @@
     src: local('Inter'), url('Inter-VariableFont_slnt,wght.ttf') format('truetype');
     /* other formats include: 'woff2', 'truetype, 'opentype',
                               'embedded-opentype', and 'svg' */
+}
+
+.myIconBtn {
+    border: none;
+    background-color: transparent;
+}
+
+.MyIconButton > p {
+    margin: 0!important;
+}
+
+.itemToggleButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 50%;
+    background-color: #ECA553;
+    color: white;
+    padding: 5px;
+    width: 4rem;
+    height: 4rem;
 }
 

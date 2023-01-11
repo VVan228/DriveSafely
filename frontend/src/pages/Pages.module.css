@@ -1,0 +1,102 @@
+
+
+.toggleBtnsContainer {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    left: 15%;
+    width: 70%;
+    height: 100%;
+    padding: 2px;
+    z-index: 100;
+    transition: .3s;
+}
+
+.bottomSphere {
+    position: fixed;
+    bottom: 0;
+    left: 10%;
+    clip-path: ellipse(49% 25% at 50% 100%);
+    background-color: #282c34;
+    z-index: -80;
+    height: 100%;
+    width: 80%;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    padding-bottom: 2rem;
+    transition: .3s .1s ;
+}
+
+.toggleButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 50%;
+    background-color: #292929;
+    color: white;
+    padding: 5px;
+    width: 4em;
+    height: 4em;
+}
+
+.worldImageContainer {
+    /*position: absolute;*/
+    z-index: 101;
+    height: 700px;
+    width: 700px;
+    border-radius: 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    clip-path: circle();
+    cursor: pointer;
+    transition: .3s;
+}
+
+.worldImageContainer:hover {
+    transform: scale(1.25);
+    /*clip-path: none;*/
+    /*width: 100%;*/
+}
+
+.worldImageContainer > img {
+    height: 100%;
+    /*width: 100%;*/
+}
+
+.competitionsContainer:has(.worldImageContainer:hover) > .bottomSphere {
+    bottom: -100%;
+}
+
+.competitionsContainer:has(.worldImageContainer:hover) > .toggleBtnsContainer {
+   opacity: 0;
+}
+
+.yellowText {
+    color: #ECA553;
+}
+
+.bigText {
+    font-size: 50px;
+    text-overflow: ellipsis;
+}
+
+.textItalic {
+    font-style: italic !important;
+}
+
+.raceBackground {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    background-color: #a9d18e;
+}
+
+.testDot {
+    width: 2px;
+    height: 2px;
+    background-color: #fff;
+    position: absolute;
+}

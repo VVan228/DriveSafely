@@ -51,8 +51,12 @@ contract CarFactory is Ownable, FuelStationFactory {
     mapping (uint => address) public chassisToOwner;
 
     mapping (address => uint) public ownerCarCount;
-    mapping (address => uint) ownerEngineCount;
-    mapping (address => uint) ownerChassisCount;
+    mapping (address => uint) public ownerEngineCount;
+    mapping (address => uint) public ownerChassisCount;
+
+    mapping (uint => uint) public carToPrice;
+    mapping (uint => uint) public engineToPrice;
+    mapping (uint => uint) public chassisToPrice;
 
 
     constructor() {
@@ -103,5 +107,40 @@ contract CarFactory is Ownable, FuelStationFactory {
         return id;
     }
 
+    function createCustomCar(string memory _model, uint16 _horsePowers, uint8 _consumtion, uint32 _durability, uint8 _carLevel, uint _carPrice) external onlyOwner {
+        string memory key = string(abi.encodePacked(_model,Strings.toString(block.timestamp))); 
+        uint vin = uint(keccak256(abi.encodePacked((key))));
+
+        uint engineId = createCustomEngine(_horsePowers, _consumtion, 0); 
+        uint chassisId = createCustomChassis(_durability, 0);
+
+        uint id = cars.length;
+        cars.push(Car(_model, vin, engineId, chassisId, _carLevel, 0, 0, 0, id));
+        carToOwner[id] = owner();
+        ownerCarCount[owner()]++;
+        carToPrice[id] = _carPrice;
+    }
+
+    function createCustomEngine(uint16 _horsePowers, uint8 _consumtion, uint _enginePrice) public onlyOwner returns(uint){
+        uint id = engineCounter++;
+        engines.push(Engine(id, _horsePowers, _consumtion));
+        ownerEngineCount[owner()]++;
+        engineToOwner[id] = owner();
+        if (_enginePrice > 0) {
+            engineToPrice[id] = _enginePrice;
+        }
+        return id;
+    }
+
+    function createCustomChassis(uint32 _durability, uint _chassisPrice) public onlyOwner returns(uint){
+        uint id = chassisCounter++;
+        chassis.push(Chassis(id, _durability, _durability));
+        ownerChassisCount[owner()]++;
+        chassisToOwner[id] = owner();
+        if (_chassisPrice > 0) {
+            chassisToPrice[id] = _chassisPrice;
+        }
+        return id;
+    }
 
 }

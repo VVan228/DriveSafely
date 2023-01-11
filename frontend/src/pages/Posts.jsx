@@ -31,8 +31,8 @@ function Posts() {
         setPosts([...posts, ...response.data]);
         const totalCount = response.headers['x-total-count']
         setTotalPages(getPageCount(totalCount, limit))
-
     })
+
     const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
 
 
