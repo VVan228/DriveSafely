@@ -154,7 +154,8 @@ const Cars = () => {
                 {/*</button>*/}
 
                 <MyModal
-                    title="Прокачка уровня"
+                    title="PimpMyRide"
+                    subTitle="Тачку на прокачку"
                     modalId="levelUp"
                     showConfirmButton={true}
                     confirmButtonText={`Прокачать за ${getLevelUpCost(cars[currentCarIndex].level).toFixed(4)} ETH`}

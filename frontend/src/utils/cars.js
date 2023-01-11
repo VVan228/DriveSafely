@@ -141,10 +141,10 @@ export const getUniqueCarImage = (car) => {
         alt=""/>
 }
 
-export const getCarsOnLevel = (cars, minLevel, maxLevel) => {
+export const getCarsOnLevel = (cars, minLevel) => {
     let newCars = []
     cars.forEach(car => {
-        if (car.level >= minLevel && car.level <= maxLevel) newCars.push(car)
+        if (car.level >= minLevel) newCars.push(car)
     })
     return newCars
 }

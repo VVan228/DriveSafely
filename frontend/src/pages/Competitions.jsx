@@ -19,7 +19,7 @@ import CarCard from "../components/UI/cards/CarCard";
 const Competitions = () => {
 
 
-    const totalWidth = window.innerWidth * 10
+    const [totalWidth, setTotalWidth] = useState(window.innerWidth * 10)
     const [offset, setOffset] = useState(0)
     const [scale, setScale] = useState(1)
     const [selectedWorld, setSelectedWorld] = useState(1)
@@ -87,6 +87,12 @@ const Competitions = () => {
     useEffect(() => {
         setWorldContainerBottom("10%")
     }, [window.location])
+
+    useEffect(() => {
+        window.addEventListener('resize', () => {
+            setTotalWidth(window.innerWidth * 10)
+        });
+    }, [])
 
     useEffect(
         () => {
@@ -182,7 +188,7 @@ const Competitions = () => {
                 {/*        <MyButton onClick={() => navigate(`/race/${car.id}`)}>Поехали</MyButton>*/}
                 {/*    </div>*/}
                 {/*)}*/}
-                <MyDataView items={getCarsOnLevel(cars, (selectedWorld - 1) * 10, selectedWorld * 10)} layout="grid"
+                <MyDataView items={getCarsOnLevel(cars, (selectedWorld - 1) * 10)} layout="grid"
                             itemsType="car"/>
             </MyModal>
         </div>

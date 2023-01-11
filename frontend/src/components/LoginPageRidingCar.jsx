@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Image} from 'primereact/image';
 
-const RidingCar = (props) => {
+const LoginPageRidingCar = (props) => {
 
     const [position, setPosition] = useState(-400)
     const [transition, setTransition] = useState("10s")
@@ -33,4 +33,4 @@ const RidingCar = (props) => {
     );
 };
 
-export default RidingCar;
+export default LoginPageRidingCar;

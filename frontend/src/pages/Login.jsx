@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import MyButton from "../components/UI/button/MyButton";
 import {AuthContext} from "../context";
-import RidingCar from "../components/RidingCar";
+import LoginPageRidingCar from "../components/LoginPageRidingCar";
 import car1 from "./cars/car1.svg"
 import car2 from "./cars/car2.svg"
 import car3 from "./cars/car5.svg"
@@ -68,16 +68,16 @@ const Login = () => {
                 <h1 className="" style={{
                     position: "relative", zIndex: "9000", fontSize: 100, fontWeight: 900, color: "#a8d18d", fontFamily: "Arial Black", fontStyle: "italic"
                 }}>Safely!</h1>
-                <RidingCar
+                <LoginPageRidingCar
                 right={60}
                 src={car1}/>
-                <RidingCar
+                <LoginPageRidingCar
                     right={350}
                     src={car2}/>
-                <RidingCar
+                <LoginPageRidingCar
                     right={800}
                     src={car3}/>
-                <RidingCar
+                <LoginPageRidingCar
                     right={1100}
                     src={car4}/>
 
