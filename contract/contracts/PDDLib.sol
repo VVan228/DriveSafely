@@ -2,6 +2,8 @@
 pragma solidity ^0.8.13;
 
 library PDDLib{
+
+
     function generateRoom(uint crossId, uint numPlayers) public view returns (uint roomDNA){
         uint randNonce = 0;
         uint mainRoad1;
@@ -12,6 +14,7 @@ library PDDLib{
         randNonce++;
         mainRoad2 = (mainRoad1 + randMod(3 - crossId, crossId, randNonce))%4;
         randNonce++;
+
         for(uint i=0; i<numPlayers; i++){
             uint carStart = randMod(4 - crossId, crossId, randNonce);
             randNonce++;
@@ -128,6 +131,7 @@ library PDDLib{
         array.length--;
         return array;
     }
+
 
     function isMainRoad(uint _mainRoad1, uint _mainRoad2, uint _road) private pure returns(bool){
         return _road==_mainRoad1 || _road==_mainRoad2;
