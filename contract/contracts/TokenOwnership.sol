@@ -5,9 +5,16 @@ import "./CarRacing.sol";
 
 contract TokenOwnership is CarRacing{
 
-    mapping (uint => address) public carApprovals;
-    mapping (uint => address) public engineApprovals;
-    mapping (uint => address) public chassisApprovals;
+
+    address chassisOwnership;
+    address engineOwnership;
+    address carOwnership;
+
+    constructor(address _chassisOwnership, address _engineOwnership, address _carOwnership){
+        chassisOwnership = _chassisOwnership;
+        engineOwnership = _engineOwnership;
+        carOwnership = _carOwnership;
+    }
 
 
     function balanceOfCars(address _owner) external view returns (uint256) {
@@ -29,11 +36,9 @@ contract TokenOwnership is CarRacing{
         carToOwner[_tokenId] = _to;
     }
     function transferCarFrom(address _from, address _to, uint256 _tokenId) external payable {
+        require(msg.sender == carOwnership, "you are not car ownership");
         require (carToOwner[_tokenId] == _from || carToPrice[_tokenId] != 0);
         _transferCar(_from, _to, _tokenId);
-    }
-    function approveCar(address _approved, uint256 _tokenId) external payable onlyOwnerOfCar(_tokenId) {
-        carApprovals[_tokenId] = _approved;
     }
 
 
@@ -56,12 +61,9 @@ contract TokenOwnership is CarRacing{
         engineToOwner[_tokenId] = _to;
     }
     function transferEngineFrom(address _from, address _to, uint256 _tokenId) external payable {
+        require(msg.sender == engineOwnership, "you are not engine ownership");
         require (engineToOwner[_tokenId] == _from);
         _transferEngine(_from, _to, _tokenId);
-    }
-
-    function approveEngine(address _approved, uint256 _tokenId) external payable onlyOwnerOfEngine(_tokenId) {
-        engineApprovals[_tokenId] = _approved;
     }
 
     
@@ -83,16 +85,13 @@ contract TokenOwnership is CarRacing{
         chassisToOwner[_tokenId] = _to;
     }
     function transferChassisFrom(address _from, address _to, uint256 _tokenId) external {
+        require(msg.sender == chassisOwnership, "you are not chassis ownership");
         require (chassisToOwner[_tokenId] == _from);
         _transferChassis(_from, _to, _tokenId);
-    }
-    function approveChassis(address _approved, uint256 _tokenId) external payable onlyOwnerOfChassis(_tokenId) {
-        chassisApprovals[_tokenId] = _approved;
     }
 
 
     function putChassisOnMarketplace(uint chassisId, uint price) public onlyOwnerOfChassis(chassisId){
-
         require(price>0, "invalid price");
         chassisToPrice[chassisId] = price;
     }
