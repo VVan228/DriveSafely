@@ -12,7 +12,7 @@ library PDDLib{
 
         mainRoad1 = randMod(4 - crossId, crossId, randNonce) + 1;
         randNonce++;
-        mainRoad2 = (mainRoad1 + randMod(3 - crossId, crossId, randNonce))%4 + 1;
+        mainRoad2 = (mainRoad1 - 1 + randMod(3 - crossId, crossId, randNonce))%4 + 1;
         randNonce++;
 
         for(uint i=0; i<numPlayers; i++){
