@@ -2,22 +2,18 @@ const CarHelper = artifacts.require("CarHelper");
 
 const counts = 50;
 
-contract('CarUpgrade', (accounts) => {
+contract('Upgrading', (accounts) => {
 
-    it('capacity is changed', async () => {
+    it('balance is changed', async () => {
         const instance = await CarHelper.deployed();
-        await instance.createCar("car1",{from:accounts[0]});
-        const cars = await instance.getCarsByOwner(accounts[0]);
-        const stations = await instance.getFuelStationByOwner(accounts[0]);
+        await instance.createFuelStation({from:accounts[0]});
+        const station = await instance.getFuelStationByOwner(accounts[0]);
         // checking balance
         // not enough balance
-        const oldBalance = counts * stations[0].capacity * CarHelper.capacityCoef;
-        assert.equal(accounts[0].balance < oldBalance, true); // TODO???
-
-        // upgrade capacity
-        const newCapacity = cars[0].capacity + counts;
-        cars[0].upgradeCapacity(0, counts);
-        assert.equal(cars[0].capacity, newCapacity);
+        const oldBalance = accounts[0].balance;
+        const cost = counts * station.capacity * CarHelper.capacityCoef;
+        await instance.upgradeCapacity(0, counts);
+        assert.equal(accounts[0].balance==oldBalance-cost);
     });
 
     it('production per hour is changed', async () => {
@@ -70,11 +66,10 @@ contract('CarUpgrade', (accounts) => {
 
     it('level increased by 1', async () => {
         const instance = await CarHelper.deployed();
-        await instance.createCar("car1",{from:accounts[0]});
         const cars = await instance.getCarsByOwner(accounts[0]);
         levelUp(0);
         // level increased by 1
-        assert.equal(cars[0].carLevel, 1);
+        assert.equal(cars[0].carLevel, 2);
         // reset win counter
         assert.equal(cars[0].winCountOnCurrentLevel, 0);
         // reset defeat counter

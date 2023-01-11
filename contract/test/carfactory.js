@@ -1,4 +1,5 @@
 const CarHelper = artifacts.require("CarHelper");
+const TokenOwnership = artifacts.require("TokenOwnership");
 
 contract('CarHelper', (accounts) => {
     it('creates one car', async () => {
@@ -34,6 +35,7 @@ contract('CarHelper', (accounts) => {
 
     it('fuel station is default', async () => {
         const instance = await CarHelper.deployed();
+        await instance.createFuelStation({from:accounts[0]});
         const station = await instance.getFuelStationByOwner(accounts[0]);
         assert.equal(station.capacity, 60);
         assert.equal(station.productionPerHour, 5);
