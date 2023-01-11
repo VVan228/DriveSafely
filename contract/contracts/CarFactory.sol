@@ -15,6 +15,10 @@ contract CarFactory is Ownable, FuelStationFactory {
     uint defaultDurabilityUp; 
 
 
+    uint public carsForSaleCount = 0;
+    uint public chassisForSaleCount = 0;
+    uint public enginesForSaleCount = 0;
+
     struct Car {
         string model;
         uint vin;

@@ -32,6 +32,7 @@ contract ChassisOwnership is ERC721, Ownable {
         require(getApproved(_tokenId) == _to, "you didn't pay for the token!");
         tokenOwnership.transferChassisFrom(_from, _to, _tokenId);
         emit Transfer(_from, _to, _tokenId);
+        chassisApprovals[_tokenId] = address(0);
     }
 
     function buyFromMarketplace(uint256 _tokenId) public payable{
@@ -45,18 +46,6 @@ contract ChassisOwnership is ERC721, Ownable {
         payable(ownerOf(_tokenId)).transfer(msg.value);
         transferFrom(ownerOf(_tokenId), msg.sender, _tokenId);
     }
-
-    // function buyFromMarketplace2(uint256 _tokenId) public payable{
-    //     // require(tokenOwnership.chassisToPrice(_tokenId)!=0, "not for sale!");
-    //     // require(msg.value == tokenOwnership.chassisToPrice(_tokenId), "val wrong");
-    //     // require(ownerOf(_tokenId) != msg.sender, "cant buy yours");
-
-    //     // approveDeal(msg.sender, _tokenId);
-    //     // emit Approval(ownerOf(_tokenId), msg.sender, _tokenId);
-
-    //     // payable(ownerOf(_tokenId)).transfer(msg.value);
-    //     tokenOwnership.transferChassisFrom(ownerOf(_tokenId), msg.sender, _tokenId);
-    // }
 
     function approveDeal(address to, uint tokenId) private{
         chassisApprovals[tokenId] = to;

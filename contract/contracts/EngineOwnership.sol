@@ -32,6 +32,7 @@ contract EngineOwnership is ERC721, Ownable{
         require(getApproved(_tokenId) == _to, "you didn't pay for the token!");
         tokenOwnership.transferEngineFrom(_from, _to, _tokenId);
         emit Transfer(_from, _to, _tokenId);
+        engineApprovals[_tokenId] = address(0);
     }
 
     function buyFromMarketplace(uint256 _tokenId) public payable{

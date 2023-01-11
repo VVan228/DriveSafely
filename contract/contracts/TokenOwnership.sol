@@ -10,11 +10,6 @@ contract TokenOwnership is CarRacing{
     address engineOwnership;
     address carOwnership;
 
-    // constructor(address _chassisOwnership, address _engineOwnership, address _carOwnership){
-    //     chassisOwnership = _chassisOwnership;
-    //     engineOwnership = _engineOwnership;
-    //     carOwnership = _carOwnership;
-    // }
     function init(address _chassisOwnership, address _engineOwnership, address _carOwnership) public onlyOwner{
         chassisOwnership = _chassisOwnership;
         engineOwnership = _engineOwnership;
@@ -97,26 +92,78 @@ contract TokenOwnership is CarRacing{
 
     function putChassisOnMarketplace(uint chassisId, uint price) public onlyOwnerOfChassis(chassisId){
         require(price>0, "invalid price");
+        if(chassisToPrice[chassisId]==0){
+            chassisForSaleCount++;
+        }
         chassisToPrice[chassisId] = price;
     }
     function removeChassisFromMarketplace(uint chassisId) public onlyOwnerOfChassis(chassisId){
+        if(chassisToPrice[chassisId]!=0){
+            chassisForSaleCount--;
+        }
         chassisToPrice[chassisId] = 0;
     }
 
     function putEngineOnMarketplace(uint engineId, uint price) public onlyOwnerOfEngine(engineId){
         require(price>0, "invalid price");
-        chassisToPrice[engineId] = price;
+        if(engineToPrice[engineId]==0){
+            enginesForSaleCount++;
+        }
+        engineToPrice[engineId] = price;
     }
     function removeEngineFromMarketplace(uint engineId) public onlyOwnerOfEngine(engineId){
-        chassisToPrice[engineId] = 0;
+        if(engineToPrice[engineId]!=0){
+            enginesForSaleCount--;
+        }
+        engineToPrice[engineId] = 0;
     }
 
     function putCarOnMarketplace(uint carId, uint price) public onlyOwnerOfCar(carId){
         require(price>0, "invalid price");
-        chassisToPrice[carId] = price;
+        if(carToPrice[carId]==0){
+            carsForSaleCount++;
+        }
+        carToPrice[carId] = price;
     }
     function removeCarFromMarketplace(uint carId) public onlyOwnerOfCar(carId){
-        chassisToPrice[carId] = 0;
+        if(carToPrice[carId]!=0){
+            carsForSaleCount--;
+        }
+        carToPrice[carId] = 0;
+    }
+
+
+    function getCarsForSale() public view returns(Car[] memory){
+        Car[] memory res = new Car[](carsForSaleCount);
+        uint c = 0;
+        for(uint i = 0; i<cars.length; i++){
+            if(carToPrice[i]!=0){
+                res[c++] = cars[i];
+            }
+        }
+        return res;
+    }
+
+    function getEnginesForSale() public view returns(Engine[] memory){
+        Engine[] memory res = new Engine[](enginesForSaleCount);
+        uint c = 0;
+        for(uint i = 0; i<engines.length; i++){
+            if(engineToPrice[i]!=0){
+                res[c++] = engines[i];
+            }
+        }
+        return res;
+    }
+
+    function getChassisForSale() public view returns(Chassis[] memory){
+        Chassis[] memory res = new Chassis[](chassisForSaleCount);
+        uint c = 0;
+        for(uint i = 0; i<chassis.length; i++){
+            if(chassisToPrice[i]!=0){
+                res[c++] = chassis[i];
+            }
+        }
+        return res;
     }
 
 }
