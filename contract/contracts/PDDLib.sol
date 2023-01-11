@@ -7,6 +7,7 @@ function generateRoom(uint crossId, uint numPlayers) public view returns (uint r
     uint mainRoad1;
     uint mainRoad2;
     uint carsDirections = 0;
+    uint testCommit = 10;
 
     mainRoad1 = randMod(4 - crossId, crossId, randNonce);
     randNonce++;
@@ -24,9 +25,9 @@ function generateRoom(uint crossId, uint numPlayers) public view returns (uint r
         randNonce++;
         carsDirections = carsDirections*100 + (carDirection*10 + carStart);
     }
-   
+
     roomDNA = carsDirections*1000 + mainRoad2*100 + mainRoad1*10 + crossId;
-    
+
 }
 
 function randMod(uint _modulus,uint _crossId, uint _randNonce) private pure returns(uint) {
@@ -41,7 +42,7 @@ function isCorrectAnswer(uint roomDNA, uint[] memory answer) public view returns
     (mainRoad2, roomDNA) = getNextDnaValue(roomDNA);
     mapping(uint => uint) carIndexToRoadIndex;
     mapping(uint => uint) carIndexToDirection;
-    uint[4][] roadCarsIndices; 
+    uint[4][] roadCarsIndices;
     uint carsDirections = roomDNA;
     for(uint i=0; i<answer.length; i++){
         uint carStart;
@@ -53,7 +54,7 @@ function isCorrectAnswer(uint roomDNA, uint[] memory answer) public view returns
         roadCarsIndices[carStart].push(i);
     }
     for(uint i=0; i<answer.length; i++){
-        if(answer[i] != roadCarsIndices[0][0] && answer[i] != roadCarsIndices[1][0] 
+        if(answer[i] != roadCarsIndices[0][0] && answer[i] != roadCarsIndices[1][0]
             && answer[i] != roadCarsIndices[2][0] && answer[i] != roadCarsIndices[3][0])
             {
                 return false;
@@ -132,7 +133,7 @@ function isMainRoad(uint _mainRoad1, uint _mainRoad2, uint _road) private pure r
     return _road==_mainRoad1 || _road==_mainRoad2;
 }
 function getNextDnaValue(uint _dna) internal returns(uint value, uint dna) private pure {
-    value = _dna % 10; 
+    value = _dna % 10;
     dna = _dna / 10;
 }
 }
