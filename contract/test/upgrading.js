@@ -2,7 +2,7 @@ const TokenOwnership = artifacts.require("TokenOwnership");
 
 const counts = 50;
 
-contract('CarUpgrade', (accounts) => {
+contract('Upgrading', (accounts) => {
 
     it('balance is changed when changing capacity', async () => {
         const instance = await TokenOwnership.deployed();
@@ -71,7 +71,7 @@ contract('CarUpgrade', (accounts) => {
         const cars = await instance.getCarsByOwner(accounts[0]);
         levelUp(0);
         // level increased by 1
-        assert.equal(cars[0].carLevel, 1);
+        assert.equal(cars[0].carLevel, 2);
         // reset win counter
         assert.equal(cars[0].winCountOnCurrentLevel, 0);
         // reset defeat counter
