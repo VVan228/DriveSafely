@@ -62,12 +62,12 @@ contract('Upgrading', (accounts) => {
         let aces = await web3.eth.getAccounts();
         await instance.createCar("car1",{ from: aces[1] });
 
-        sum2 = await instance.getHorsePowersUpgradeCost(1, counts);
+        const sum = await instance.getHorsePowersUpgradeCost(1, counts);
 
         oldBalance = await web3.eth.getBalance(aces[0])
-        await instance.upgradeHorsePowers(1, counts, { from: aces[1], value: sum2.toString() });
+        await instance.upgradeHorsePowers(1, counts, { from: aces[1], value: sum.toString() });
         newBalance = await web3.eth.getBalance(aces[0])
-        assert.equal(parseInt(newBalance), parseInt(oldBalance)+parseInt(sum2));
+        assert.equal(parseInt(newBalance), parseInt(oldBalance)+parseInt(sum));
     });
 
     it('Horse powers are changed', async () => {
@@ -133,7 +133,7 @@ contract('Upgrading', (accounts) => {
         const instance = await TokenOwnership.deployed();
         let aces = await web3.eth.getAccounts();
 
-        const sum = await instance.getLevelUpCost(1, counts);
+        const sum = await instance.getLevelUpCost(0);
 
         oldBalance = await web3.eth.getBalance(aces[0]);
         await instance.levelUp(0, { from: aces[1], value: sum.toString() });
@@ -145,11 +145,10 @@ contract('Upgrading', (accounts) => {
         const instance = await TokenOwnership.deployed();
         let aces = await web3.eth.getAccounts();
 
-        const sum = await instance.getLevelUpCost(1, counts);
+        const sum = await instance.getLevelUpCost(0);
         cars = await instance.getCarsByOwner(aces[1]);
-        console.log(cars)
         const oldLevel = parseInt(cars[0].carLevel);
-        await instance.upgradeConsumtion(1, counts, { from: aces[1], value: sum.toString() });
+        await instance.levelUp(0, { from: aces[1], value: sum.toString() });
         cars = await instance.getCarsByOwner(aces[1]);
         assert.equal(parseInt(cars[0].carLevel), oldLevel+1);
     });
