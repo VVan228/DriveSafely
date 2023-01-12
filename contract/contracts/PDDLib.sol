@@ -4,26 +4,26 @@ pragma solidity ^0.8.13;
 library PDDLib{
 
 
-    function generateRoom(uint crossId, uint numPlayers) external view returns (uint roomDNA){
+    function generateRoom(uint crossId, uint numPlayers, string memory randomStr) public pure returns (uint roomDNA){
         uint randNonce = 0;
         uint mainRoad1;
         uint mainRoad2;
         uint carsDirections = 0;
 
-        mainRoad1 = randMod(4 - crossId, crossId, randNonce) + 1;
+        mainRoad1 = randMod(4 - crossId, crossId, randNonce, randomStr) + 1;
         randNonce++;
-        mainRoad2 = (mainRoad1 - 1 + randMod(3 - crossId, crossId, randNonce))%4 + 1;
+        mainRoad2 = (mainRoad1 - 1 + randMod(3 - crossId, crossId, randNonce, randomStr))%4 + 1;
 
         randNonce++;
 
         for(uint i=0; i<numPlayers; i++){
-            uint carStart = randMod(4 - crossId, crossId, randNonce) + 1;
+            uint carStart = randMod(4 - crossId, crossId, randNonce, randomStr) + 1;
             randNonce++;
             uint carDirection;
             if(carStart == 3){
-                carDirection = crossId + randMod(3 - crossId, crossId, randNonce) +1;
+                carDirection = crossId + randMod(3 - crossId, crossId, randNonce, randomStr) +1;
             }else{
-                carDirection = randMod(3 - crossId, crossId, randNonce)+1 ;
+                carDirection = randMod(3 - crossId, crossId, randNonce, randomStr)+1 ;
             }
             randNonce++;
             carsDirections = carsDirections*100 + (carDirection*10 + carStart);
@@ -33,11 +33,11 @@ library PDDLib{
 
     }
 
-    function randMod(uint _modulus,uint _crossId, uint _randNonce) private pure returns(uint) {
-        return uint(keccak256(abi.encodePacked(block.timestamp, _crossId, _randNonce))) % _modulus;
+    function randMod(uint _modulus,uint _crossId, uint _randNonce, string memory randStr) private pure returns(uint) {
+        return uint(keccak256(abi.encodePacked(randStr, _crossId, _randNonce))) % _modulus;
 
     }
-    function isCorrectAnswer(uint roomDNA, uint[] memory answer) public view returns (bool){
+    function isCorrectAnswer(uint roomDNA, uint[] memory answer) public pure returns (bool){
         uint crossId;
         (crossId, roomDNA) = getNextDnaValue(roomDNA);
         uint mainRoad1;
@@ -61,7 +61,7 @@ library PDDLib{
             roadCarsIndices[carStart][roadNumCars[carStart]]=i;
             roadNumCars[carStart]++;
         }
-        uint[4] roadNextCar;
+        uint[4] memory roadNextCar;
         for(uint i=0; i<answer.length; i++){
             if(answer[i] != roadCarsIndices[0][roadNextCar[0]] && answer[i] != roadCarsIndices[1][roadNextCar[1]]
             && answer[i] != roadCarsIndices[2][roadNextCar[2]] && answer[i] != roadCarsIndices[3][roadNextCar[3]])
@@ -71,7 +71,7 @@ library PDDLib{
             uint myRoadIndex = carIndexToRoadIndex[answer[i]];
             if(carIndexToDirection[answer[i]] == 0){
                 if(roadNextCar[(myRoadIndex+2)%4] != roadNumCars[(myRoadIndex+2)%4] && carIndexToDirection[roadCarsIndices[(myRoadIndex+2)%4][roadNextCar[(myRoadIndex+2)%4]]]==2){
-                    if(!isMainRoad(mainRoad1,mainRoad2,myRoadIndex) && isMainRoad((mainRoad1,mainRoad2, myRoadIndex+2)%4)){
+                    if(!isMainRoad(mainRoad1,mainRoad2,myRoadIndex) && isMainRoad(mainRoad1,mainRoad2, (myRoadIndex+2)%4)){
 
                         return false;
                     }
