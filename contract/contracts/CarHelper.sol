@@ -116,7 +116,7 @@ contract CarHelper is CarFactory {
 
     /// list of owner chassis
     /// @param _owner owner's address
-    /// @return Chassis[] memory owner's list of engines
+    /// @return Chassis[] memory owner's list of chassis
     function getChassisByOwner(address _owner) public view returns(Chassis[] memory) {
         Chassis[] memory result = new Chassis[](ownerChassisCount[_owner]);
         uint counter = 0;
@@ -188,7 +188,7 @@ contract CarHelper is CarFactory {
         chassis[_chassisId].durability += _counts; 
     }
 
-
+    /// 
     function getCapacityUpgradeCost(uint _fuelStatonId, uint8 _counts) public view returns(uint){
         return (uint(_counts) * uint(stations[_fuelStatonId].capacity)) * capacityCoef;
     }
