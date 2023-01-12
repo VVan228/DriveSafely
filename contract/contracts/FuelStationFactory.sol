@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
 
+/// @title factory of fuel station
 contract FuelStationFactory{
 
     uint8 defaultCapacity = 60;
@@ -19,6 +20,7 @@ contract FuelStationFactory{
 
     mapping (uint => address) public fuelStationToOwner;
 
+    /// creation fuel station
     function createFuelStation() public{
         address ad = msg.sender;
         uint id = stations.length;
