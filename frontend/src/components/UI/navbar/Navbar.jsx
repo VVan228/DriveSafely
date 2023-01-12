@@ -12,7 +12,7 @@ const Navbar = () => {
     const logout = () => {
         localStorage.setItem('auth', 'false')
         setIsAuth(false)
-        setAccount
+        // setAccount
         console.log(isAuth)
     }
 

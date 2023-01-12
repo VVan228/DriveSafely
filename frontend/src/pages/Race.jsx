@@ -8,6 +8,7 @@ import {useParams} from "react-router-dom";
 import {getDummyCars} from "../utils/cars";
 import Car from "../components/Car";
 import {getCarPosition} from "../utils/race";
+import {getRoomInfo} from "../utils/room";
 
 const Race = () => {
 
@@ -15,16 +16,17 @@ const Race = () => {
     const [windowHeight, setWindowHeight] = useState(0)
     const params = useParams()
 
-
+    const roomInfo = getRoomInfo("113344112211121314231");
     const roadType = Math.floor(Math.random() * 2)
     const testCars = getDummyCars(Math.floor(Math.random() * ((roadType === 0 ? 5 : 4) - 2) + 2))
-    const testCarsComponents = testCars.map((car, index)=>
+    const testCarsComponents = roomInfo.listOfCars.map((car, index)=>
         <Car
-            key={car.id}
-            car={car}
-            position={getCarPosition(index, windowWidth / windowHeight)}
+            key={car.index}
+            car={testCars[0]}
+            position={car.position}
             width="5%"
-            rotate={90 * index}
+            height="8%"
+            rotate={car.rotation}
         />
     )
     console.log(testCarsComponents)
@@ -62,8 +64,13 @@ const Race = () => {
                         )}
                     </div>
 
-                    <img src={roadType == 0 ? background : background2 } alt="" width="100%" style={{}}/>
-                    {testCarsComponents.map(testCar => testCar)}
+                    {/*<img src={roadType == 0 ? background : background2 } alt="" width="100%" style={{}}/>*/}
+                    {/*{testCarsComponents.map(testCar => testCar)}*/}
+
+                    <div style={{backgroundImage:  `url(${background})`, backgroundSize: "cover",
+                    backgroundPosition: "center", width: "100%", paddingTop:"80%", position: "relative"}}>
+                        {testCarsComponents.map(testCar => testCar)}
+                    </div>
                 </div>
             </div>
     );

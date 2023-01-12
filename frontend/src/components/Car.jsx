@@ -7,10 +7,11 @@ const Car = (props) => {
             transform: `rotate(${props.rotate}deg)`,
             bottom: `${props.position.y}%`,
             left: `${props.position.x}%`,
-            width: props.width
+            width: props.width,
+            height: props.height
         }}>
             <img src={props.car.image} alt=""/>
-            <span className="h2 position-absolute top-50 left-50 bg-light">{props.rotate / 90}</span>
+            {/*<span className="h2 position-absolute top-50 left-50 bg-light">{props.rotate / 90}</span>*/}
         </div>
     );
 };
