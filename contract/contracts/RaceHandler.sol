@@ -85,7 +85,7 @@ contract RaceHandler is CarHelper{
             playersToRooms[msg.sender] = openedRooms[i].id;
             playersToCars[msg.sender] = carId;
             openedRooms[i].playersEntered++;
-            openedRooms[i].roomSeed += cars[carId].vin/2;
+            openedRooms[i].roomSeed += cars[carId].vin%100;
             if(openedRooms[i].playersEntered == openedRooms[i].cross.playersNeeded){
                 uint roomDNA = PDDLib.generateRoom(
                     openedRooms[i].cross.crossId,
@@ -120,7 +120,7 @@ contract RaceHandler is CarHelper{
             1,
             cars[carId].carLevel/10+1,
             cr,
-            cars[carId].vin/2
+            cars[carId].vin%100
         ));
     }
 
