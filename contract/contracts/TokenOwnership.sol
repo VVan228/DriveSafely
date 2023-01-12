@@ -23,7 +23,8 @@ contract TokenOwnership is CarRacing{
         return carToOwner[_tokenId];
     }
     function _transferCar(address _from, address _to, uint256 _tokenId) private {
-        require(ownerCarCount[_from]>0, "it is your last car");
+        require(ownerCarCount[_from]>0 || _from==owner(), "it is your last car");
+
         if(cars[_tokenId].chassisId != 0){
             cars[_tokenId].chassisId = 0;
         }
@@ -33,8 +34,9 @@ contract TokenOwnership is CarRacing{
         ownerCarCount[_to]++;// = ownerCarCount[_to].add(1);
         ownerCarCount[_from]--;// = ownerCarCount[_from].sub(1);
         carToOwner[_tokenId] = _to;
+        delete carToPrice[_tokenId];
     }
-    function transferCarFrom(address _from, address _to, uint256 _tokenId) external payable {
+    function transferCarFrom(address _from, address _to, uint256 _tokenId) external {
         require(msg.sender == carOwnership, "you are not car ownership");
         require (carToOwner[_tokenId] == _from || carToPrice[_tokenId] != 0);
         _transferCar(_from, _to, _tokenId);
@@ -48,6 +50,8 @@ contract TokenOwnership is CarRacing{
         return engineToOwner[_tokenId];
     }
     function _transferEngine(address _from, address _to, uint256 _tokenId) private {
+        require(ownerEngineCount[_from]>0 || _from==owner(), "it is your last engine");
+
         Car[] memory cars = getCarsByOwner(_from);
         
         for(uint i = 0; i<cars.length; i++){
@@ -58,8 +62,10 @@ contract TokenOwnership is CarRacing{
         ownerEngineCount[_to]++;// = ownerEngineCount[_to].add(1);
         ownerEngineCount[_from]--;// = ownerEngineCount[_from].sub(1);
         engineToOwner[_tokenId] = _to;
+        
+        delete engineToPrice[_tokenId];
     }
-    function transferEngineFrom(address _from, address _to, uint256 _tokenId) external payable {
+    function transferEngineFrom(address _from, address _to, uint256 _tokenId) external {
         require(msg.sender == engineOwnership, "you are not engine ownership");
         require (engineToOwner[_tokenId] == _from);
         _transferEngine(_from, _to, _tokenId);
@@ -73,6 +79,8 @@ contract TokenOwnership is CarRacing{
         return chassisToOwner[_tokenId];
     }
     function _transferChassis(address _from, address _to, uint256 _tokenId) private {
+        require(ownerChassisCount[_from]>0 || _from==owner(), "it is your last chassis");
+
         ownerChassisCount[_to]++;// = ownerChassisCount[_to].add(1);
         ownerChassisCount[_from]--;// = ownerChassisCount[_from].sub(1);
         Car[] memory cars = getCarsByOwner(_from);
@@ -82,6 +90,8 @@ contract TokenOwnership is CarRacing{
             }
         }
         chassisToOwner[_tokenId] = _to;
+
+        delete chassisToPrice[_tokenId];
     }
     function transferChassisFrom(address _from, address _to, uint256 _tokenId) external {
         require(msg.sender == chassisOwnership, "you are not chassis ownership");
@@ -147,7 +157,7 @@ contract TokenOwnership is CarRacing{
     function getEnginesForSale() public view returns(Engine[] memory){
         Engine[] memory res = new Engine[](enginesForSaleCount);
         uint c = 0;
-        for(uint i = 0; i<engines.length; i++){
+        for(uint i = 1; i<engines.length; i++){
             if(engineToPrice[i]!=0){
                 res[c++] = engines[i];
             }
@@ -158,7 +168,7 @@ contract TokenOwnership is CarRacing{
     function getChassisForSale() public view returns(Chassis[] memory){
         Chassis[] memory res = new Chassis[](chassisForSaleCount);
         uint c = 0;
-        for(uint i = 0; i<chassis.length; i++){
+        for(uint i = 1; i<chassis.length; i++){
             if(chassisToPrice[i]!=0){
                 res[c++] = chassis[i];
             }

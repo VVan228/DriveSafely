@@ -123,6 +123,7 @@ contract CarFactory is Ownable, FuelStationFactory {
         carToOwner[id] = owner();
         ownerCarCount[owner()]++;
         carToPrice[id] = _carPrice;
+        carsForSaleCount++;
     }
 
     function createCustomEngine(uint16 _horsePowers, uint8 _consumtion, uint _enginePrice) public onlyOwner returns(uint){
@@ -132,6 +133,7 @@ contract CarFactory is Ownable, FuelStationFactory {
         engineToOwner[id] = owner();
         if (_enginePrice > 0) {
             engineToPrice[id] = _enginePrice;
+            enginesForSaleCount++;
         }
         return id;
     }
@@ -143,6 +145,7 @@ contract CarFactory is Ownable, FuelStationFactory {
         chassisToOwner[id] = owner();
         if (_chassisPrice > 0) {
             chassisToPrice[id] = _chassisPrice;
+            chassisForSaleCount++;
         }
         return id;
     }

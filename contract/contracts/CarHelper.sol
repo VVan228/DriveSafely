@@ -114,39 +114,44 @@ contract CarHelper is CarFactory {
     }
 
     function upgradeCapacity(uint _fuelStatonId, uint8 _counts) external payable onlyOwnerOfFuelStation(_fuelStatonId) {
-        require(msg.value == (_counts * stations[_fuelStatonId].capacity * capacityCoef));
+        uint cost = (uint(_counts) * uint(stations[_fuelStatonId].capacity)) * capacityCoef;
+        require(msg.value == cost, "wrong cost");
         payable(owner()).transfer(msg.value);
         stations[_fuelStatonId].capacity += _counts; 
     }
-
+    
     function upgradeProductionPerHour(uint _fuelStatonId, uint8 _counts) external payable onlyOwnerOfFuelStation(_fuelStatonId) {
-        require(msg.value == (_counts * stations[_fuelStatonId].productionPerHour * productionPerHourCoef));
+        uint cost = (uint(_counts) * uint(stations[_fuelStatonId].productionPerHour)) * productionPerHourCoef;
+        require(msg.value == cost, "wrong cost");
         payable(owner()).transfer(msg.value);
         stations[_fuelStatonId].productionPerHour += _counts; 
     }
 
     function upgradeHorsePowers(uint _engineId, uint8 _counts) external payable onlyOwnerOfEngine(_engineId) {
-        require(msg.value == (_counts * engines[_engineId].horsePowers * horsePowersCoef));
+        uint cost = (uint(_counts) * uint(engines[_engineId].horsePowers)) * horsePowersCoef;
+        require(msg.value == cost, "wrong cost");
         payable(owner()).transfer(msg.value);
         engines[_engineId].horsePowers += _counts; 
     }
 
-    function upgradeConsumtion(uint _engineId, uint8 _counts) external payable onlyOwnerOfEngine(_engineId) {
-        require(msg.value == consumtionCoef * 2**(10 - engines[_engineId].consumtion));
+    function upgradeConsumtion(uint _engineId) external payable onlyOwnerOfEngine(_engineId) {
+        uint cost = uint(2 ** uint(10 - engines[_engineId].consumtion)) * consumtionCoef;
+        require(msg.value == cost, "wrong cost");
         payable(owner()).transfer(msg.value);
-        engines[_engineId].consumtion -= _counts; 
+        engines[_engineId].consumtion --; 
     }
 
     function upgradeDurability(uint _chassisId, uint8 _counts) external payable onlyOwnerOfChassis(_chassisId) {
-        require(msg.value == (_counts * chassis[_chassisId].durability * durabilityCoef));
+        uint cost = (uint(_counts) * uint(chassis[_chassisId].durability)) * durabilityCoef;
+        require(msg.value == cost,  "wrong cost");
         payable(owner()).transfer(msg.value);
         chassis[_chassisId].durability += _counts; 
     }
 
     function levelUp(uint _carId) external payable {
-        uint r = levelUpCost * (cars[_carId].carLevel/10 + 1);
-        require(msg.value == r, "wrong cost");
-        //require(cars[_carId].winCountOnCurrentLevel >= (cars[_carId].carLevel + 1), "level is");
+        uint cost = levelUpCost * (cars[_carId].carLevel/10 + 1);
+        require(msg.value == cost, "wrong cost");
+        //require(cars[_carId].winCountOnCurrentLevel >= (cars[_carId].carLevel + 1), "not enough wins on current level!");
         payable(owner()).transfer(msg.value);
         cars[_carId].carLevel++;
         cars[_carId].winCountOnCurrentLevel = 0;

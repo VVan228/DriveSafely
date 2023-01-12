@@ -13,6 +13,19 @@ contract RaceHandler is CarHelper{
     }
 
     Cross[] crosses;
+
+    uint[] levelToReward = [
+        10000000000000,
+        20000000000000,
+        40000000000000,
+        80000000000000,
+        160000000000000,
+        320000000000000,
+        640000000000000,
+        1280000000000000,
+        2560000000000000,
+        5120000000000000
+    ];
     
     mapping(address => uint) playersToRooms;
     mapping(address => uint) playersToCars;
@@ -119,6 +132,20 @@ contract RaceHandler is CarHelper{
             idToStartedRooms[roomId].closed = true;
             delete playersToRooms[msg.sender];
             delete playersToCars[msg.sender];
+
+            //
+            uint numCorrectAnswers = 0;
+            for(uint i = 0; i<idToStartedRooms[roomId].numberPlayers; i++){
+                if(idToStartedRooms[roomId].answers[i].correct){
+                    numCorrectAnswers++;
+                }
+            }
+            if(numCorrectAnswers==0){
+                return;
+            }
+            if(numCorrectAnswers==1){
+                //payable(idToStartedRooms[roomId].answers[0].player).transfer(1000);
+            }
         }
     }
 }

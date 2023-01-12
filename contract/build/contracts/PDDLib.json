@@ -1989,12 +1989,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x6c13F222c4d6961c90c2265E790DBe4F50DcAc05",
-      "transactionHash": "0xa7588174a26274a09a29c8d08c9beba7264ab1280754b93f3835b5e6d7a6545d"
+      "address": "0xe84661f421F4bBaf758C1fa7Db7cDF3d32c9ecC2",
+      "transactionHash": "0x2eac32123b6260df75bdb17ea325814829aa3daedba30125921c0f50942baa88"
     }
   },
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-01-11T13:50:04.586Z",
+  "updatedAt": "2023-01-12T05:49:46.536Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
