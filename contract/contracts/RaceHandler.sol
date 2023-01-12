@@ -167,8 +167,15 @@ contract RaceHandler is CarHelper{
                 return;
             }
             if(numCorrectAnswers==1){
-                //payable(idToStartedRooms[roomId].answers[0].player).transfer(1000);
+                // payToWinner{value:levelToReward[idToStartedRooms[roomId].world]}(idToStartedRooms[roomId].answers[0].player);
+            }
+            if(numCorrectAnswers==2){
+                // payToWinner(idToStartedRooms[roomId].answers[0].player);
             }
         }
+    }
+
+    function payToWinner(address reciever) public payable onlyOwner {
+        payable(reciever).transfer(msg.value);
     }
 }

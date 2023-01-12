@@ -7384,19 +7384,19 @@
         565
       ],
       "Context": [
-        6303
+        6458
       ],
       "FuelStationFactory": [
-        2418
+        2420
       ],
       "Math": [
-        7379
+        7534
       ],
       "Ownable": [
-        4845
+        5000
       ],
       "Strings": [
-        6478
+        6633
       ]
     },
     "id": 566,
@@ -7421,7 +7421,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 566,
-        "sourceUnit": 6479,
+        "sourceUnit": 6634,
         "src": "57:67:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -7433,7 +7433,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 566,
-        "sourceUnit": 4846,
+        "sourceUnit": 5001,
         "src": "125:68:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -7445,7 +7445,7 @@
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 566,
-        "sourceUnit": 2419,
+        "sourceUnit": 2421,
         "src": "194:34:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -7458,7 +7458,7 @@
               "id": 6,
               "name": "Ownable",
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 4845,
+              "referencedDeclaration": 5000,
               "src": "292:7:0"
             },
             "id": 7,
@@ -7470,7 +7470,7 @@
               "id": 8,
               "name": "FuelStationFactory",
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 2418,
+              "referencedDeclaration": 2420,
               "src": "301:18:0"
             },
             "id": 9,
@@ -7491,9 +7491,9 @@
         "id": 565,
         "linearizedBaseContracts": [
           565,
-          2418,
-          4845,
-          6303
+          2420,
+          5000,
+          6458
         ],
         "name": "CarFactory",
         "nameLocation": "278:10:0",
@@ -9443,10 +9443,10 @@
                                 "name": "Strings",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 6478,
+                                "referencedDeclaration": 6633,
                                 "src": "2226:7:0",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_type$_t_contract$_Strings_$6478_$",
+                                  "typeIdentifier": "t_type$_t_contract$_Strings_$6633_$",
                                   "typeString": "type(library Strings)"
                                 }
                               },
@@ -9457,7 +9457,7 @@
                               "lValueRequested": false,
                               "memberName": "toString",
                               "nodeType": "MemberAccess",
-                              "referencedDeclaration": 6361,
+                              "referencedDeclaration": 6516,
                               "src": "2226:16:0",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_function_internal_pure$_t_uint256_$returns$_t_string_memory_ptr_$",
@@ -11859,10 +11859,10 @@
                                 "name": "Strings",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 6478,
+                                "referencedDeclaration": 6633,
                                 "src": "4586:7:0",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_type$_t_contract$_Strings_$6478_$",
+                                  "typeIdentifier": "t_type$_t_contract$_Strings_$6633_$",
                                   "typeString": "type(library Strings)"
                                 }
                               },
@@ -11873,7 +11873,7 @@
                               "lValueRequested": false,
                               "memberName": "toString",
                               "nodeType": "MemberAccess",
-                              "referencedDeclaration": 6361,
+                              "referencedDeclaration": 6516,
                               "src": "4586:16:0",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_function_internal_pure$_t_uint256_$returns$_t_string_memory_ptr_$",
@@ -12773,7 +12773,7 @@
                         "name": "owner",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 4773,
+                        "referencedDeclaration": 4928,
                         "src": "4960:5:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_view$__$returns$_t_address_$",
@@ -12838,7 +12838,7 @@
                           "name": "owner",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 4773,
+                          "referencedDeclaration": 4928,
                           "src": "4991:5:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_internal_view$__$returns$_t_address_$",
@@ -13000,7 +13000,7 @@
                   "id": 358,
                   "name": "onlyOwner",
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 4764,
+                  "referencedDeclaration": 4919,
                   "src": "4515:9:0"
                 },
                 "nodeType": "ModifierInvocation",
@@ -13429,7 +13429,7 @@
                           "name": "owner",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 4773,
+                          "referencedDeclaration": 4928,
                           "src": "5513:5:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_internal_view$__$returns$_t_address_$",
@@ -13525,7 +13525,7 @@
                         "name": "owner",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 4773,
+                        "referencedDeclaration": 4928,
                         "src": "5553:5:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_view$__$returns$_t_address_$",
@@ -13753,7 +13753,7 @@
                   "id": 457,
                   "name": "onlyOwner",
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 4764,
+                  "referencedDeclaration": 4919,
                   "src": "5367:9:0"
                 },
                 "nodeType": "ModifierInvocation",
@@ -14129,7 +14129,7 @@
                           "name": "owner",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 4773,
+                          "referencedDeclaration": 4928,
                           "src": "6089:5:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_internal_view$__$returns$_t_address_$",
@@ -14225,7 +14225,7 @@
                         "name": "owner",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 4773,
+                        "referencedDeclaration": 4928,
                         "src": "6130:5:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_view$__$returns$_t_address_$",
@@ -14453,7 +14453,7 @@
                   "id": 514,
                   "name": "onlyOwner",
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 4764,
+                  "referencedDeclaration": 4919,
                   "src": "5941:9:0"
                 },
                 "nodeType": "ModifierInvocation",
@@ -14578,7 +14578,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-01-12T16:50:30.706Z",
+  "updatedAt": "2023-01-12T18:53:59.466Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
