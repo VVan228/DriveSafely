@@ -1,34 +1,95 @@
-import React, {useEffect, useLayoutEffect, useState} from 'react';
+import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
 import classes from "./Pages.module.css";
 import background from "../images/game/background.png"
 import background2 from "../images/game/background2.png"
 import {useFetching} from "../hooks/useFetching";
 import Loader from "../components/UI/loader/Loader";
 import {useParams} from "react-router-dom";
-import {getDummyCars} from "../utils/cars";
+import {convertCarsToJsObject, getDummyCars} from "../utils/cars";
 import Car from "../components/Car";
 import {getCarPosition} from "../utils/race";
 import {getRoomInfo} from "../utils/room";
+import {AuthContext} from "../context";
+import ContractService from "../API/ContractService";
 
 const Race = () => {
 
     const [windowWidth, setWindowWidth] = useState(0)
     const [windowHeight, setWindowHeight] = useState(0)
     const params = useParams()
+    const [order, setOrder] = useState([])
+    // const {contract, isLoading} = useContext(AuthContext)
+    // const [roomDna, isRoomDnaLoading, roomDnaError] = useFetching(async () => {
+    //
+    //         let response = await contract.generateRoom()
+    //         useLogging && alert(`Got room:\n${response}`)
+    //         return response;
+    //     }
+    // )
+    function onClickCar(index){
+        console.log("++++", order, "++++")
+        let newOrder = order
+        console.log(newOrder)
+        if(!newOrder.includes(index)){
+            newOrder.push(index)
+            setOrder(newOrder)
+            let newCars = []
 
-    const roomInfo = getRoomInfo("113344112211121314231");
+            cars.map((car) =>
+                newCars.push(
+                    <Car
+                        index={car.props.index}
+                        order={newOrder.indexOf(car.props.index)}
+                        car={testCars[0]}
+                        position={car.props.position}
+                        width="5%"
+                        height="8%"
+                        rotate={car.props.rotate}
+                        onClick={()=>onClickCar(car.props.index)}
+                    />
+                )
+            )
+            setCars(newCars)
+            console.log(newOrder)
+        }
+        function onClickClear(){
+            let newCars = []
+            cars.map((car) =>
+                newCars.push(
+                    <Car
+                        index={car.props.index}
+                        order={-1}
+                        car={testCars[0]}
+                        position={car.props.position}
+                        width="5%"
+                        height="8%"
+                        rotate={car.props.rotate}
+                        onClick={()=>onClickCar(car.props.index)}
+                    />
+                )
+            )
+            setCars(newCars)
+            setOrder([])
+            }
+
+            // setIsOrderShow(true);
+    }
+    const roomInfo = getRoomInfo("112211334411121");
     const roadType = Math.floor(Math.random() * 2)
     const testCars = getDummyCars(Math.floor(Math.random() * ((roadType === 0 ? 5 : 4) - 2) + 2))
     const testCarsComponents = roomInfo.listOfCars.map((car, index)=>
         <Car
-            key={car.index}
+            index={car.index}
             car={testCars[0]}
+            order={-1}
             position={car.position}
             width="5%"
             height="8%"
             rotate={car.rotation}
+            onClick={()=>onClickCar(car.index)}
         />
     )
+    const [cars, setCars] = useState(testCarsComponents)
     console.log(testCarsComponents)
 
 
@@ -69,7 +130,7 @@ const Race = () => {
 
                     <div style={{backgroundImage:  `url(${background})`, backgroundSize: "cover",
                     backgroundPosition: "center", width: "100%", paddingTop:"80%", position: "relative"}}>
-                        {testCarsComponents.map(testCar => testCar)}
+                        {cars.map(testCar => testCar)}
                     </div>
                 </div>
             </div>
