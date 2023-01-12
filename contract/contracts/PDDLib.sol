@@ -4,7 +4,7 @@ pragma solidity ^0.8.13;
 library PDDLib{
 
 
-    function generateRoom(uint crossId, uint numPlayers) public view returns (uint roomDNA){
+    function generateRoom(uint crossId, uint numPlayers) external view returns (uint roomDNA){
         uint randNonce = 0;
         uint mainRoad1;
         uint mainRoad2;
