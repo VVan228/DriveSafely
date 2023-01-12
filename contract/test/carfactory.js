@@ -1,7 +1,6 @@
 const TokenOwnership = artifacts.require("TokenOwnership");
 
 
-
 contract('CarHelper', (accounts) => {
     it('creates one car', async () => {
         const instance = await TokenOwnership.deployed();
@@ -40,5 +39,22 @@ contract('CarHelper', (accounts) => {
         const station = await instance.getFuelStationByOwner(accounts[0]);
         assert.equal(station.capacity, 60);
         assert.equal(station.productionPerHour, 5);
-    });  
+
+    });
+
+    it('get engines (owner, length)', async () => {
+        const instance = await TokenOwnership.deployed();
+        const engines = await instance.getEnginesByOwner(accounts[0]);
+        const cars = await instance.getCarsByOwner(accounts[0]);
+        assert.equal(engines[0].id, cars[0].engineId);
+        assert.equal(engines.length, 1);
+    });
+
+    it('get chassis (owner, length)', async () => {
+        const instance = await TokenOwnership.deployed();
+        const chassis = await instance.getChassisByOwner(accounts[0]);
+        const cars = await instance.getCarsByOwner(accounts[0]);
+        assert.equal(chassis[0].id, cars[0].chassisId);
+        assert.equal(chassis.length, 1);
+    });
 });

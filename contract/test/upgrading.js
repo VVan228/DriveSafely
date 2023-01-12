@@ -1,99 +1,84 @@
 const TokenOwnership = artifacts.require("TokenOwnership");
 
 const counts = 50;
+const capacityCoef = 0.00001 * 10^18;
 
 contract('Upgrading', (accounts) => {
 
-    // it('balance is changed when changing capacity', async () => {
-    //     const instance = await TokenOwnership.deployed();
-    //     await instance.createFuelStation({from:accounts[0]});
-    //     //await instance.createCar("jojo",{from:accounts[0]});
-    //     const station = await instance.getFuelStationByOwner(accounts[0]);
-    //     // checking balance
-    //     // not enough balance
-        
-    //     const oldBalance = await web3.eth.getBalance(accounts[0]);
-    //     cpc = 0.001;
-    //     //console.log(await TokenOwnership.capacityCoef);
-    //     //c = await web3.eth.TokenOwnership.getCapacityCoef();
-        
-    //     const count = counts * station.capacity * cpc;
-    //     await instance.upgradeCapacity(station.id, counts, {from:accounts[0], value:count});
-    //     const newBalance = await web3.eth.getBalance(accounts[0]);
-    //     assert.equal(newBalance, oldBalance-count);
-    // });
-    // it('balance is changed when changing capacity', async () => {
-    //     const instance = await TokenOwnership.deployed();
-    //     await instance.createFuelStation({from:accounts[0]});
-    //     //await instance.createCar("jojo",{from:accounts[0]});
-    //     const station = await instance.getFuelStationByOwner(accounts[0]);
-    //     // checking balance
-    //     // not enough balance
-    //     const oldBalance = accounts[0].balance;
-    //     const count = counts * station.capacity * TokenOwnership.capacityCoef;
-    //     await instance.upgradeCapacity(station.id, counts, {from:accounts[0], value:count});
-    //     assert.equal(accounts[0].balance, oldBalance-count);
-    // });
+    it('balance is changed when changing capacity', async () => {
+        const instance = await TokenOwnership.deployed();
+        await instance.createCar("car1",{from:accounts[0]});
+        //const cars = await instance.getCarsByOwner(accounts[0]);
+        //assert.equal(cars[0].model, "car1");
+        await instance.createFuelStation({from:accounts[0]});
+        const station = await instance.getFuelStationByOwner(accounts[0]);
+        //assert.equal(station.id, 0);
 
-    // it('production per hour is changed', async () => {
-    //     const instance = await TokenOwnership.deployed();
-    //     await instance.createCar("car1",{from:accounts[0]});
-    //     const cars = await instance.getCarsByOwner(accounts[0]);
+        // checking balance
+        //oldBalance = web3.eth.getBalance(accounts[0]);
+        oldBalance = accounts[0].balance;
+        sum = counts * station.capacity * capacityCoef;
+        //assert.equal(sum, 0.030000000000000002);
+        await instance.upgradeCapacity(0, counts, {from:accounts[0], value:sum.toString()});
+        assert.equal(oldBalance, accounts[0].balance);
+    });
+/*
+    it('balance is changed when changing production per hour', async () => {
+        const instance = await TokenOwnership.deployed();
+        await instance.createFuelStation({from:accounts[0]});
+        const station = await instance.getFuelStationByOwner(accounts[0]);
+        // checking balance
+        const oldBalance = accounts[0].balance;
+        const count = counts * station.productionPerHour * TokenOwnership.productionPerHourCoef;
+        await instance.upgradeProductionPerHour(station.id, counts, {from:accounts[0], value:count});
+    });
+
+    it('horse powers is changed', async () => {
+        const instance = await TokenOwnership.deployed();
+        //TODO
 
 
-    //     // upgrade production per hour
-    //     const newProductionPerHour = cars[0].productionPerHour + counts;
-    //     cars[0].upgradeProductionPerHour(0, counts);
-    //     assert.equal(cars[0].productionPerHour, newProductionPerHour);
-    // });
+        // upgrade horse powers
+        const newHorsePowers = cars[0].horsePowers + counts;
+        cars[0].upgradeHorsePowers(0, counts);
+    });
 
-    // it('horse powers is changed', async () => {
-    //     const instance = await TokenOwnership.deployed();
-    //     await instance.createCar("car1",{from:accounts[0]});
-    //     const cars = await instance.getCarsByOwner(accounts[0]);
+    it('consumtion is changed', async () => {
+        const instance = await TokenOwnership.deployed();
+        // TODO
 
 
-    //     // upgrade horse powers
-    //     const newHorsePowers = cars[0].horsePowers + counts;
-    //     cars[0].upgradeHorsePowers(0, counts);
-    //     assert.equal(cars[0].horsePowers, newHorsePowers);
-    // });
+        // upgrade consumtion
+        const newConsumtion = cars[0].consumtion + counts;
+        cars[0].upgradeConsumtion(0, counts);
+    });
 
-    // it('consumtion is changed', async () => {
-    //     const instance = await TokenOwnership.deployed();
-    //     await instance.createCar("car1",{from:accounts[0]});
-    //     const cars = await instance.getCarsByOwner(accounts[0]);
+    it('durability is changed', async () => {
+        const instance = await TokenOwnership.deployed();
+        // TODO
 
 
-    //     // upgrade consumtion
-    //     const newConsumtion = cars[0].consumtion + counts;
-    //     cars[0].upgradeConsumtion(0, counts);
-    //     assert.equal(cars[0].consumtion, newConsumtion);
-    // });
+        // upgrade durability
+        const newDurability = cars[0].durability + counts;
+        cars[0].upgradeDurability(0, counts);
+    });*/
 
-    // it('durability is changed', async () => {
-    //     const instance = await TokenOwnership.deployed();
-    //     await instance.createCar("car1",{from:accounts[0]});
-    //     const cars = await instance.getCarsByOwner(accounts[0]);
+    it('level increased by 1', async () => {
+        const instance = await TokenOwnership.deployed();
+        //await instance.createCar("car1",{from:accounts[0]});
+        const cars = await instance.getCarsByOwner(accounts[0]);
+        //assert.equal(cars[0].carLevel, 1);
 
-
-    //     // upgrade durability
-    //     const newDurability = cars[0].durability + counts;
-    //     cars[0].upgradeDurability(0, counts);
-    //     assert.equal(cars[0].durability, newDurability);
-    // });
-
-    // it('level increased by 1', async () => {
-    //     const instance = await TokenOwnership.deployed();
-    //     await instance.createCar("car1",{from:accounts[0]});
-    //     const cars = await instance.getCarsByOwner(accounts[0]);
-    //     levelUp(0);
-    //     // level increased by 1
-    //     assert.equal(cars[0].carLevel, 2);
-    //     // reset win counter
-    //     assert.equal(cars[0].winCountOnCurrentLevel, 0);
-    //     // reset defeat counter
-    //     assert.equal(cars[0].lossCountOnCurrentLevel, 0);
-    // });
+        /*const oldBalance = accounts[0].balance;
+        const count = 2 * (cars[0].carLevel/10 + 1);
+        await instance.levelUp(0, {from:accounts[0], value:count});
+        assert.equal(accounts[0].balance, oldBalance-count);
+        // level increased by 1
+        assert.equal(cars[0].carLevel, 2);
+        // reset win counter
+        assert.equal(cars[0].winCountOnCurrentLevel, 0);
+        // reset defeat counter
+        assert.equal(cars[0].lossCountOnCurrentLevel, 0);*/
+    });
 
 });
