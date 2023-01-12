@@ -1,12 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
 
+/// @title save fuel stations
 contract FuelStationFactory{
 
     uint8 defaultCapacity = 60;
     uint8 defaultProduction = 5;
 
-	struct FuelStation{ 
+	struct FuelStation{
         uint id;
         uint8 capacity;
         uint8 productionPerHour;

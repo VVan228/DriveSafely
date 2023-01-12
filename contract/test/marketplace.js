@@ -1,5 +1,7 @@
 const TokenOwnership = artifacts.require("TokenOwnership");
 const ChassisOwnership = artifacts.require("ChassisOwnership");
+const EngineOwnership = artifacts.require("EngineOwnership");
+const CarOwnership = artifacts.require("CarOwnership");
 const truffleAssert = require('truffle-assertions');
 
 
@@ -93,36 +95,110 @@ contract('TokenOwnership', (accounts) => {
 
     });
 
+    it("success buy token from marketplace", async () => {
+        let a = await TokenOwnership.deployed();
+        let b = await EngineOwnership.deployed();
+        let aces = await web3.eth.getAccounts();
 
+        await b.buyFromMarketplace(2, { from: aces[1], value: "500" });
+        engines = await a.getEnginesByOwner(aces[1]);
+        assert.equal(engines.length, 2);
+    });
 
+    it("try to buy with wrong eth value", async () => {
+        let a = await TokenOwnership.deployed();
+        let b = await EngineOwnership.deployed();
+        let aces = await web3.eth.getAccounts();
 
+        await a.putEngineOnMarketplace(2, 1000, { from: aces[1] });
+        await truffleAssert.fails(
+            b.buyFromMarketplace(2, { from: aces[2], value: "500" }),
+            truffleAssert.ErrorType.REVERT,
+            "val wrong"
+        );
 
-    // it("remove token from marketplace", async () => {
-    //     let a = await TokenOwnership.deployed();
-    //     let aces = await web3.eth.getAccounts();
+    });
 
-    //     await a.createCustomEngine( 100, 5, 1000, { from: aces[0] });
+    it("try to buy yourself token", async () => {
+        let a = await TokenOwnership.deployed();
+        let b = await EngineOwnership.deployed();
+        let aces = await web3.eth.getAccounts();
 
-    //     let saleEngines = await a.getCarsForSale();
-    //     assert.equal(saleEngines[0].horsePowers, 100);
+        await truffleAssert.fails(
+            b.buyFromMarketplace(2, { from: aces[1], value: "1000" }),
+            truffleAssert.ErrorType.REVERT,
+            "cant buy yours"
+        );
 
-    // });
+    });
 
-    // it("put token on market place with correct price", async () => {
-    //     let a = await TokenOwnership.deployed();
-    //     let aces = await web3.eth.getAccounts();
+    it("try to buy not saling token", async () => {
+        let a = await TokenOwnership.deployed();
+        let b = await ChassisOwnership.deployed();
+        let aces = await web3.eth.getAccounts();
 
-    //     a.createCar({from: aces[1]});
-    //     a.createCustomCar
+        await truffleAssert.fails(
+            b.buyFromMarketplace(0, { from: aces[3], value: "100" }),
+            truffleAssert.ErrorType.REVERT,
+            "not for sale!"
+        );
 
+    });
 
-    //     await a.createCustomEngine(100, 5, 300, { from: aces[0] });
+    it("try to transfer token without payment", async () => {
+        let a = await TokenOwnership.deployed();
+        let b = await EngineOwnership.deployed();
+        let aces = await web3.eth.getAccounts();
 
-    //     let price = await a.engineToPrice[1];
-    //     assert.equal(price, 300);
+        await truffleAssert.fails(
+            b.transferFrom(aces[1], aces[2], 2, { from: aces[2] }),
+            truffleAssert.ErrorType.REVERT,
+            "you didn't pay for the token!"
+        );
 
-    // });
+    });
 
+    it("get balance of tokens for owner", async () => {
+        let a = await TokenOwnership.deployed();
+        let b = await EngineOwnership.deployed();
+        let aces = await web3.eth.getAccounts();
 
+        balance = await b.balanceOf(aces[1]);
+        assert.equal(balance, "2");
+
+    });
+
+    it("get owner for token", async () => {
+        let a = await TokenOwnership.deployed();
+        let b = await CarOwnership.deployed();
+        let aces = await web3.eth.getAccounts();
+
+        owner = await b.ownerOf(1);
+        assert.equal(owner, aces[0]);
+
+    });
+
+    it("get count of saling tokens", async () => {
+        let a = await TokenOwnership.deployed();
+        let b = await EngineOwnership.deployed();
+        let c = await ChassisOwnership.deployed();
+        let aces = await web3.eth.getAccounts();
+
+        await a.createCustomCar("model Ford Mustangr", 100, 5, 100000, 12, 1000, { from: aces[0] });
+        await a.createCustomCar("model Honda", 100, 5, 100000, 12, 1000, { from: aces[0] });
+
+        await a.putChassisOnMarketplace(3, 200, { from: aces[0] });
+        await a.putEngineOnMarketplace(3, 500, { from: aces[0] });
+        await a.putEngineOnMarketplace(4, 700, { from: aces[0] });
+
+        cars = await a.getCarsForSale();
+        engines = await a.getEnginesForSale();
+        chassis = await a.getChassisForSale();
+
+        assert.equal(cars.length, 3);
+        assert.equal(engines.length, 4);
+        assert.equal(chassis.length, 1);
+
+    });
 
 });

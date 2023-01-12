@@ -116,7 +116,7 @@ contract CarHelper is CarFactory {
 
     /// list of owner chassis
     /// @param _owner owner's address
-    /// @return Chassis[] memory owner's list of engines
+    /// @return Chassis[] memory owner's list of chassis
     function getChassisByOwner(address _owner) public view returns(Chassis[] memory) {
         Chassis[] memory result = new Chassis[](ownerChassisCount[_owner]);
         uint counter = 0;
@@ -150,16 +150,16 @@ contract CarHelper is CarFactory {
     function upgradeCapacity(uint _fuelStatonId, uint8 _counts) external payable onlyOwnerOfFuelStation(_fuelStatonId) {
         require(msg.value == getCapacityUpgradeCost(_fuelStatonId, _counts), "wrong cost");
         payable(owner()).transfer(msg.value);
-        stations[_fuelStatonId].capacity += _counts; 
+        stations[_fuelStatonId].capacity += _counts;
     }
-    
+
     /// upgrade production on per hour
     /// @param _fuelStatonId fuel station id
     /// @param _counts size
     function upgradeProductionPerHour(uint _fuelStatonId, uint8 _counts) external payable onlyOwnerOfFuelStation(_fuelStatonId) {
         require(msg.value == getProductionPerHourUpgradeCost(_fuelStatonId, _counts), "wrong cost");
         payable(owner()).transfer(msg.value);
-        stations[_fuelStatonId].productionPerHour += _counts; 
+        stations[_fuelStatonId].productionPerHour += _counts;
     }
 
     /// upgrade horse powers
@@ -176,7 +176,7 @@ contract CarHelper is CarFactory {
     function upgradeConsumtion(uint _engineId) external payable onlyOwnerOfEngine(_engineId) {
         require(msg.value == getConsumtionUpgradeCost(_engineId), "wrong cost");
         payable(owner()).transfer(msg.value);
-        engines[_engineId].consumtion --; 
+        engines[_engineId].consumtion --;
     }
 
     /// upgrade durability
@@ -188,7 +188,10 @@ contract CarHelper is CarFactory {
         chassis[_chassisId].durability += _counts; 
     }
 
-
+    /// upgrade capacity
+    /// @param _fuelStatonId fuel station id
+    /// @param _counts size
+    /// @return uint new capacity
     function getCapacityUpgradeCost(uint _fuelStatonId, uint8 _counts) public view returns(uint){
         return (uint(_counts) * uint(stations[_fuelStatonId].capacity)) * capacityCoef;
     }

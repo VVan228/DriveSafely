@@ -63,6 +63,8 @@ contract CarOwnership is ERC721, Ownable{
         transferFrom(ownerOf(_tokenId), msg.sender, _tokenId);
     }
     
+    /// confirmation of money for a token
+    /// @dev permission for sending token
     function approveDeal(address to, uint tokenId) private{
         carApprovals[tokenId] = to;
     }
