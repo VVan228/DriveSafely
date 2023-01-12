@@ -3,7 +3,9 @@ pragma solidity ^0.8.13;
 
 import "./CarRacing.sol";
 
+/// @title token owner
 contract TokenOwnership is CarRacing{
+
 
 
     address chassisOwnership;
@@ -16,12 +18,25 @@ contract TokenOwnership is CarRacing{
         carOwnership = _carOwnership;
     }
 
+    /// @notice number of user cars
+    /// @param _owner owner address
+    /// @return uint256 number of cars
     function balanceOfCars(address _owner) external view returns (uint256) {
         return ownerCarCount[_owner];
     }
+
+    /// @notice car owner
+    /// @param _tokenId car id token
+    /// @return address owner adress
     function ownerOfCar(uint256 _tokenId) external view returns(address) {
         return carToOwner[_tokenId];
     }
+
+    /// @notice car token transfer
+    /// @param _from sender's address
+    /// @param _to address of the recipient
+    /// @param _tokenId car id token
+    /// @dev the car is sold disassembled (without chassis and engine), chassis and engine remain with the sender
     function _transferCar(address _from, address _to, uint256 _tokenId) private {
         require(ownerCarCount[_from]>0 || _from==owner(), "it is your last car");
 
@@ -36,6 +51,12 @@ contract TokenOwnership is CarRacing{
         carToOwner[_tokenId] = _to;
         delete carToPrice[_tokenId];
     }
+    
+    /// @notice moving car after payment
+    /// @param _from sender's address
+    /// @param _to address of the recipient
+    /// @param _tokenId token id
+    /// @dev call function for moving car after payment
     function transferCarFrom(address _from, address _to, uint256 _tokenId) external {
         require(msg.sender == carOwnership, "you are not car ownership");
         require (carToOwner[_tokenId] == _from || carToPrice[_tokenId] != 0);
@@ -43,12 +64,24 @@ contract TokenOwnership is CarRacing{
     }
 
 
+    /// @notice number of user engines
+    /// @param _owner owner address
+    /// @return uint256 number of owner engine
     function balanceOfEngines(address _owner) external view returns (uint256) {
         return ownerEngineCount[_owner];
     }
+
+    /// @notice owner of engine
+    /// @param _tokenId token id
+    /// @return address owner address
     function ownerOfEngine(uint256 _tokenId) external view returns(address) {
         return engineToOwner[_tokenId];
     }
+
+    /// @notice engine token transfer
+    /// @param _from sender's address
+    /// @param _to address of the recipient
+    /// @param _tokenId engine id token
     function _transferEngine(address _from, address _to, uint256 _tokenId) private {
         require(ownerEngineCount[_from]>0 || _from==owner(), "it is your last engine");
 
@@ -65,19 +98,38 @@ contract TokenOwnership is CarRacing{
         
         delete engineToPrice[_tokenId];
     }
+
+    /// @notice moving engine from sender
+    /// @param _from sender's address
+    /// @param _to address of the recipient
+    /// @param _tokenId engine id token
+    /// @dev call function for moving engine from sender after payment
     function transferEngineFrom(address _from, address _to, uint256 _tokenId) external {
         require(msg.sender == engineOwnership, "you are not engine ownership");
         require (engineToOwner[_tokenId] == _from);
         _transferEngine(_from, _to, _tokenId);
     }
-
     
+
+    /// @notice number of user chassis
+    /// @param _owner owner address
+    /// @return uint256 number of owner chassis
     function balanceOfChassis(address _owner) external view returns (uint256) {
         return ownerChassisCount[_owner];
     }
+
+    /// @notice chassis owner
+    /// @param _tokenId chassis id token
+    /// @return address owner adress
     function ownerOfChassis(uint256 _tokenId) external view returns(address) {
         return chassisToOwner[_tokenId];
     }
+
+    /// @notice transfer chassis
+    /// @param _from sender's address
+    /// @param _to address of the recipient
+    /// @param _tokenId chassis id token
+    /// @dev add chassis to recipient
     function _transferChassis(address _from, address _to, uint256 _tokenId) private {
         require(ownerChassisCount[_from]>0 || _from==owner(), "it is your last chassis");
 
@@ -93,6 +145,12 @@ contract TokenOwnership is CarRacing{
 
         delete chassisToPrice[_tokenId];
     }
+
+    /// @notice moving chassis after payment
+    /// @param _from sender's address
+    /// @param _to address of the recipient
+    /// @param _tokenId token id
+    /// @dev call function for moving chassis after payment
     function transferChassisFrom(address _from, address _to, uint256 _tokenId) external {
         require(msg.sender == chassisOwnership, "you are not chassis ownership");
         require (chassisToOwner[_tokenId] == _from);
@@ -100,6 +158,10 @@ contract TokenOwnership is CarRacing{
     }
 
 
+    /// @notice selling chassis from owner on marketplace
+    /// @param chassisId chassis id
+    /// @param price chassis cost
+    /// @dev using only for owner chassis
     function putChassisOnMarketplace(uint chassisId, uint price) public onlyOwnerOfChassis(chassisId){
         require(price>0, "invalid price");
         if(chassisToPrice[chassisId]==0){
@@ -107,6 +169,10 @@ contract TokenOwnership is CarRacing{
         }
         chassisToPrice[chassisId] = price;
     }
+
+    /// @notice withdraw chassis from marketplace
+    /// @param chassisId chassis id
+    /// @dev using only for owner chassis
     function removeChassisFromMarketplace(uint chassisId) public onlyOwnerOfChassis(chassisId){
         if(chassisToPrice[chassisId]!=0){
             chassisForSaleCount--;
@@ -114,6 +180,10 @@ contract TokenOwnership is CarRacing{
         chassisToPrice[chassisId] = 0;
     }
 
+    /// @notice selling engine from owner on marketplace
+    /// @param engineId engine id
+    /// @param price engine cost
+    /// @dev using only for owner engine
     function putEngineOnMarketplace(uint engineId, uint price) public onlyOwnerOfEngine(engineId){
         require(price>0, "invalid price");
         if(engineToPrice[engineId]==0){
@@ -121,6 +191,10 @@ contract TokenOwnership is CarRacing{
         }
         engineToPrice[engineId] = price;
     }
+
+    /// @notice withdraw engine from marketplace
+    /// @param engineId engine id
+    /// @dev using only for owner engine
     function removeEngineFromMarketplace(uint engineId) public onlyOwnerOfEngine(engineId){
         if(engineToPrice[engineId]!=0){
             enginesForSaleCount--;
@@ -128,6 +202,10 @@ contract TokenOwnership is CarRacing{
         engineToPrice[engineId] = 0;
     }
 
+    /// @notice selling car from owner on marketplace
+    /// @param carId car id
+    /// @param price car cost
+    /// @dev using only for owner car
     function putCarOnMarketplace(uint carId, uint price) public onlyOwnerOfCar(carId){
         require(price>0, "invalid price");
         if(carToPrice[carId]==0){
@@ -135,6 +213,10 @@ contract TokenOwnership is CarRacing{
         }
         carToPrice[carId] = price;
     }
+
+    /// @notice withdraw car from marketplace
+    /// @param carId car id
+    /// @dev using only for owner car
     function removeCarFromMarketplace(uint carId) public onlyOwnerOfCar(carId){
         if(carToPrice[carId]!=0){
             carsForSaleCount--;

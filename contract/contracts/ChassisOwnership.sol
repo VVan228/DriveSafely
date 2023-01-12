@@ -5,7 +5,6 @@ import "./TokenOwnership.sol";
 import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 import "../node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
-
 contract ChassisOwnership is ERC721, Ownable {
     TokenOwnership tokenOwnership;
     mapping (uint => address) public chassisApprovals;
