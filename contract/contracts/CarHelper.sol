@@ -7,7 +7,7 @@ import "../node_modules/@openzeppelin/contracts/utils/Strings.sol";
 /// @title cars
 contract CarHelper is CarFactory {
 
-    uint public capacityCoef  = 0.00001 ether ;
+    uint capacityCoef = 0.00001 ether ;
     uint productionPerHourCoef = 0.0002 ether;
     uint horsePowersCoef = 0.000015 ether;
     uint consumtionCoef = 0.005 ether;
