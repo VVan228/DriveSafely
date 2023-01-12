@@ -16,19 +16,19 @@ contract CarHelper is CarFactory {
 
     /// caller is equal car owner
     modifier onlyOwnerOfCar(uint _carId) {
-        require(msg.sender == carToOwner[_carId]);
+        require(msg.sender == carToOwner[_carId], "you're not owner for this Car!");
         _;
     }
 
     /// caller is equal engine owner
     modifier onlyOwnerOfEngine(uint _engineId) {
-        require(msg.sender == engineToOwner[_engineId]);
+        require(msg.sender == engineToOwner[_engineId],"you're not owner for this Engine!");
         _;
     }
 
     /// caller is equal chassis owner
     modifier onlyOwnerOfChassis(uint _chassisId) {
-        require(msg.sender == chassisToOwner[_chassisId], "chassis not your >:(");
+        require(msg.sender == chassisToOwner[_chassisId], "you're not owner for this Chassis!");
         _;
     }
 

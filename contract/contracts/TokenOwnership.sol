@@ -163,6 +163,7 @@ contract TokenOwnership is CarRacing{
     /// @param price chassis cost
     /// @dev using only for owner chassis
     function putChassisOnMarketplace(uint chassisId, uint price) public onlyOwnerOfChassis(chassisId){
+        require(ownerChassisCount[chassisToOwner[chassisId]] > 1 || msg.sender == owner(), "you can't sale last chassis!");
         require(price>0, "invalid price");
         if(chassisToPrice[chassisId]==0){
             chassisForSaleCount++;
@@ -185,6 +186,7 @@ contract TokenOwnership is CarRacing{
     /// @param price engine cost
     /// @dev using only for owner engine
     function putEngineOnMarketplace(uint engineId, uint price) public onlyOwnerOfEngine(engineId){
+        require(ownerEngineCount[engineToOwner[engineId]] > 1 || msg.sender == owner(), "you can't sale last engine!");
         require(price>0, "invalid price");
         if(engineToPrice[engineId]==0){
             enginesForSaleCount++;
@@ -207,6 +209,7 @@ contract TokenOwnership is CarRacing{
     /// @param price car cost
     /// @dev using only for owner car
     function putCarOnMarketplace(uint carId, uint price) public onlyOwnerOfCar(carId){
+        require(ownerCarCount[carToOwner[carId]] > 1 || msg.sender == owner(), "you can't sale last car!");
         require(price>0, "invalid price");
         if(carToPrice[carId]==0){
             carsForSaleCount++;
