@@ -113,10 +113,8 @@ contract('Upgrading', (accounts) => {
 
         oldBalance = await web3.eth.getBalance(aces[0])
         await instance.upgradeDurability(1, counts, { from: aces[1], value: sum.toString() });
-        chassis = await instance.getChassisByOwner(aces[1]);
-        console.log(chassis);
         newBalance = await web3.eth.getBalance(aces[0])
-        assert.equal(parseInt(newBalance) - parseInt(oldBalance), parseInt(sum));
+        assert.equal(parseInt(newBalance), parseInt(oldBalance)+parseInt(sum));
     });
 
     it('Durability is changed', async () => {
@@ -126,7 +124,7 @@ contract('Upgrading', (accounts) => {
         const sum = await instance.getDurabilityUpgradeCost(1, counts);
         chassis = await instance.getChassisByOwner(aces[1]);
         const oldDurability = chassis[0].durability;
-        await instance.upgradeConsumtion(1, counts, { from: aces[1], value: sum.toString() });
+        await instance.upgradeDurability(1, counts, { from: aces[1], value: sum.toString() });
         chassis = await instance.getChassisByOwner(aces[1]);
         assert.equal(parseInt(chassis[0].durability), parseInt(oldDurability) + parseInt(counts));
     });
@@ -149,6 +147,7 @@ contract('Upgrading', (accounts) => {
 
         const sum = await instance.getLevelUpCost(1, counts);
         cars = await instance.getCarsByOwner(aces[1]);
+        console.log(cars)
         const oldLevel = parseInt(cars[0].carLevel);
         await instance.upgradeConsumtion(1, counts, { from: aces[1], value: sum.toString() });
         cars = await instance.getCarsByOwner(aces[1]);
