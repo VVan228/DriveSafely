@@ -102,7 +102,8 @@ contract RaceHandler is CarHelper{
 
     /// get closed room
     /// @param roomId room id
-    /// @return Answer[] memory
+    /// @return Answer[] memory list with player response, player, player car and response time
+    /// @dev called after receiving the event about sending the last response to the room
     function getClosedRoom(uint roomId) public view returns(Answer[] memory){
         require(idToStartedRooms[roomId].closed, "room not closed");
         return idToStartedRooms[roomId].answers;
