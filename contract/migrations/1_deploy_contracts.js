@@ -28,14 +28,16 @@ async function doDeploy(deployer, network) {
   let c = await CarOwnership.deployed()
   let ch = await ChassisOwnership.deployed();
   let e = await EngineOwnership.deployed();
-  
+
+  await deployer.link(PDDLib, TokenOwnership);
+
   // await deployer.deploy(TokenOwnership, ch.address, e.address, c.address);
   await deployer.deploy(TokenOwnership);
   let to = await TokenOwnership.deployed();
-  await deployer.link(PDDLib, TokenOwnership);
-
-  await deployer.deploy(PDDLibTest);
+  
   await deployer.link(PDDLib, PDDLibTest);
+  await deployer.deploy(PDDLibTest);
+  
 
   await c.init(to.address);
   await ch.init(to.address);
