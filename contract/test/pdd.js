@@ -1,3 +1,5 @@
+const { assert } = require("chai");
+
 const TokenOwnership = artifacts.require("TokenOwnership");
 const PDDLibTest = artifacts.require("PDDLibTest");
 
@@ -20,33 +22,51 @@ contract('PDDLib', (accounts) => {
         c = await instance.commitAnswer(room.id, ans, { from: accounts[0] });
         // console.log(c);
 
-        c = await instance.commitAnswer(room.id, ans, { from: accounts[0] });
+        // c = await instance.commitAnswer(room.id, ans, { from: accounts[0] });
         // console.log(c);
 
     });
 
-    it('carRacing test', async () => {
+    it('correct answer test', async () => {
         const instance = await PDDLibTest.deployed();
+        
+        let dna = 12121134121;
+        let c = await instance.commitAnswerTest.call(dna, [2,3,1,0], {from:accounts[0]});
+        let c2 = await instance.commitAnswerTest.call(dna, [3,2,1,0], {from:accounts[1]});
 
-        // let dna = 12121134121;
-        let dna = 3311312;
+        assert.isTrue(c);
+        assert.isTrue(!c2);
 
-        // let c = await instance.commitAnswerTest.call(dna, [2,3,1,0], {from:accounts[0]});
-        // let c2 = await instance.commitAnswerTest.call(dna, [3,2,1,0], {from:accounts[1]});
-        let c = await instance.commitAnswerTest.call(dna, [0, 1]);
-        let c2 = await instance.commitAnswerTest.call(dna, [1, 0]);
+        dna = 3311312;
+        c = await instance.commitAnswerTest.call(dna, [0,1]);
+        c2 = await instance.commitAnswerTest.call(dna, [1,0]);
+        
+        assert.isTrue(c);
+        assert.isTrue(!c2);
 
-        console.log(c)
-        console.log(c2)
+        dna = 3311322;
+        c = await instance.commitAnswerTest.call(dna, [0,1]);
+        c2 = await instance.commitAnswerTest.call(dna, [1,0]);
+        
+        assert.isTrue(!c);
+        assert.isTrue(c2);
+
+        dna = 3331311;
+        c = await instance.commitAnswerTest.call(dna, [0,1]);
+        c2 = await instance.commitAnswerTest.call(dna, [1,0]);
+        
+        assert.isTrue(c);
+        assert.isTrue(c2);
     });
 
     it('carRacing test', async () => {
-        const instance = await PDDLibTest.deployed();
-
-
-        let c = await instance.generate.call(0, 3, "asddsa");
-
-        console.log(web3.utils.BN(c).toString())
-
+        // const instance = await TokenOwnership.deployed();
+        // await instance.createCar("Приора", {from:accounts[0]})
+        // await instance.startRace(0,{from:accounts[0]})
+          
+        // //let c = await instance.startRace();
+        
+        // //console.log(web3.utils.BN(c).toString())
+        
     });
 });
