@@ -7,7 +7,9 @@ const MySidebar = ({children, ...props}) => {
     const [position, setPosition] = useState("-100%")
 
     useEffect(() => {
-        setTimeout(()=>{setPosition("0%")}, 100)
+        setTimeout(() => {
+            setPosition("0%")
+        }, 100)
     }, [])
 
     return (
@@ -15,11 +17,19 @@ const MySidebar = ({children, ...props}) => {
             {...props}
             ref={sidebar}
             className={[props.side === "left" ? classes.leftSidebar : classes.rightSidebar, classes.mySidebar, "d-flex align-items-center", `justify-content-${props.align}`].join(" ")}
-            style={props.side === "left" ? {
-                left: position,
-                backgroundColor: props.color,
-                width: props.width
-            } : {right: position, backgroundColor: props.color, width: props.width}}
+            style={
+                props.side === "left" ?
+                    {
+                        left: position,
+                        backgroundColor: props.color,
+                        width: props.width
+                    } :
+                    {
+                        right: position,
+                        backgroundColor: props.color,
+                        width: props.width
+                    }
+            }
 
         >
             {children}

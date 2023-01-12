@@ -1,71 +1,23 @@
-import React, {useContext, useEffect, useState} from 'react';
-import Cars from "./Cars";
-import Engines from "./Engines";
-import Chasisses from "./Chasisses";
+import React, {useState} from 'react';
+import OwnerCars from "./OwnerCars";
+import OwnerEngines from "./OwnerEngines";
+import OwnerChassis from "./OwnerChassis";
 import MySidebar from "../../components/UI/sidebar/MySidebar";
 import MyButton from "../../components/UI/button/MyButton";
-import {AuthContext} from "../../context";
-import ContractService from "../../API/ContractService";
 import Loader from "../../components/UI/loader/Loader";
-import {useFetching} from "../../hooks/useFetching";
-import PostService from "../../API/PostService";
 import Navbar from "../../components/UI/navbar/Navbar";
-// import {Car} from "../../utils/cars";
 
 
 const Inventory = () => {
 
-    const [activeIndex, setActiveIndex] = useState(1);
-
-    const {contract, isLoading} = useContext(AuthContext)
-    // const [cars, setCars] = useState([])
-    // const [engines, setEngines] = useState([])
-    // const [chassis, setChassis] = useState([])
-    //
-    //
-    // const [fetchCars, isCarsLoading, carsError] = useFetching(async () => {
-    //         const owner = await ContractService.getUserAddress()
-    //         const response = await contract.getCarsByOwner(owner)
-    //         setCars(response)
-    //     }
-    // )
-    //
-    // const [fetchEngines, isEnginesLoading, enginesError] = useFetching(async () => {
-    //         const owner = await ContractService.getUserAddress()
-    //         const response = await contract.getEnginesByOwner(owner)
-    //         setEngines(response)
-    //     }
-    // )
-    //
-    // const [fetchChassis, isChassisLoading, chassisError] = useFetching(async () => {
-    //         const owner = await ContractService.getUserAddress()
-    //         const response = await contract.getChassisByOwner(owner)
-    //         setChassis(response)
-    //     }
-    // )
-
-
-    useEffect(
-        () => {
-            // fetchCars()
-            // fetchEngines()
-            // fetchChassis()
-            // const car = new Car("Tesla Silvia", 1221221, 0, 0, 1, 187200, 10, 0)
-            // console.log(car)
-            // setCars([car])
-        }, []
-    )
-
+    const [activeIndex, setActiveIndex] = useState(0);
 
     const pages = [
-        <Cars/>,
-        <Engines/>,
-        <Chasisses/>
+        <OwnerCars/>,
+        <OwnerEngines/>,
+        <OwnerChassis/>
     ]
 
-    if (isLoading) {
-        return <Loader/>
-    }
     return (
             <div className="row p-0 h-100 text-center d-flex flex-row justify-content-between">
                 <Navbar/>
@@ -80,9 +32,6 @@ const Inventory = () => {
                 <div className="col-8 p-0 d-flex align-items-center justify-content-center">
                     {pages[activeIndex]}
                 </div>
-                {/*<MySidebar side="right">*/}
-                {/*    <div></div>*/}
-                {/*</MySidebar>*/}
             </div>
     );
 };

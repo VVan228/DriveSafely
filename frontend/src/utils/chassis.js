@@ -1,4 +1,5 @@
 import Car from "./cars";
+import chassisImage from "../images/chassises/chassis.svg"
 
 export class Chassis {
     constructor(id, durability, resource) {
@@ -6,10 +7,11 @@ export class Chassis {
         this.durability = durability;
         this.resource = resource;
         this.hue = getHue(id);
+        this.image = chassisImage
     }
 }
 
-export const convertChassisToJsObject = (car) => {
+export const convertChassisToJsObject = (chassis) => {
     /*
        0 - модель
        1 - vin
@@ -20,11 +22,16 @@ export const convertChassisToJsObject = (car) => {
        6 - победы (на уровне)
        7 - поражения (на уровне)
    */
-    return new Car(car[0], car[1], car[2], car[3], car[4], car[5], car[6], car[7])
+    chassis = chassis.toString().split(",")
+    return new Chassis(chassis[0], chassis[1], chassis[2])
 }
 
 export const convertChassisesToJsObject = (chassisArray) => {
     let convertedArray = []
     chassisArray.forEach(chassis => convertedArray.push(convertChassisToJsObject(chassis)))
     return convertedArray;
+}
+
+const getHue = (id) => {
+    return id % 360;
 }

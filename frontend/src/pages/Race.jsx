@@ -27,7 +27,6 @@ const Race = () => {
             rotate={90 * index}
         />
     )
-    console.log(testCarsComponents)
 
 
     const [waitForPlayers, isRoomLoading, error] = useFetching(async () => {

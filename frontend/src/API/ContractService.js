@@ -1,6 +1,5 @@
 export default class ContractService {
 
-
     static contract;
 
     static async getUserAddress() {

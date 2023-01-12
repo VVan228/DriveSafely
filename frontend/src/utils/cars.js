@@ -9,7 +9,7 @@ const images = importAll(require.context('../images/cars', false, /\.(png|jpe?g|
 const useLogging = false;
 
 const getCarImage = (vin) => {
-    let sum = vin.toString().split('').reduce(function(a, b) {
+    let sum = vin.toString().split('').reduce(function (a, b) {
         return +a + +b;
     })
     return images[sum % 8]
@@ -37,7 +37,7 @@ export default class Car {
 
 }
 
-export const convertCarToJsObject = async (car) => {
+export const convertCarToJsObject = (car) => {
     /*
        0 - модель
        1 - vin
@@ -56,11 +56,11 @@ export const convertCarToJsObject = async (car) => {
     return carObject
 }
 
-export const convertCarsToJsObject = async (carsArray) => {
+export const convertCarsToJsObject = (carsArray) => {
     // console.log(carsArray)
     let convertedArray = []
     for (const car of carsArray) {
-        let convertedCar = await convertCarToJsObject(car)
+        let convertedCar = convertCarToJsObject(car)
         convertedArray.push(convertedCar)
     }
     useLogging && console.log("Converted array:", convertedArray)
@@ -68,26 +68,24 @@ export const convertCarsToJsObject = async (carsArray) => {
 }
 
 
-
-
 export const getDummyCars = (length) => {
 
-        let dummyCars = []
-        for (let i = 0; i < length; i++) {
-            dummyCars.push(new Car(
-                    getDummyName(faker.vehicle.vehicle()), //название
+    let dummyCars = []
+    for (let i = 0; i < length; i++) {
+        dummyCars.push(new Car(
+                getDummyName(faker.vehicle.vehicle()), //название
                 `${getRandomInt(100000000, 999999999)}`, //vin
                 getRandomInt(100000000, 999999999), //id двигателя
                 getRandomInt(100000000, 999999999), //id шасси
                 getRandomInt(1, 100), //уровень
-                getRandomInt(0, 9999999), //пробег
+                getRandomInt(0, 100000), //пробег
                 getRandomInt(0, 90), //количество побед
                 getRandomInt(0, 90),
-                    i),//количество поражений
-                //id
-            )
-        }
-        return dummyCars
+                i),//количество поражений
+            //id
+        )
+    }
+    return dummyCars
 }
 
 
@@ -121,7 +119,7 @@ export const addZerosToId = (id, targetLength) => {
     }
     if (id.length < targetLength) {
         let resId = "";
-        for (let i=0; i<targetLength - id.length; i++) {
+        for (let i = 0; i < targetLength - id.length; i++) {
             resId += '0'
         }
         return resId + id;
@@ -129,7 +127,7 @@ export const addZerosToId = (id, targetLength) => {
 }
 
 export const getLevelUpCost = (currentLevel) => {
-    return (parseInt(currentLevel)/10 + 1) * 0.001
+    return (parseInt(parseInt(currentLevel) / 10) + 1) * 0.001
 }
 
 export const getUniqueCarImage = (car) => {
@@ -147,4 +145,26 @@ export const getCarsOnLevel = (cars, minLevel) => {
         if (car.level >= minLevel) newCars.push(car)
     })
     return newCars
+}
+
+export const getCarRarity = (car) => {
+    return ((car.mileage + 1) * 100 / 10000) * car.level * 100
+}
+
+export const getCarRarityColor = (car) => {
+    let rarity = getCarRarity(car)
+    if (rarity < 20) return "#b1b6bc"
+    else if (rarity < 40) return "#83c258"
+    else if (rarity < 60) return "#46abf5"
+    else if (rarity < 80) return "#826ed4"
+    else return "#ECA553"
+}
+
+export const getCarRarityName = (car) => {
+    let rarity = getCarRarity(car)
+    if (rarity < 20) return "Обычный"
+    else if (rarity < 40) return "Необычный"
+    else if (rarity < 60) return "Редкий"
+    else if (rarity < 80) return "Эпический"
+    else return "Легендарный"
 }

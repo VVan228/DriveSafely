@@ -40,6 +40,11 @@
     padding: 5px;
     width: 4em;
     height: 4em;
+    transition: .3s;
+}
+
+.toggleButton:hover {
+    transform: scale(1.2);
 }
 
 .worldImageContainer {

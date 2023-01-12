@@ -2,10 +2,10 @@ import React from 'react';
 import PostItem from "./PostItem";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 
-const PostList = ({posts, title, remove, page, totalPages}) => {
+const PostList = ({posts, title, remove, page, totalPages, style}) => {
     return (
         posts.length != 0 ?
-            <div>
+            <div style={style}>
                 <div className="row d-flex justify-content-end"><span className="col-auto mt-5 text-muted">Страница {page} из {totalPages}</span></div>
                 <h1 className="text-center mt-5 text-light">{title}:</h1>
                 <TransitionGroup>
