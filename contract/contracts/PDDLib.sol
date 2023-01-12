@@ -42,10 +42,10 @@ library PDDLib{
         (mainRoad1, roomDNA) = getNextDnaValue(roomDNA);
         uint mainRoad2;
         (mainRoad2, roomDNA) = getNextDnaValue(roomDNA);
-        uint[30] carIndexToRoadIndex;
-        uint[30] carIndexToDirection;
-        uint[4][30] roadCarsIndices;
-        uint[4] roadNumCars;
+        uint[30] memory carIndexToRoadIndex;
+        uint[30] memory carIndexToDirection;
+        uint[4][30] memory roadCarsIndices;
+        uint[4] memory roadNumCars;
         uint carsDirections = roomDNA;
         for(uint i=0; i<answer.length; i++){
             uint carStart;
@@ -128,7 +128,7 @@ library PDDLib{
     function isMainRoad(uint _mainRoad1, uint _mainRoad2, uint _road) private pure returns(bool){
         return _road==_mainRoad1 || _road==_mainRoad2;
     }
-    function getNextDnaValue(uint _dna) internal returns(uint value, uint dna){
+    function getNextDnaValue(uint _dna) internal pure returns(uint value, uint dna){
         value = _dna % 10;
         dna = _dna / 10;
     }
