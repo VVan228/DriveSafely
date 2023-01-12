@@ -20,7 +20,7 @@ contract('PDDLib', (accounts) => {
         c = await instance.commitAnswer(room.id, ans, { from: accounts[0] });
         // console.log(c);
 
-        c = await instance.commitAnswer(room.id, ans, { from: accounts[0] });
+        // c = await instance.commitAnswer(room.id, ans, { from: accounts[0] });
         // console.log(c);
 
     });
@@ -44,7 +44,7 @@ contract('PDDLib', (accounts) => {
         const instance = await PDDLibTest.deployed();
 
 
-        let c = await instance.generate.call(0, 3, "asddsa");
+        let c = await instance.generateRoom(0, 3, "asddsa");
 
         console.log(web3.utils.BN(c).toString())
 
