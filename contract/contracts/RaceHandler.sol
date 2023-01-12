@@ -8,7 +8,6 @@ import "./CarFactory.sol";
 contract RaceHandler is CarHelper{
     struct Cross{
         uint playersNeeded;
-        uint roadsNum;
         uint crossId;
     }
 
@@ -54,11 +53,11 @@ contract RaceHandler is CarHelper{
     uint roomsCount;
 
     constructor(){
-        crosses.push(Cross(4,4,0));
-        crosses.push(Cross(3,4,0));
-        crosses.push(Cross(2,4,0));
-        crosses.push(Cross(3,3,1));
-        crosses.push(Cross(2,3,1));
+        // crosses.push(Cross(4,4,0));
+        // crosses.push(Cross(3,4,0));
+        // crosses.push(Cross(2,4,0));
+        // crosses.push(Cross(3,3,1));
+        // crosses.push(Cross(2,3,1));
         roomsCount = 1;
     }
 
@@ -99,13 +98,16 @@ contract RaceHandler is CarHelper{
             return;
         }
         uint id = roomsCount++;
-        uint crossNum = block.timestamp%crosses.length;
+        Cross memory cr = Cross(
+            block.timestamp%5 + 2,
+            block.timestamp%2
+        );
         playersToRooms[msg.sender] = id;
         openedRooms.push(OpenedRoom(
             id,
             1,
             cars[carId].carLevel/10+1,
-            crosses[crossNum]
+            cr
         ));
     }
 
