@@ -8,4 +8,7 @@ contract PDDLibTest{
         bool right = PDDLib.isCorrectAnswer(roomDNA, answer);
         return right;
     }
+    function generateRoom(uint crossId, uint numPlayers, string memory randomStr) public view returns(uint){
+        return PDDLib.generateRoom(crossId, numPlayers, randomStr);
+    }
 }

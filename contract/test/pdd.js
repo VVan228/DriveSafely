@@ -24,17 +24,26 @@ contract('PDDLib', (accounts) => {
 
     it('carRacing test', async () => {
         const instance = await PDDLibTest.deployed();
-        playerCount = 4;
-        let dna = 12121134121;
-        let k=12121134121
-        for(let i =0;i<playerCount*2+2;i++){
-            k=k/10;
-        }
-        assert.isTrue(k>0 && k<10);
-        let c = await instance.commitAnswerTest(dna, [3,2,1,4], {from:accounts[0]});
-        let c2 = await instance.commitAnswerTest(dna, [2,3,1,4], {from:accounts[1]});
-        console.log(c);
-        let solution = false;
+        
+        // let dna = 12121134121;
+        let dna = 3311312;
+        
+        // let c = await instance.commitAnswerTest.call(dna, [2,3,1,0], {from:accounts[0]});
+        // let c2 = await instance.commitAnswerTest.call(dna, [3,2,1,0], {from:accounts[1]});
+        let c = await instance.commitAnswerTest.call(dna, [0,1]);
+        let c2 = await instance.commitAnswerTest.call(dna, [1,0]);
+        
+        console.log(c)
+        console.log(c2)
+    });
 
+    it('carRacing test', async () => {
+        const instance = await PDDLibTest.deployed();
+        
+
+        let c = await instance.generate.call(0, 3, "asddsa");
+        
+        console.log(web3.utils.BN(c).toString())
+        
     });
 });

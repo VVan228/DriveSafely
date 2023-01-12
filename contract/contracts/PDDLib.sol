@@ -42,8 +42,10 @@ library PDDLib{
         (crossId, roomDNA) = getNextDnaValue(roomDNA);
         uint mainRoad1;
         (mainRoad1, roomDNA) = getNextDnaValue(roomDNA);
+        mainRoad1--;
         uint mainRoad2;
         (mainRoad2, roomDNA) = getNextDnaValue(roomDNA);
+        mainRoad2--;
         uint[30] memory carIndexToRoadIndex;
         uint[30] memory carIndexToDirection;
         uint[4][30] memory roadCarsIndices;
