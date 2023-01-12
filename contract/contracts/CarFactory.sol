@@ -4,7 +4,7 @@ import "../node_modules/@openzeppelin/contracts/utils/Strings.sol";
 import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 import "./FuelStationFactory.sol";
 
-/// @title car's factory
+/// @title create tokens and save data
 contract CarFactory is Ownable, FuelStationFactory {
 
     uint defaultHorsePowersLow;

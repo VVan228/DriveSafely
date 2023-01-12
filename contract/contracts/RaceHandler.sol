@@ -5,7 +5,7 @@ import "./PDDLib.sol";
 import "./CarHelper.sol";
 import "./CarFactory.sol";
 
-/// @title race
+/// @title An auxiliary contract that implements the interaction with the rooms and connects them with the functions of the main game mechanics
 contract RaceHandler is CarHelper{
     struct Cross{
         uint playersNeeded;
@@ -56,7 +56,9 @@ contract RaceHandler is CarHelper{
     OpenedRoom[] public openedRooms;
     mapping(uint => StartedRoom) public idToStartedRooms;
 
-    /// 
+    /// search room for competition
+    /// @param carId car id
+    /// @dev if exist appropriate room for current user, user start competition in this room, else add new room
     function findRoom(uint carId) public onlyOwnerOfCar(carId){
         bool foundRoom = false;
         for(uint i = 0; i<openedRooms.length; i++){
@@ -98,13 +100,17 @@ contract RaceHandler is CarHelper{
         ));
     }
 
+    /// get closed room
+    /// @param roomId room id
+    /// @return Answer[] memory
     function getClosedRoom(uint roomId) public view returns(Answer[] memory){
         require(idToStartedRooms[roomId].closed, "room not closed");
         return idToStartedRooms[roomId].answers;
     }
 
-
-
+    /// commit ans
+    /// @param roomId room id
+    /// @param answer ?
     function commitAnswer(uint roomId, uint[] memory answer) public{
         require(playersToRooms[msg.sender]==roomId, "not your room");
 
