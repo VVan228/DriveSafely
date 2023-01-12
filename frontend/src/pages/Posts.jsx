@@ -7,7 +7,7 @@ import {usePosts} from "../hooks/usePosts";
 import MyButton from "../components/UI/button/MyButton";
 import MyModal from "../components/UI/modal/MyModal";
 import PostForm from "../components/PostForm";
-import PostFilter from "../components/PostFilter";
+import CarsFilter from "../components/CarsFilter";
 import Loader from "../components/UI/loader/Loader";
 import PostList from "../components/PostList";
 import Pagination from "../components/UI/pagination/Pagination";
@@ -71,7 +71,7 @@ function Posts() {
             <MyModal visible={modal} setVisible={setModal}>
                 <PostForm create={createPost}/>
             </MyModal>
-            <PostFilter filter={filter} setFilter={setFilter} limit={limit} setLimit={setLimit}/>
+            <CarsFilter filter={filter} setFilter={setFilter} limit={limit} setLimit={setLimit}/>
             {postError && <h1>Произошла ошибка ${postError}</h1>}
 
             <PostList remove={removePost} posts={sortedAndSearchedPosts} title="Посты" page={page}

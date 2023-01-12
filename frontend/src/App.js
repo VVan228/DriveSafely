@@ -15,24 +15,12 @@ function App() {
 
     const [provider, setProvider] = useState(new ethers.providers.Web3Provider(window.ethereum))
     const [signer, setSigner] = useState(provider.getSigner())
-    const [contract, setContract] = useState(new ethers.Contract(Constants.CONTRACT_ADDRESS, Constants.ABI, signer))
-
-    // const updateEthers = () => {
-    //     let tempProvider = new ethers.providers.Web3Provider(window.ethereum)
-    //     setProvider(tempProvider)
-    //     console.log("provider: ", provider)
-    //
-    //     let tempSigner = tempProvider.getSigner();
-    //     setSigner(tempSigner)
-    //     console.log("signer: ", signer)
-    //
-    //     let tempContract = new ethers.Contract(Constants.CONTRACT_ADDRESS, Constants.ABI, tempSigner);
-    //     setContract(tempContract)
-    //     console.log("contract: ", contract)
-    // }
+    const [tokenContract, setTokenContract] = useState(new ethers.Contract(Constants.TOKEN_OWNERSHIP_ADDRESS, Constants.TOKEN_OWNERSHIP_ABI, signer))
+    const [engineContract, setEngineContract] = useState(new ethers.Contract(Constants.ENGINE_OWNERSHIP_ADDRESS, Constants.ENGINE_OWNERSHIP_ABI, signer))
+    const [chassisContract, setChassisContract] = useState(new ethers.Contract(Constants.CHASSIS_OWNERSHIP_ADDRESS, Constants.CHASSIS_OWNERSHIP_ABI, signer))
+    const [carContract, setCarContract] = useState(new ethers.Contract(Constants.CAR_OWNERSHIP_ADDRESS, Constants.CAR_OWNERSHIP_ABI, signer))
 
     useEffect(() => {
-        // updateEthers()
         if (localStorage.getItem('auth')) {
             setIsAuth(true)
         }
@@ -47,7 +35,11 @@ function App() {
             isAuth,
             setIsAuth,
             isLoading,
-            contract
+            tokenContract,
+            carContract,
+            engineContract,
+            chassisContract
+            // contract2
         }}>
             <BrowserRouter>
                 {/*<Navbar/>*/}

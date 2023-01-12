@@ -151,6 +151,20 @@
     "constant": true
   },
   {
+    "inputs": [],
+    "name": "carsForSaleCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -174,6 +188,20 @@
         "internalType": "uint32",
         "name": "resource",
         "type": "uint32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [],
+    "name": "chassisForSaleCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -456,6 +484,20 @@
     "constant": true
   },
   {
+    "inputs": [],
+    "name": "enginesForSaleCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -482,6 +524,31 @@
         "internalType": "address",
         "name": "",
         "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_fuelStatonId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_counts",
+        "type": "uint8"
+      }
+    ],
+    "name": "getCapacityUpgradeCost",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -637,6 +704,51 @@
   {
     "inputs": [
       {
+        "internalType": "uint256",
+        "name": "_engineId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getConsumtionUpgradeCost",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_chassisId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_counts",
+        "type": "uint8"
+      }
+    ],
+    "name": "getDurabilityUpgradeCost",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "_owner",
         "type": "address"
@@ -712,6 +824,76 @@
         "internalType": "struct FuelStationFactory.FuelStation",
         "name": "",
         "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_engineId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_counts",
+        "type": "uint8"
+      }
+    ],
+    "name": "getHorsePowersUpgradeCost",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_carId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getLevelUpCost",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_fuelStatonId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_counts",
+        "type": "uint8"
+      }
+    ],
+    "name": "getProductionPerHourUpgradeCost",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -811,11 +993,6 @@
           },
           {
             "internalType": "uint256",
-            "name": "roadsNum",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
             "name": "crossId",
             "type": "uint256"
           }
@@ -902,37 +1079,6 @@
     "stateMutability": "view",
     "type": "function",
     "constant": true
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "chassisId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "price",
-        "type": "uint256"
-      }
-    ],
-    "name": "putChassisOnMarketplace",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "chassisId",
-        "type": "uint256"
-      }
-    ],
-    "name": "removeChassisFromMarketplace",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
   },
   {
     "inputs": [],
@@ -1068,11 +1214,6 @@
         "internalType": "uint256",
         "name": "_engineId",
         "type": "uint256"
-      },
-      {
-        "internalType": "uint8",
-        "name": "_counts",
-        "type": "uint8"
       }
     ],
     "name": "upgradeConsumtion",
@@ -1142,6 +1283,29 @@
     "inputs": [
       {
         "internalType": "address",
+        "name": "_chassisOwnership",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_engineOwnership",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_carOwnership",
+        "type": "address"
+      }
+    ],
+    "name": "init",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
         "name": "_owner",
         "type": "address"
       }
@@ -1198,28 +1362,8 @@
     ],
     "name": "transferCarFrom",
     "outputs": [],
-    "stateMutability": "payable",
-    "type": "function",
-    "payable": true
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_approved",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_tokenId",
-        "type": "uint256"
-      }
-    ],
-    "name": "approveCar",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function",
-    "payable": true
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
     "inputs": [
@@ -1281,28 +1425,8 @@
     ],
     "name": "transferEngineFrom",
     "outputs": [],
-    "stateMutability": "payable",
-    "type": "function",
-    "payable": true
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_approved",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_tokenId",
-        "type": "uint256"
-      }
-    ],
-    "name": "approveEngine",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function",
-    "payable": true
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
     "inputs": [
@@ -1364,27 +1488,223 @@
     ],
     "name": "transferChassisFrom",
     "outputs": [],
-    "stateMutability": "payable",
-    "type": "function",
-    "payable": true
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "_approved",
-        "type": "address"
+        "internalType": "uint256",
+        "name": "chassisId",
+        "type": "uint256"
       },
       {
         "internalType": "uint256",
-        "name": "_tokenId",
+        "name": "price",
         "type": "uint256"
       }
     ],
-    "name": "approveChassis",
+    "name": "putChassisOnMarketplace",
     "outputs": [],
-    "stateMutability": "payable",
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "chassisId",
+        "type": "uint256"
+      }
+    ],
+    "name": "removeChassisFromMarketplace",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "engineId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      }
+    ],
+    "name": "putEngineOnMarketplace",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "engineId",
+        "type": "uint256"
+      }
+    ],
+    "name": "removeEngineFromMarketplace",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "carId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      }
+    ],
+    "name": "putCarOnMarketplace",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "carId",
+        "type": "uint256"
+      }
+    ],
+    "name": "removeCarFromMarketplace",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getCarsForSale",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "model",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "vin",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "engineId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "chassisId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint8",
+            "name": "carLevel",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint256",
+            "name": "mileage",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "winCountOnCurrentLevel",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "lossCountOnCurrentLevel",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct CarFactory.Car[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function",
-    "payable": true
+    "constant": true
+  },
+  {
+    "inputs": [],
+    "name": "getEnginesForSale",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint16",
+            "name": "horsePowers",
+            "type": "uint16"
+          },
+          {
+            "internalType": "uint8",
+            "name": "consumtion",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct CarFactory.Engine[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [],
+    "name": "getChassisForSale",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint32",
+            "name": "durability",
+            "type": "uint32"
+          },
+          {
+            "internalType": "uint32",
+            "name": "resource",
+            "type": "uint32"
+          }
+        ],
+        "internalType": "struct CarFactory.Chassis[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
   }
 ]

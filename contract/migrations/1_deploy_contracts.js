@@ -8,6 +8,7 @@ const TokenOwnership = artifacts.require("./TokenOwnership.sol");
 const CarOwnership = artifacts.require("./CarOwnership.sol");
 const ChassisOwnership = artifacts.require("./ChassisOwnership.sol");
 const EngineOwnership = artifacts.require("./EngineOwnership.sol");
+const PDDLibTest = artifacts.require("./PDDLibTest.sol");
 
 async function doDeploy(deployer, network) {
   // await deployer.deploy(FuelStationFactory);
@@ -33,6 +34,10 @@ async function doDeploy(deployer, network) {
   let to = await TokenOwnership.deployed();
   await deployer.link(PDDLib, TokenOwnership);
 
+  await deployer.link(PDDLib, PDDLibTest);
+  await deployer.deploy(PDDLibTest);
+  
+
   await c.init(to.address);
   await ch.init(to.address);
   await e.init(to.address);
@@ -40,11 +45,6 @@ async function doDeploy(deployer, network) {
   
 };
 
-async function deployOwnerships(){
-  await deployer.deploy(CarOwnership);
-  await deployer.deploy(ChassisOwnership);
-  await deployer.deploy(EngineOwnership);
-}
 
 module.exports = (deployer, network) => {
   deployer.then(async () => {

@@ -16,7 +16,6 @@ contract('Upgrading', (accounts) => {
         oldBalance = await web3.eth.getBalance(aces[0])
         await instance.upgradeCapacity(0, counts, { from: aces[1], value: sum.toString() });
         newBalance = await web3.eth.getBalance(aces[0])
-        console.log(oldBalance + " " + newBalance)
         assert.equal(parseInt(newBalance) - parseInt(oldBalance), parseInt(sum));
     });
     /*

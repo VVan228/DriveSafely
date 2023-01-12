@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Chasisses = ({...props}) => {
+const OwnerChassis = ({...props}) => {
     return (
         <div>
             тут шасси
@@ -8,4 +8,4 @@ const Chasisses = ({...props}) => {
     );
 };
 
-export default Chasisses;
+export default OwnerChassis;

@@ -4,6 +4,8 @@ pragma solidity ^0.8.13;
 import "./PDDLib.sol";
 import "./CarHelper.sol";
 import "./CarFactory.sol";
+import "../node_modules/@openzeppelin/contracts/utils/Strings.sol";
+
 
 /// @title An auxiliary contract that implements the interaction with the rooms and connects them with the functions of the main game mechanics
 contract RaceHandler is CarHelper{
@@ -34,6 +36,7 @@ contract RaceHandler is CarHelper{
         uint playersEntered;
         uint world;
         Cross cross;
+        uint roomSeed;
     }
     struct StartedRoom{
         uint numberPlayers;
@@ -82,8 +85,12 @@ contract RaceHandler is CarHelper{
             playersToRooms[msg.sender] = openedRooms[i].id;
             playersToCars[msg.sender] = carId;
             openedRooms[i].playersEntered++;
+            openedRooms[i].roomSeed += cars[carId].vin/2;
             if(openedRooms[i].playersEntered == openedRooms[i].cross.playersNeeded){
-                uint roomDNA = PDDLib.generateRoom(openedRooms[i].cross.crossId, openedRooms[i].cross.playersNeeded);
+                uint roomDNA = PDDLib.generateRoom(
+                    openedRooms[i].cross.crossId,
+                    openedRooms[i].cross.playersNeeded,
+                    Strings.toString(openedRooms[i].roomSeed));
                 
                 StartedRoom storage ss = idToStartedRooms[openedRooms[i].id];
                 ss.numberPlayers = openedRooms[i].cross.playersNeeded;
@@ -112,7 +119,8 @@ contract RaceHandler is CarHelper{
             id,
             1,
             cars[carId].carLevel/10+1,
-            cr
+            cr,
+            cars[carId].vin/2
         ));
     }
 
@@ -124,6 +132,8 @@ contract RaceHandler is CarHelper{
         require(idToStartedRooms[roomId].closed, "room not closed");
         return idToStartedRooms[roomId].answers;
     }
+
+
 
 
     /// commit ans
