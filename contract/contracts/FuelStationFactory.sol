@@ -20,6 +20,8 @@ contract FuelStationFactory{
 
     mapping (uint => address) public fuelStationToOwner;
 
+    /// create fuel station
+    /// @dev add new fuel station to list
     function createFuelStation() public{
         address ad = msg.sender;
         uint id = stations.length;
