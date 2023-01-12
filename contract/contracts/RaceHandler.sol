@@ -5,6 +5,7 @@ import "./PDDLib.sol";
 import "./CarHelper.sol";
 import "./CarFactory.sol";
 
+/// @title race
 contract RaceHandler is CarHelper{
     struct Cross{
         uint playersNeeded;
@@ -55,6 +56,7 @@ contract RaceHandler is CarHelper{
     OpenedRoom[] public openedRooms;
     mapping(uint => StartedRoom) public idToStartedRooms;
 
+    /// 
     function findRoom(uint carId) public onlyOwnerOfCar(carId){
         bool foundRoom = false;
         for(uint i = 0; i<openedRooms.length; i++){

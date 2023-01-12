@@ -4,6 +4,7 @@ import "../node_modules/@openzeppelin/contracts/utils/Strings.sol";
 import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 import "./FuelStationFactory.sol";
 
+/// @title car's factory
 contract CarFactory is Ownable, FuelStationFactory {
 
     uint defaultHorsePowersLow;
@@ -12,7 +13,7 @@ contract CarFactory is Ownable, FuelStationFactory {
     uint8 defaultConsumtion;
   
     uint defaultDurabilityLow;
-    uint defaultDurabilityUp; 
+    uint defaultDurabilityUp;
 
 
     struct Car {
@@ -71,6 +72,9 @@ contract CarFactory is Ownable, FuelStationFactory {
          chassis.push();
     }
 
+    /// creating car
+    /// @param model car model
+    /// @dev creating new car for user
     function createCar(string memory model) public {
         require(ownerCarCount[msg.sender] == 0);
 
@@ -87,7 +91,9 @@ contract CarFactory is Ownable, FuelStationFactory {
         ownerCarCount[msg.sender]++;
     }
 
-
+    /// default engine gineration создание дефолтного двигателя (при регистрации нового игрока)
+    /// @return id new engine
+    /// @dev new random engine
     function _generateDefaultEngine() private returns (uint){
         uint16 randHorsePowers = (uint16)(defaultHorsePowersLow + block.timestamp % (defaultHorsePowersUp - defaultHorsePowersLow));
         // uint16 randConsumtion = (uint16) (defaultConsumtionLow + block.timestamp % (defaultConsumtionUp - defaultConsumtionLow));
@@ -98,6 +104,9 @@ contract CarFactory is Ownable, FuelStationFactory {
         return id;
     }
 
+    /// default chassis gineration создание дефолтного шасси
+    /// @return id new chassis
+    /// @dev new random chassis
     function _generateDefaultChassis() private returns(uint) {
         uint32 randDurability = (uint32)(defaultDurabilityLow + block.timestamp % (defaultDurabilityUp - defaultDurabilityLow));
         uint id = chassisCounter++;
@@ -107,11 +116,19 @@ contract CarFactory is Ownable, FuelStationFactory {
         return id;
     }
 
+    /// customer car creation для владельца контракта (для продажи токенов на маркетплейсе)
+    /// @param _model car model
+    /// @param _horsePowers car horse powers
+    /// @param _consumtion car consumtion
+    /// @param  _durability car durability
+    /// @param  _carLevel car level
+    /// @param  _carPrice car price
+    /// @dev creation car for customer with different characteristics
     function createCustomCar(string memory _model, uint16 _horsePowers, uint8 _consumtion, uint32 _durability, uint8 _carLevel, uint _carPrice) external onlyOwner {
-        string memory key = string(abi.encodePacked(_model,Strings.toString(block.timestamp))); 
+        string memory key = string(abi.encodePacked(_model,Strings.toString(block.timestamp)));
         uint vin = uint(keccak256(abi.encodePacked((key))));
 
-        uint engineId = createCustomEngine(_horsePowers, _consumtion, 0); 
+        uint engineId = createCustomEngine(_horsePowers, _consumtion, 0);
         uint chassisId = createCustomChassis(_durability, 0);
 
         uint id = cars.length;
@@ -121,6 +138,11 @@ contract CarFactory is Ownable, FuelStationFactory {
         carToPrice[id] = _carPrice;
     }
 
+    /// customer engine creation
+    /// @param _horsePowers car horse powers
+    /// @param _consumtion car consumtion
+    /// @param _enginePrice car engine price
+    /// @return id new engine
     function createCustomEngine(uint16 _horsePowers, uint8 _consumtion, uint _enginePrice) public onlyOwner returns(uint){
         uint id = engineCounter++;
         engines.push(Engine(id, _horsePowers, _consumtion));
@@ -132,6 +154,10 @@ contract CarFactory is Ownable, FuelStationFactory {
         return id;
     }
 
+    /// customer chassis creation
+    /// @param _durability car durability
+    /// @param _chassisPrice chassis price
+    /// @return id new chassis
     function createCustomChassis(uint32 _durability, uint _chassisPrice) public onlyOwner returns(uint){
         uint id = chassisCounter++;
         chassis.push(Chassis(id, _durability, _durability));
