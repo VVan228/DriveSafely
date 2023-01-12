@@ -98,10 +98,11 @@ const OwnerCars = () => {
         return <h1>Произошла ошибка {carsError}</h1>
     } else if (!cars[currentCarIndex]) {
         console.log(`Waiting for cars to load from ${tokenContract.address.toString()}`)
-        return <Loader/>
-    } else if (cars.length == 0) {
         tokenContract.createCar(faker.vehicle.vehicle())
         tokenContract.createFuelStation()
+        return <Loader/>
+    } else if (cars.length == 0) {
+
     }
     return (
         isCarsLoading || isEnginesLoading || isChassisLoading

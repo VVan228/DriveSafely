@@ -9,6 +9,8 @@ import Marketplace from "../pages/Marketplace";
 import OwnerCars from "../pages/Inventory/OwnerCars";
 import Race from "../pages/Race";
 import CarPage from "../pages/CarPage";
+import RoomWaitingPage from "../pages/RoomWaitingPage";
+import BattleResult from "../pages/BattleResult";
 
 export const privateRoutes = [
     {path: '/about', component: <About/>, exact: true},
@@ -19,7 +21,9 @@ export const privateRoutes = [
     {path: '/marketplace', component: <Marketplace/>, exact: true},
     {path: '/posts/:id', component: <PostPage/>, exact: true},
     {path: '/cars/:id', component: <CarPage/>, exact: true},
-    {path: '/race', component: <Race/>, exact: true},
+    {path: '/race/:roomDNA/:roomID', component: <Race/>, exact: true},
+    {path: '/roomWaiting/:carId', component: <RoomWaitingPage/>, exact: true},
+    {path: '/raceResults/:roomID', component: <BattleResult/>, exact: true},
     {path: '*', component: <Login/>, exact: true},
 ]
 

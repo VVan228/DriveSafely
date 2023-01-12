@@ -1,10 +1,10 @@
 import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
 import classes from "./Pages.module.css";
-import background from "../images/game/background.png"
+import background1 from "../images/game/background.png"
 import background2 from "../images/game/background2.png"
 import {useFetching} from "../hooks/useFetching";
 import Loader from "../components/UI/loader/Loader";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {convertCarsToJsObject, getDummyCars} from "../utils/cars";
 import Car from "../components/Car";
 import {getCarPosition} from "../utils/race";
@@ -12,21 +12,15 @@ import {getRoomInfo} from "../utils/room";
 import {AuthContext} from "../context";
 import ContractService from "../API/ContractService";
 import Sign from "../components/Sign";
+import MyButton from "../components/UI/button/MyButton";
 
 const Race = () => {
 
-    const [windowWidth, setWindowWidth] = useState(0)
-    const [windowHeight, setWindowHeight] = useState(0)
-    const params = useParams()
+    const {roomDNA, roomID} = useParams()
     const [order, setOrder] = useState([])
-    // const {contract, isLoading} = useContext(AuthContext)
-    // const [roomDna, isRoomDnaLoading, roomDnaError] = useFetching(async () => {
-    //
-    //         let response = await contract.generateRoom()
-    //         useLogging && alert(`Got room:\n${response}`)
-    //         return response;
-    //     }
-    // )
+    const {tokenContract} = useContext(AuthContext)
+    const navigate = useNavigate()
+
     function onClickCar(index){
         console.log("++++", order, "++++")
         let newOrder = order
@@ -36,12 +30,12 @@ const Race = () => {
             setOrder(newOrder)
             let newCars = []
 
-            cars.map((car) =>
+            cars.map((car, index) =>
                 newCars.push(
                     <Car
                         index={car.props.index}
                         order={newOrder.indexOf(car.props.index)}
-                        car={testCars[0]}
+                        car={testCars[index]}
                         position={car.props.position}
                         width="5%"
                         height="8%"
@@ -53,35 +47,47 @@ const Race = () => {
             setCars(newCars)
             console.log(newOrder)
         }
-        function onClickClear(){
-            let newCars = []
-            cars.map((car) =>
-                newCars.push(
-                    <Car
-                        index={car.props.index}
-                        order={-1}
-                        car={testCars[0]}
-                        position={car.props.position}
-                        width="5%"
-                        height="8%"
-                        rotate={car.props.rotate}
-                        onClick={()=>onClickCar(car.props.index)}
-                    />
-                )
-            )
-            setCars(newCars)
-            setOrder([])
-            }
-
-            // setIsOrderShow(true);
     }
-    const roomInfo = getRoomInfo("112211334411131");
-    const roadType = Math.floor(Math.random() * 2)
-    const testCars = getDummyCars(Math.floor(Math.random() * ((roadType === 0 ? 5 : 4) - 2) + 2))
+
+    function onClickClear(){
+        let newCars = []
+        cars.map((car) =>
+            newCars.push(
+                <Car
+                    index={car.props.index}
+                    order={-1}
+                    car={testCars[0]}
+                    position={car.props.position}
+                    width="5%"
+                    height="8%"
+                    rotate={car.props.rotate}
+                    onClick={()=>onClickCar(car.props.index)}
+                />
+            )
+        )
+        setCars(newCars)
+        setOrder([])
+    }
+
+    const verifyAnswer = () => {
+        tokenContract.on("RoomClosed", (roomId) => {
+            let roomInfo = {
+                roomId: roomId,
+            };
+            console.log(roomInfo.roomDNA, roomInfo.roomId)
+            // navigate(`/race/${roomInfo.roomDNA}/${roomInfo.roomId}`)
+        });
+        console.log("order: ", typeof order, order)
+        tokenContract.commitAnswer(roomID, order)
+        navigate(`/raceResults/${roomID}`)
+    }
+
+    const roomInfo = getRoomInfo(roomDNA);
+    const testCars = getDummyCars(roomInfo.listOfCars.length)
     const testCarsComponents = roomInfo.listOfCars.map((car, index)=>
         <Car
             index={car.index}
-            car={testCars[0]}
+            car={testCars[index]}
             order={-1}
             position={car.position}
             width="5%"
@@ -103,30 +109,7 @@ const Race = () => {
     console.log(testCarsComponents)
 
 
-
-    const [waitForPlayers, isRoomLoading, error] = useFetching(async () => {
-        setTimeout(() => {
-            console.log("loaded")
-        }, 5000)
-    })
-
-    useEffect(() => {
-        waitForPlayers()
-        console.log(testCars)
-    }, [])
-
-    useEffect(() => {
-        window.addEventListener('resize', () => {
-            setWindowWidth(window.innerWidth)
-            setWindowHeight(window.innerHeight)
-        });
-    }, [])
-
-    // window.onresize(console.log("resized to", window.innerWidth, window.innerHeight))
-
     return (
-        isRoomLoading ?
-            <div className="h-100 w-100 d-flex align-items-center justify-content-center"><Loader/></div> :
             <div className={classes.raceBackground}>
                 <div style={{width: "100vw"}}>
                     <div className="position-absolute top-0 text-dark bg-light">
@@ -136,13 +119,26 @@ const Race = () => {
                         )}
                     </div>
 
-                    {/*<img src={roadType == 0 ? background : background2 } alt="" width="100%" style={{}}/>*/}
-                    {/*{testCarsComponents.map(testCar => testCar)}*/}
-
-                    <div style={{backgroundImage:  `url(${background})`, backgroundSize: "cover",
-                    backgroundPosition: "center", width: "100%", paddingTop:"80%", position: "relative"}}>
+                    <div style={{backgroundImage:  getRoomInfo(roomDNA) !== 0 ? `url(${background1})` : `url(${background2})`, backgroundSize: "cover",
+                        backgroundPosition: "center", width: "100%", paddingTop:"80%", position: "relative"}}>
                         {cars.map(testCar => testCar)}
                         {signs.map(testCar => testCar)}
+                    </div>
+
+                    <div className={classes.bottomRaceContainer}>
+                        <div>
+                            <MyButton
+                                onClick={() => {
+
+                                    onClickClear()
+                                }
+                                }
+                                color={"secondary"}>Сброс</MyButton>
+                        </div>
+
+                        <div>
+                            <MyButton color={"success"} onClick={() => verifyAnswer()}>Drive Safely!</MyButton>
+                        </div>
                     </div>
                 </div>
             </div>
