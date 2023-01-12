@@ -6,8 +6,9 @@ import Competitions from "../pages/Competitions";
 import Factory from "../pages/Factory";
 import Inventory from "../pages/Inventory/Inventory";
 import Marketplace from "../pages/Marketplace";
-import Cars from "../pages/Inventory/Cars";
+import OwnerCars from "../pages/Inventory/OwnerCars";
 import Race from "../pages/Race";
+import CarPage from "../pages/CarPage";
 
 export const privateRoutes = [
     {path: '/about', component: <About/>, exact: true},
@@ -17,6 +18,7 @@ export const privateRoutes = [
     {path: '/inventory', component: <Inventory/>, exact: true},
     {path: '/marketplace', component: <Marketplace/>, exact: true},
     {path: '/posts/:id', component: <PostPage/>, exact: true},
+    {path: '/cars/:id', component: <CarPage/>, exact: true},
     {path: '/race', component: <Race/>, exact: true},
     {path: '*', component: <Login/>, exact: true},
 ]

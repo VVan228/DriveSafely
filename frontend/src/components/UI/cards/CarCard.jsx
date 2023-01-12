@@ -4,7 +4,6 @@ import classes from "./Card.module.css";
 import MyButton from "../button/MyButton";
 
 const CarCard = (props) => {
-    console.log(props.car)
     return (
         <div className={classes.myCard}>
             <div className="d-flex justify-content-center flex-column align-items-center">
