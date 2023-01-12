@@ -40,11 +40,6 @@ async function doDeploy(deployer, network) {
   
 };
 
-async function deployOwnerships(){
-  await deployer.deploy(CarOwnership);
-  await deployer.deploy(ChassisOwnership);
-  await deployer.deploy(EngineOwnership);
-}
 
 module.exports = (deployer, network) => {
   deployer.then(async () => {
