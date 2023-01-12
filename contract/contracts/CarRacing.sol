@@ -41,7 +41,12 @@ contract CarRacing is RaceHandler{
     function startRace(uint _carId) external onlyOwnerOfCar(_carId) {
         uint8 durToNextCrossroad = 2 * (10 - cars[_carId].carLevel / 10);
 
-        require(_isEnoughFuel(_carId, durToNextCrossroad) && chassis[cars[_carId].chassisId].resource >= durToNextCrossroad);
+        require(playersToCars[msg.sender]==0, "car already in race");
+        require(cars[_carId].chassisId!=0, "no chassis");
+        require(cars[_carId].engineId!=0, "no engine");
+        require(_isEnoughFuel(_carId, durToNextCrossroad), "not enough fuel");
+        require(chassis[cars[_carId].chassisId].resource >= durToNextCrossroad, "resource");
+        
         // TODO
 
         chassis[cars[_carId].chassisId].resource -= durToNextCrossroad;

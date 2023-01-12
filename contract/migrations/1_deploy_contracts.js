@@ -16,13 +16,35 @@ async function doDeploy(deployer, network) {
   await deployer.deploy(PDDLib);
   // await deployer.link(PDDLib, CarRacing);
   // await deployer.deploy(CarRacing);
-  await deployer.link(PDDLib, TokenOwnership);
-  await deployer.deploy(TokenOwnership);
-
+  
+  // deployOwnerships().then(() =>{
+  //   return deployer.deploy(TokenOwnership, ChassisOwnership.address, EngineOwnership.address, CarFactory.address);
+  // });
   await deployer.deploy(CarOwnership);
   await deployer.deploy(ChassisOwnership);
   await deployer.deploy(EngineOwnership);
+
+  let c = await CarOwnership.deployed()
+  let ch = await ChassisOwnership.deployed();
+  let e = await EngineOwnership.deployed();
+  
+  // await deployer.deploy(TokenOwnership, ch.address, e.address, c.address);
+  await deployer.deploy(TokenOwnership);
+  let to = await TokenOwnership.deployed();
+  await deployer.link(PDDLib, TokenOwnership);
+
+  await c.init(to.address);
+  await ch.init(to.address);
+  await e.init(to.address);
+  await to.init(ch.address,e.address,c.address);
+  
 };
+
+async function deployOwnerships(){
+  await deployer.deploy(CarOwnership);
+  await deployer.deploy(ChassisOwnership);
+  await deployer.deploy(EngineOwnership);
+}
 
 module.exports = (deployer, network) => {
   deployer.then(async () => {

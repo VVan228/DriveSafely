@@ -8,6 +8,8 @@ import "../node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol";
 /// @title car's owner
 contract CarOwnership is ERC721, Ownable{
     TokenOwnership tokenOwnership;
+    mapping (uint => address) public carApprovals;
+
 
     constructor() ERC721("CarBucks", "CBX"){}
 
@@ -32,8 +34,8 @@ contract CarOwnership is ERC721, Ownable{
     /// get approved
     /// @param _tokenId token id
     /// @return address owner address
-    function getApproved(uint256 _tokenId) override public view returns(address) {
-        return tokenOwnership.carApprovals(_tokenId);
+     function getApproved(uint256 _tokenId) override public view returns(address) {
+        return carApprovals[_tokenId];
     }
 
     /// transfer token
@@ -44,6 +46,7 @@ contract CarOwnership is ERC721, Ownable{
         require(getApproved(_tokenId) == _to, "you didn't pay for the token!");
         tokenOwnership.transferCarFrom(_from, _to, _tokenId);
         emit Transfer(_from, _to, _tokenId);
+        carApprovals[_tokenId] = address(0);
     }
 
     /// buying token from marketplace
@@ -53,10 +56,14 @@ contract CarOwnership is ERC721, Ownable{
         require(msg.value == tokenOwnership.carToPrice(_tokenId), "val wrong");
         require(ownerOf(_tokenId) != msg.sender, "cant buy yours");
 
-        tokenOwnership.approveCar(msg.sender, _tokenId);
+        approveDeal(msg.sender, _tokenId);
         emit Approval(ownerOf(_tokenId), msg.sender, _tokenId);
 
         payable(ownerOf(_tokenId)).transfer(msg.value);
         transferFrom(ownerOf(_tokenId), msg.sender, _tokenId);
+    }
+    
+    function approveDeal(address to, uint tokenId) private{
+        carApprovals[tokenId] = to;
     }
 }
