@@ -29,8 +29,8 @@ contract RaceHandler is CarHelper{
         5120000000000000
     ];
     
-    mapping(address => uint) playersToRooms;
-    mapping(address => uint) playersToCars;
+    mapping(address => uint) public playersToRooms;
+    mapping(address => uint) public playersToCars;
     struct OpenedRoom{
         uint id;
         uint playersEntered;
@@ -70,20 +70,21 @@ contract RaceHandler is CarHelper{
 
     OpenedRoom[] public openedRooms;
     mapping(uint => StartedRoom) public idToStartedRooms;
+    mapping(uint => uint) public roomIdToRoomDNA;
 
 
     /// search room for competition
     /// @param carId car id
     /// @dev if exist appropriate room for current user, user start competition in this room, else add new room
-    function findRoom(uint carId) public onlyOwnerOfCar(carId){
+    function findRoom(address user, uint carId) public onlyOwnerOfCar(carId){
         bool foundRoom = false;
         for(uint i = 0; i<openedRooms.length; i++){
             if(cars[carId].carLevel/10+1 != openedRooms[i].world){
                 continue;
             }
             foundRoom = true;
-            playersToRooms[msg.sender] = openedRooms[i].id;
-            playersToCars[msg.sender] = carId;
+            playersToRooms[user] = openedRooms[i].id;
+            playersToCars[user] = carId;
             openedRooms[i].playersEntered++;
             openedRooms[i].roomSeed += cars[carId].vin%100;
             if(openedRooms[i].playersEntered == openedRooms[i].cross.playersNeeded){
@@ -99,6 +100,7 @@ contract RaceHandler is CarHelper{
                 ss.startTime = block.timestamp;
                 ss.curAnswer = 0;
                 ss.closed = false;
+                roomIdToRoomDNA[i] = roomDNA;
 
                 emit RoomFull(openedRooms[i].id, roomDNA);
                 delete openedRooms[i];

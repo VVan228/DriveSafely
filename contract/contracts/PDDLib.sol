@@ -4,7 +4,7 @@ pragma solidity ^0.8.13;
 library PDDLib{
 
 
-    function generateRoom(uint crossId, uint numPlayers, string memory randomStr) public view returns (uint roomDNA){
+    function generateRoom(uint crossId, uint numPlayers, string memory randomStr) public pure returns (uint roomDNA){
         uint randNonce = 0;
         uint mainRoad1;
         uint mainRoad2;
@@ -35,7 +35,7 @@ library PDDLib{
     function randMod(uint _modulus,uint _crossId, uint _randNonce, string memory randStr) private pure returns(uint) {
         return uint(keccak256(abi.encodePacked(randStr, _crossId, _randNonce))) % _modulus;
     }
-    function isCorrectAnswer(uint roomDNA, uint[] memory answer) public view returns (bool){
+    function isCorrectAnswer(uint roomDNA, uint[] memory answer) public pure returns (bool){
         uint crossId;
         (crossId, roomDNA) = getNextDnaValue(roomDNA);
         uint mainRoad1;

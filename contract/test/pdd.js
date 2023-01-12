@@ -10,7 +10,7 @@ contract('PDDLib', (accounts) => {
         const instance = await TokenOwnership.deployed();
         const instance2 = await PDDLibTest.deployed();
         await instance.createCar("Приора", { from: accounts[0] })
-        await instance.findRoom(0, { from: accounts[0] });
+        await instance.findRoom(accounts[0], 0, { from: accounts[0] });
         room = await instance.openedRooms(0);
         playerCount = room.cross.playersNeeded;
 
@@ -29,10 +29,11 @@ contract('PDDLib', (accounts) => {
             room.cross.crossId,
             room.cross.playersNeeded,
             String(roomDNA));
+        roomDNA = web3.utils.BN(roomDNA).toString()
 
         //console.log(roomDNA)
         for (var i = 1; i < playerCount; i++) {
-            await instance.findRoom(i, { from: accounts[i] });
+            await instance.findRoom(accounts[i], i, { from: accounts[i] });
         }
         
         res = []

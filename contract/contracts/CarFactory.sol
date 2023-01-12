@@ -91,6 +91,7 @@ contract CarFactory is Ownable, FuelStationFactory {
 
         uint id = cars.length;
         cars.push(Car(model, vin, engineId, chassisId, 1, 0, 0, 0, id));
+        
         carToOwner[id] = msg.sender;
         ownerCarCount[msg.sender]++;
     }

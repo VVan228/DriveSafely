@@ -48,6 +48,7 @@ contract CarRacing is RaceHandler{
         require(chassis[cars[_carId].chassisId].resource >= durToNextCrossroad, "resource");
         
         // TODO
+        findRoom(msg.sender, _carId);
 
         chassis[cars[_carId].chassisId].resource -= durToNextCrossroad;
         cars[_carId].mileage += durToNextCrossroad;
