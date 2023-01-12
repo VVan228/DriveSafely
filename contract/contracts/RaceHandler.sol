@@ -5,14 +5,27 @@ import "./PDDLib.sol";
 import "./CarHelper.sol";
 import "./CarFactory.sol";
 
+/// @title An auxiliary contract that implements the interaction with the rooms and connects them with the functions of the main game mechanics
 contract RaceHandler is CarHelper{
     struct Cross{
         uint playersNeeded;
-        uint roadsNum;
         uint crossId;
     }
 
     Cross[] crosses;
+
+    uint[] levelToReward = [
+        10000000000000,
+        20000000000000,
+        40000000000000,
+        80000000000000,
+        160000000000000,
+        320000000000000,
+        640000000000000,
+        1280000000000000,
+        2560000000000000,
+        5120000000000000
+    ];
     
     mapping(address => uint) playersToRooms;
     mapping(address => uint) playersToCars;
@@ -41,11 +54,11 @@ contract RaceHandler is CarHelper{
     uint roomsCount;
 
     constructor(){
-        crosses.push(Cross(4,4,0));
-        crosses.push(Cross(3,4,0));
-        crosses.push(Cross(2,4,0));
-        crosses.push(Cross(3,3,1));
-        crosses.push(Cross(2,3,1));
+        // crosses.push(Cross(4,4,0));
+        // crosses.push(Cross(3,4,0));
+        // crosses.push(Cross(2,4,0));
+        // crosses.push(Cross(3,3,1));
+        // crosses.push(Cross(2,3,1));
         roomsCount = 1;
     }
 
@@ -55,6 +68,10 @@ contract RaceHandler is CarHelper{
     OpenedRoom[] public openedRooms;
     mapping(uint => StartedRoom) public idToStartedRooms;
 
+
+    /// search room for competition
+    /// @param carId car id
+    /// @dev if exist appropriate room for current user, user start competition in this room, else add new room
     function findRoom(uint carId) public onlyOwnerOfCar(carId){
         bool foundRoom = false;
         for(uint i = 0; i<openedRooms.length; i++){
@@ -86,23 +103,32 @@ contract RaceHandler is CarHelper{
             return;
         }
         uint id = roomsCount++;
-        uint crossNum = block.timestamp%crosses.length;
+        Cross memory cr = Cross(
+            block.timestamp%5 + 2,
+            block.timestamp%2
+        );
         playersToRooms[msg.sender] = id;
         openedRooms.push(OpenedRoom(
             id,
             1,
             cars[carId].carLevel/10+1,
-            crosses[crossNum]
+            cr
         ));
     }
 
+    /// get closed room
+    /// @param roomId room id
+    /// @return Answer[] memory list with player response, player, player car and response time
+    /// @dev called after receiving the event about sending the last response to the room
     function getClosedRoom(uint roomId) public view returns(Answer[] memory){
         require(idToStartedRooms[roomId].closed, "room not closed");
         return idToStartedRooms[roomId].answers;
     }
 
 
-
+    /// commit ans
+    /// @param roomId room id
+    /// @param answer ?
     function commitAnswer(uint roomId, uint[] memory answer) public{
         require(playersToRooms[msg.sender]==roomId, "not your room");
 
@@ -119,6 +145,20 @@ contract RaceHandler is CarHelper{
             idToStartedRooms[roomId].closed = true;
             delete playersToRooms[msg.sender];
             delete playersToCars[msg.sender];
+
+            //
+            uint numCorrectAnswers = 0;
+            for(uint i = 0; i<idToStartedRooms[roomId].numberPlayers; i++){
+                if(idToStartedRooms[roomId].answers[i].correct){
+                    numCorrectAnswers++;
+                }
+            }
+            if(numCorrectAnswers==0){
+                return;
+            }
+            if(numCorrectAnswers==1){
+                //payable(idToStartedRooms[roomId].answers[0].player).transfer(1000);
+            }
         }
     }
 }

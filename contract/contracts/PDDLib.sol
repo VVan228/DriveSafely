@@ -13,6 +13,7 @@ library PDDLib{
         mainRoad1 = randMod(4 - crossId, crossId, randNonce) + 1;
         randNonce++;
         mainRoad2 = (mainRoad1 - 1 + randMod(3 - crossId, crossId, randNonce))%4 + 1;
+
         randNonce++;
 
         for(uint i=0; i<numPlayers; i++){
@@ -34,6 +35,7 @@ library PDDLib{
 
     function randMod(uint _modulus,uint _crossId, uint _randNonce) private pure returns(uint) {
         return uint(keccak256(abi.encodePacked(block.timestamp, _crossId, _randNonce))) % _modulus;
+
     }
     function isCorrectAnswer(uint roomDNA, uint[] memory answer) public view returns (bool){
         uint crossId;
@@ -70,11 +72,13 @@ library PDDLib{
             if(carIndexToDirection[answer[i]] == 0){
                 if(roadNextCar[(myRoadIndex+2)%4] != roadNumCars[(myRoadIndex+2)%4] && carIndexToDirection[roadCarsIndices[(myRoadIndex+2)%4][roadNextCar[(myRoadIndex+2)%4]]]==2){
                     if(!isMainRoad(mainRoad1,mainRoad2,myRoadIndex) && isMainRoad((mainRoad1,mainRoad2, myRoadIndex+2)%4)){
+
                         return false;
                     }
                     continue;
                 }
                 if(roadNextCar[(myRoadIndex+3)%4] != roadNumCars[(myRoadIndex+3)%4] && carIndexToDirection[roadCarsIndices[(myRoadIndex+3)%4][roadNextCar[(myRoadIndex+3)%4]]]==1){
+
                     if(!isMainRoad(mainRoad1,mainRoad2,myRoadIndex) && isMainRoad(mainRoad1,mainRoad2,( myRoadIndex+3)%4)){
                         return false;
                     }
@@ -82,6 +86,7 @@ library PDDLib{
                 }
             }
             if(carIndexToDirection[answer[i]] == 1){
+
                 if(roadNextCar[(myRoadIndex+1)%4] != roadNumCars[(myRoadIndex+1)%4]){
                     if(isMainRoad(mainRoad1, mainRoad2, myRoadIndex) && !isMainRoad(mainRoad1,mainRoad2,(myRoadIndex+1)%4)){
                         continue;
@@ -89,12 +94,14 @@ library PDDLib{
                     return false;
                 }
                 if(roadNextCar[(myRoadIndex+2)%4] != roadNumCars[(myRoadIndex+2)%4] && carIndexToDirection[roadCarsIndices[(myRoadIndex+2)%4][roadNextCar[(myRoadIndex+2)%4]]]==2){
+
                     if(!isMainRoad(mainRoad1,mainRoad2, myRoadIndex) && isMainRoad(mainRoad1, mainRoad2, (myRoadIndex+2)%4)){
                         return false;
                     }
                     continue;
                 }
                 if(roadNextCar[(myRoadIndex+3)%4] != roadNumCars[(myRoadIndex+3)%4] && carIndexToDirection[roadCarsIndices[(myRoadIndex+3)%4][roadNextCar[(myRoadIndex+3)%4]]]!=0){
+
                     if(!isMainRoad(mainRoad1, mainRoad2,myRoadIndex) && isMainRoad(mainRoad1,mainRoad2,(myRoadIndex+3)%4)){
                         return false;
                     }
@@ -103,6 +110,7 @@ library PDDLib{
             }
             if(carIndexToDirection[answer[i]] == 2){
                 if(roadNextCar[(myRoadIndex+1)%4] != roadNumCars[(myRoadIndex+1)%4] && carIndexToDirection[roadCarsIndices[(myRoadIndex+1)%4][roadNextCar[(myRoadIndex+1)%4]]]!=0){
+
                     if(isMainRoad(mainRoad1,mainRoad2,myRoadIndex) && !isMainRoad(mainRoad1,mainRoad2,(myRoadIndex+1)%4)){
                         continue;
                     }
@@ -115,6 +123,7 @@ library PDDLib{
                     continue;
                 }
                 if(roadNextCar[(myRoadIndex+3)%4] != roadNumCars[(myRoadIndex+3)%4]  && carIndexToDirection[roadCarsIndices[(myRoadIndex+3)%4][roadNextCar[(myRoadIndex+3)%4]]]!=0){
+
                     if(!isMainRoad(mainRoad1,mainRoad2,myRoadIndex) && isMainRoad(mainRoad1,mainRoad2,(myRoadIndex+3)%4)){
                         return false;
                     }
@@ -134,4 +143,5 @@ library PDDLib{
         value = _dna % 10;
         dna = _dna / 10;
     }
+
 }
