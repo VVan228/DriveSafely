@@ -57,4 +57,16 @@ contract('CarHelper', (accounts) => {
         assert.equal(chassis[0].id, cars[0].chassisId);
         assert.equal(chassis.length, 1);
     });
+
+    it('one car for one user', async () => {
+        const instance = await TokenOwnership.deployed();
+        const cars = await instance.getCarsByOwner(accounts[0]);
+        assert.equal(cars.length, 1);
+    });
+
+    it('get id user fuel station', async () => {
+        const instance = await TokenOwnership.deployed();
+        const fuelStation = await instance.getFuelStationByOwner(accounts[0]);
+        assert.equal(fuelStation.id, 0);
+    });
 });
