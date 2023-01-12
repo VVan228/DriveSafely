@@ -8,10 +8,12 @@ import car3 from "./cars/car5.svg"
 import car4 from "./cars/car9.svg"
 import {useNavigate} from "react-router-dom";
 import MySidebar from "../components/UI/sidebar/MySidebar";
+import {faker} from "@faker-js/faker";
 
 
 const Login = () => {
 
+    const {carContract} = useContext(AuthContext)
     const {isAuth, setIsAuth, isMetamaskSet, setIsMetamaskSet} = useContext(AuthContext)
     const [account, setAccount] = useState(null)
     const [balance, setBalance] = useState(null)

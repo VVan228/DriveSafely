@@ -15,6 +15,7 @@ const Car = (props) => {
             height: props.height
         }
         }>
+
             <img src={props.car.image} alt=""/>
             {(props.order!=-1) ? <div className={classes.orderSprite} style={{transform: `rotate(${-props.rotate}deg)`}}>
                 {props.order + 1}

@@ -103,6 +103,7 @@ const Race = () => {
     console.log(testCarsComponents)
 
 
+
     const [waitForPlayers, isRoomLoading, error] = useFetching(async () => {
         setTimeout(() => {
             console.log("loaded")
