@@ -68,6 +68,7 @@ contract RaceHandler is CarHelper{
     OpenedRoom[] public openedRooms;
     mapping(uint => StartedRoom) public idToStartedRooms;
 
+
     /// search room for competition
     /// @param carId car id
     /// @dev if exist appropriate room for current user, user start competition in this room, else add new room
@@ -123,6 +124,7 @@ contract RaceHandler is CarHelper{
         require(idToStartedRooms[roomId].closed, "room not closed");
         return idToStartedRooms[roomId].answers;
     }
+
 
     /// commit ans
     /// @param roomId room id
