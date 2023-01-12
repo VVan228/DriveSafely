@@ -7,12 +7,17 @@ import "../node_modules/@openzeppelin/contracts/utils/Strings.sol";
 
 contract CarHelper is CarFactory {
 
-    uint capacityCoef = 0.00001 ether;
+    uint public capacityCoef  = 0.00001 ether ;
     uint productionPerHourCoef = 0.0002 ether;
     uint horsePowersCoef = 0.000015 ether;
     uint consumtionCoef = 0.005 ether;
     uint durabilityCoef = 0.0000000001 ether;
     uint levelUpCost = 0.001 ether;
+
+
+    // function getCapacityCoef() external view returns(uint){
+    //     return capacityCoef;
+    // }
 
     modifier onlyOwnerOfCar(uint _carId) {
         require(msg.sender == carToOwner[_carId]);
@@ -114,9 +119,11 @@ contract CarHelper is CarFactory {
     }
 
     function upgradeCapacity(uint _fuelStatonId, uint8 _counts) external payable onlyOwnerOfFuelStation(_fuelStatonId) {
-        require(msg.value == (_counts * stations[_fuelStatonId].capacity * capacityCoef));
-        payable(owner()).transfer(msg.value);
-        stations[_fuelStatonId].capacity += _counts; 
+        unchecked {
+            require(msg.value == (_counts * stations[_fuelStatonId].capacity * capacityCoef));
+            payable(owner()).transfer(msg.value);
+            stations[_fuelStatonId].capacity += _counts; 
+        }
     }
 
     function upgradeProductionPerHour(uint _fuelStatonId, uint8 _counts) external payable onlyOwnerOfFuelStation(_fuelStatonId) {
