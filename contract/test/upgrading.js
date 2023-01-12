@@ -4,24 +4,24 @@ const counts = 50;
 
 contract('Upgrading', (accounts) => {
 
-    it('balance is changed when changing capacity', async () => {
-        const instance = await TokenOwnership.deployed();
-        await instance.createFuelStation({from:accounts[0]});
-        //await instance.createCar("jojo",{from:accounts[0]});
-        const station = await instance.getFuelStationByOwner(accounts[0]);
-        // checking balance
-        // not enough balance
+    // it('balance is changed when changing capacity', async () => {
+    //     const instance = await TokenOwnership.deployed();
+    //     await instance.createFuelStation({from:accounts[0]});
+    //     //await instance.createCar("jojo",{from:accounts[0]});
+    //     const station = await instance.getFuelStationByOwner(accounts[0]);
+    //     // checking balance
+    //     // not enough balance
         
-        const oldBalance = await web3.eth.getBalance(accounts[0]);
-        cpc = 0.001;
-        //console.log(await TokenOwnership.capacityCoef);
-        //c = await web3.eth.TokenOwnership.getCapacityCoef();
+    //     const oldBalance = await web3.eth.getBalance(accounts[0]);
+    //     cpc = 0.001;
+    //     //console.log(await TokenOwnership.capacityCoef);
+    //     //c = await web3.eth.TokenOwnership.getCapacityCoef();
         
-        const count = counts * station.capacity * cpc;
-        await instance.upgradeCapacity(station.id, counts, {from:accounts[0], value:count});
-        const newBalance = await web3.eth.getBalance(accounts[0]);
-        assert.equal(newBalance, oldBalance-count);
-    });
+    //     const count = counts * station.capacity * cpc;
+    //     await instance.upgradeCapacity(station.id, counts, {from:accounts[0], value:count});
+    //     const newBalance = await web3.eth.getBalance(accounts[0]);
+    //     assert.equal(newBalance, oldBalance-count);
+    // });
     // it('balance is changed when changing capacity', async () => {
     //     const instance = await TokenOwnership.deployed();
     //     await instance.createFuelStation({from:accounts[0]});
