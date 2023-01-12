@@ -1,9 +1,42 @@
 export const getRoomInfo = (roomDna) => {
     let dna = getDnaValues(roomDna)
     let crossType = dna[0]
-    let roadTypes = [0,0,0,0]
-    roadTypes[dna[1]]=1
-    roadTypes[dna[2]]=1
+    let roadTypes = []
+    roadTypes.push({
+        position: {
+            x: 36.5,
+            y: 33.25
+        },
+        rotation: 90,
+        isMain: false
+    })
+    roadTypes.push({
+        position:{
+            x: 59,
+            y: 34
+        },
+        rotation: 0,
+        isMain: false
+    })
+
+    roadTypes.push({
+        position:{
+            x: 58,
+            y: 61
+        },
+        rotation: 270,
+        isMain: false
+    })
+    roadTypes.push({
+        position: {
+            x: 36.5,
+            y: 60.5
+        },
+        rotation: 180,
+        isMain: false
+    })
+    roadTypes[dna[1]-1].isMain=true
+    roadTypes[dna[2]-1].isMain=true
     dna = dna.slice(3)
     let roads = [0, 0, 0, 0]
     let cars = []

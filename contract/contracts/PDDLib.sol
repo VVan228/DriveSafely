@@ -33,7 +33,7 @@ library PDDLib{
     }
 
     function randMod(uint _modulus,uint _crossId, uint _randNonce) private pure returns(uint) {
-        return uint(keccak256(abi.encodePacked(_crossId, _randNonce))) % _modulus;
+        return uint(keccak256(abi.encodePacked(block.timestamp, _crossId, _randNonce))) % _modulus;
     }
     function isCorrectAnswer(uint roomDNA, uint[] memory answer) public view returns (bool){
         uint crossId;
@@ -50,8 +50,10 @@ library PDDLib{
         for(uint i=0; i<answer.length; i++){
             uint carStart;
             (carStart, carsDirections) = getNextDnaValue(carsDirections);
+            carStart=carStart-1;
             uint carEnd;
             (carEnd, carsDirections) = getNextDnaValue(carsDirections);
+            carEnd=carEnd-1;
             carIndexToRoadIndex[i]=carStart;
             carIndexToDirection[i]=carEnd;
             roadCarsIndices[carStart][roadNumCars[carStart]]=i;
@@ -65,42 +67,42 @@ library PDDLib{
                 return false;
             }
             uint myRoadIndex = carIndexToRoadIndex[answer[i]];
-            if(carIndexToDirection[answer[i]] == 1){
-                if(roadNextCar[(myRoadIndex+2)%4] != roadNumCars[(myRoadIndex+2)%4] && carIndexToDirection[roadCarsIndices[(myRoadIndex+2)%4][roadNextCar[(myRoadIndex+2)%4]]]==3){
+            if(carIndexToDirection[answer[i]] == 0){
+                if(roadNextCar[(myRoadIndex+2)%4] != roadNumCars[(myRoadIndex+2)%4] && carIndexToDirection[roadCarsIndices[(myRoadIndex+2)%4][roadNextCar[(myRoadIndex+2)%4]]]==2){
                     if(!isMainRoad(mainRoad1,mainRoad2,myRoadIndex) && isMainRoad((mainRoad1,mainRoad2, myRoadIndex+2)%4)){
                         return false;
                     }
                     continue;
                 }
-                if(roadNextCar[(myRoadIndex+3)%4] != roadNumCars[(myRoadIndex+3)%4] && carIndexToDirection[roadCarsIndices[(myRoadIndex+3)%4][roadNextCar[(myRoadIndex+3)%4]]]==2){
+                if(roadNextCar[(myRoadIndex+3)%4] != roadNumCars[(myRoadIndex+3)%4] && carIndexToDirection[roadCarsIndices[(myRoadIndex+3)%4][roadNextCar[(myRoadIndex+3)%4]]]==1){
                     if(!isMainRoad(mainRoad1,mainRoad2,myRoadIndex) && isMainRoad(mainRoad1,mainRoad2,( myRoadIndex+3)%4)){
                         return false;
                     }
                     continue;
                 }
             }
-            if(carIndexToDirection[answer[i]] == 2){
+            if(carIndexToDirection[answer[i]] == 1){
                 if(roadNextCar[(myRoadIndex+1)%4] != roadNumCars[(myRoadIndex+1)%4]){
                     if(isMainRoad(mainRoad1, mainRoad2, myRoadIndex) && !isMainRoad(mainRoad1,mainRoad2,(myRoadIndex+1)%4)){
                         continue;
                     }
                     return false;
                 }
-                if(roadNextCar[(myRoadIndex+2)%4] != roadNumCars[(myRoadIndex+2)%4] && carIndexToDirection[roadCarsIndices[(myRoadIndex+2)%4][roadNextCar[(myRoadIndex+2)%4]]]==3){
+                if(roadNextCar[(myRoadIndex+2)%4] != roadNumCars[(myRoadIndex+2)%4] && carIndexToDirection[roadCarsIndices[(myRoadIndex+2)%4][roadNextCar[(myRoadIndex+2)%4]]]==2){
                     if(!isMainRoad(mainRoad1,mainRoad2, myRoadIndex) && isMainRoad(mainRoad1, mainRoad2, (myRoadIndex+2)%4)){
                         return false;
                     }
                     continue;
                 }
-                if(roadNextCar[(myRoadIndex+3)%4] != roadNumCars[(myRoadIndex+3)%4] && carIndexToDirection[roadCarsIndices[(myRoadIndex+3)%4][roadNextCar[(myRoadIndex+3)%4]]]!=1){
+                if(roadNextCar[(myRoadIndex+3)%4] != roadNumCars[(myRoadIndex+3)%4] && carIndexToDirection[roadCarsIndices[(myRoadIndex+3)%4][roadNextCar[(myRoadIndex+3)%4]]]!=0){
                     if(!isMainRoad(mainRoad1, mainRoad2,myRoadIndex) && isMainRoad(mainRoad1,mainRoad2,(myRoadIndex+3)%4)){
                         return false;
                     }
                     continue;
                 }
             }
-            if(carIndexToDirection[answer[i]] == 3){
-                if(roadNextCar[(myRoadIndex+1)%4] != roadNumCars[(myRoadIndex+1)%4] && carIndexToDirection[roadCarsIndices[(myRoadIndex+1)%4][roadNextCar[(myRoadIndex+1)%4]]]!=1){
+            if(carIndexToDirection[answer[i]] == 2){
+                if(roadNextCar[(myRoadIndex+1)%4] != roadNumCars[(myRoadIndex+1)%4] && carIndexToDirection[roadCarsIndices[(myRoadIndex+1)%4][roadNextCar[(myRoadIndex+1)%4]]]!=0){
                     if(isMainRoad(mainRoad1,mainRoad2,myRoadIndex) && !isMainRoad(mainRoad1,mainRoad2,(myRoadIndex+1)%4)){
                         continue;
                     }
@@ -112,7 +114,7 @@ library PDDLib{
                     }
                     continue;
                 }
-                if(roadNextCar[(myRoadIndex+3)%4] != roadNumCars[(myRoadIndex+3)%4]  && carIndexToDirection[roadCarsIndices[(myRoadIndex+3)%4][roadNextCar[(myRoadIndex+3)%4]]]!=1){
+                if(roadNextCar[(myRoadIndex+3)%4] != roadNumCars[(myRoadIndex+3)%4]  && carIndexToDirection[roadCarsIndices[(myRoadIndex+3)%4][roadNextCar[(myRoadIndex+3)%4]]]!=0){
                     if(!isMainRoad(mainRoad1,mainRoad2,myRoadIndex) && isMainRoad(mainRoad1,mainRoad2,(myRoadIndex+3)%4)){
                         return false;
                     }

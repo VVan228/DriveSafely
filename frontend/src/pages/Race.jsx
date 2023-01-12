@@ -11,6 +11,7 @@ import {getCarPosition} from "../utils/race";
 import {getRoomInfo} from "../utils/room";
 import {AuthContext} from "../context";
 import ContractService from "../API/ContractService";
+import Sign from "../components/Sign";
 
 const Race = () => {
 
@@ -74,7 +75,7 @@ const Race = () => {
 
             // setIsOrderShow(true);
     }
-    const roomInfo = getRoomInfo("112211334411121");
+    const roomInfo = getRoomInfo("112211334411131");
     const roadType = Math.floor(Math.random() * 2)
     const testCars = getDummyCars(Math.floor(Math.random() * ((roadType === 0 ? 5 : 4) - 2) + 2))
     const testCarsComponents = roomInfo.listOfCars.map((car, index)=>
@@ -87,6 +88,15 @@ const Race = () => {
             height="8%"
             rotate={car.rotation}
             onClick={()=>onClickCar(car.index)}
+        />
+    )
+    const signs = roomInfo.mainSignIndicator.map((sign, index)=>
+        <Sign
+            isMain={sign.isMain}
+            position={sign.position}
+            width="5%"
+            height="5%"
+            rotate={sign.rotation}
         />
     )
     const [cars, setCars] = useState(testCarsComponents)
@@ -131,6 +141,7 @@ const Race = () => {
                     <div style={{backgroundImage:  `url(${background})`, backgroundSize: "cover",
                     backgroundPosition: "center", width: "100%", paddingTop:"80%", position: "relative"}}>
                         {cars.map(testCar => testCar)}
+                        {signs.map(testCar => testCar)}
                     </div>
                 </div>
             </div>
