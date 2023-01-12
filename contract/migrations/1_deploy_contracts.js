@@ -34,8 +34,9 @@ async function doDeploy(deployer, network) {
   let to = await TokenOwnership.deployed();
   await deployer.link(PDDLib, TokenOwnership);
 
-  await deployer.deploy(PDDLibTest);
   await deployer.link(PDDLib, PDDLibTest);
+  await deployer.deploy(PDDLibTest);
+  
 
   await c.init(to.address);
   await ch.init(to.address);

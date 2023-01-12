@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@openzeppelin/contracts": "^4.8.0",
+    "chai": "^4.3.7",
     "truffle": "^5.7.2"
   }
 }
