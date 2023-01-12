@@ -133,7 +133,7 @@ contract RaceHandler is CarHelper{
         require(playersToRooms[msg.sender]==roomId, "not your room");
 
         uint roomDNA = idToStartedRooms[roomId].roomDNA;
-        bool right = true;//PDDLib.isCorrectAnswer(roomDNA, answer);
+        bool right = PDDLib.isCorrectAnswer(roomDNA, answer);
         //Answer memory ans = Answer(msg.sender, right, block.timestamp);
         
         Answer memory ans = Answer(msg.sender, right, block.timestamp, playersToCars[msg.sender]);
@@ -160,6 +160,5 @@ contract RaceHandler is CarHelper{
                 //payable(idToStartedRooms[roomId].answers[0].player).transfer(1000);
             }
         }
-        return right;
     }
 }
