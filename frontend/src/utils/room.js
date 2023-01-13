@@ -1,4 +1,18 @@
-export const getRoomInfo = (roomDna) => {
+function importAll(r) {
+    return r.keys().map(r);
+}
+
+function choose(choices) {
+    var index = Math.floor(Math.random() * choices.length);
+    return choices[index];
+}
+
+
+const images = importAll(require.context('../images/cars', false, /\.(png|jpe?g|svg)$/));
+
+
+
+export const getRoomInfo = (roomDna, _cars) => {
     let dna = getDnaValues(roomDna)
     let crossType = dna[0]
     let roadTypes = []
@@ -43,23 +57,24 @@ export const getRoomInfo = (roomDna) => {
     for(let i=0; i<dna.length; i+=2){
         let x,y
         if(dna[i]==1){
-            x = 35.5 -10*roads[0]
+            x = 34 -10*roads[0]
             y = 41
             roads[0]++
         }else if(dna[i]==2){
             x = 51.5
-            y = 31 - 13*roads[1]
+            y = 29 - 13*roads[1]
             roads[1]++
         }else if(dna[i]==3){
-            x = 59.5 + 10*roads[2]
+            x = 61 + 10*roads[2]
             y = 51
             roads[2]++
         }else if(dna[i]==4){
             x = 43.5
-            y = 61 + 13*roads[3]
+            y = 63 + 13*roads[3]
             roads[3]++
         }
         cars.push({
+            image: choose(images),
             index: i/2,
             direction: dna[i+1],
             rotation: 180 - 90*dna[i],

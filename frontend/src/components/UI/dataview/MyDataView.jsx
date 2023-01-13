@@ -13,7 +13,7 @@ const MyDataView = (props) => {
             {
                 props.items.length != 0 ?
                     props.items.map(item =>
-                        props.itemsType === "car" ? <CarCard onClick={() => {window.open(`/race?carId=${item.id}`)}} car={item} key={item.id}/> :
+                        props.itemsType === "car" ? <CarCard onClick={() => {navigate(`/roomWaiting/${item.id}`)}} car={item} key={item.id}/> :
                             props.itemsType === "engine" ? <CarCard car={item} key={item.id}/> :
                                 <CarCard car={item} key={item.id}/>
                     ) :

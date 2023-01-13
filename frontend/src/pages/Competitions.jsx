@@ -15,6 +15,7 @@ import Navbar from "../components/UI/navbar/Navbar";
 import {DataView} from "primereact/dataview";
 import MyDataView from "../components/UI/dataview/MyDataView";
 import CarCard from "../components/UI/cards/CarCard";
+import Loader from "../components/UI/loader/Loader";
 
 const Competitions = () => {
 
@@ -27,9 +28,10 @@ const Competitions = () => {
     const [buttonsOpacity, setButtonsOpacity] = useState(1)
     const [worldContainerBottom, setWorldContainerBottom] = useState("-100%")
     const modal = useRef()
+    const [showModal, setShowModal] = useState(false)
 
 
-    const {contract, isLoading} = useContext(AuthContext)
+    const {tokenContract, isLoading} = useContext(AuthContext)
     const [cars, setCars] = useState([])
     const [engines, setEngines] = useState([])
     const [chassis, setChassis] = useState([])
@@ -37,23 +39,23 @@ const Competitions = () => {
 
     const [fetchCars, isCarsLoading, carsError] = useFetching(async () => {
             const owner = await ContractService.getUserAddress()
-            let response = await contract.getCarsByOwner(owner)
+            let response = await tokenContract.getCarsByOwner(owner)
             // await setCars(await convertCarsToJsObject(response))
-            setCars(await getDummyCars(50))
+            setCars(await convertCarsToJsObject(response))
             return response;
         }
     )
 
     const [fetchEngines, isEnginesLoading, enginesError] = useFetching(async () => {
             const owner = await ContractService.getUserAddress()
-            const response = await contract.getEnginesByOwner(owner)
+            const response = await tokenContract.getEnginesByOwner(owner)
             setEngines(response)
         }
     )
 
     const [fetchChassis, isChassisLoading, chassisError] = useFetching(async () => {
             const owner = await ContractService.getUserAddress()
-            const response = await contract.getChassisByOwner(owner)
+            const response = await tokenContract.getChassisByOwner(owner)
             setChassis(response)
         }
     )
@@ -99,99 +101,98 @@ const Competitions = () => {
             fetchCars()
             fetchEngines()
             fetchChassis()
-            setCars(getDummyCars(5))
         }, []
     )
 
     return (
-        <div className="p-0 h-100">
-            <Navbar/>
-            <div className={classes.competitionsContainer}>
-                <div className={classes.bottomSphere}>
-                </div>
-                <div style={{
-                    width: `${totalWidth}px`,
-                    left: `${-offset}px`,
-                    bottom: worldContainerBottom,
-                    position: "absolute",
-                    transition: ".3s ease"
-                }}
-                     className="d-flex">
-                    {worlds.map(world =>
-                        <div
-                            world-id={world.id}
-                            key={world.id}
-                            style={{
-                                // backgroundColor: world.color,
-                                width: window.innerWidth,
-                                height: "100%",
-                            }}
-                            className="d-flex justify-content-center align-items-center"
-                        >
-                            <WorldPreview
-                                src={city}
-                                level={world.id}
-                                hueRotate={360 / worlds.length * world.id}
+        isCarsLoading ? <Loader/> :
+            <div className="p-0 h-100">
+                <Navbar/>
+                <div className={classes.competitionsContainer}>
+                    <div className={classes.bottomSphere}>
+                    </div>
+                    <div style={{
+                        width: `${totalWidth}px`,
+                        left: `${-offset}px`,
+                        bottom: worldContainerBottom,
+                        position: "absolute",
+                        transition: ".3s ease"
+                    }}
+                         className="d-flex">
+                        {worlds.map(world =>
+                            <div
+                                world-id={world.id}
+                                key={world.id}
                                 style={{
-                                    transform: `scale(${scale})`,
-                                    zIndex: 120,
-                                    opacity: worldOpacity,
-                                    transition: ".3s"
+                                    // backgroundColor: world.color,
+                                    width: window.innerWidth,
+                                    height: "100%",
                                 }}
-                                data-bs-target="#selectCar"
-                                data-bs-toggle="modal"
-                                onClick={() => {
-                                    setSelectedWorld(world.id)
-                                    // setWorldContainerBottom("-100%")
-                                    // modal.modal('toggle')
-                                }}
-                            />
-                        </div>
-                    )}
+                                className="d-flex justify-content-center align-items-center"
+                            >
+                                <WorldPreview
+                                    src={city}
+                                    level={world.id}
+                                    hueRotate={360 / worlds.length * world.id}
+                                    style={{
+                                        transform: `scale(${scale})`,
+                                        zIndex: 120,
+                                        opacity: worldOpacity,
+                                        transition: ".3s"
+                                    }}
+                                    onClick={() => {
+                                        setSelectedWorld(world.id)
+                                        setShowModal(true)
+                                        // setWorldContainerBottom("-100%")
+                                        // modal.modal('toggle')
+                                    }}
+                                />
+                            </div>
+                        )}
+                    </div>
+                    <div className={classes.toggleBtnsContainer}>
+                        {offset > 0 ? <button
+                            className={classes.toggleButton}
+                            onClick={() => {
+                                setOffset(offset - window.innerWidth)
+                                console.log(offset)
+                            }}
+                        ><i className="pi pi-angle-left" style={{fontSize: "2em"}}></i>
+                        </button> : <div></div>}
+                        {offset < window.innerWidth * (worlds.length - 1) ? <button
+                            className={classes.toggleButton}
+                            onClick={() => {
+                                setOffset(offset + window.innerWidth)
+                                console.log(offset)
+                            }}
+                        ><i className="pi pi-angle-right" style={{fontSize: "2em"}}></i>
+                        </button> : <div></div>}
+                    </div>
+
+
                 </div>
-                <div className={classes.toggleBtnsContainer}>
-                    {offset > 0 ? <button
-                        className={classes.toggleButton}
-                        onClick={() => {
-                            setOffset(offset - window.innerWidth)
-                            console.log(offset)
-                        }}
-                    ><i className="pi pi-angle-left" style={{fontSize: "2em"}}></i>
-                    </button> : <div></div>}
-                    {offset < window.innerWidth * (worlds.length - 1) ? <button
-                        className={classes.toggleButton}
-                        onClick={() => {
-                            setOffset(offset + window.innerWidth)
-                            console.log(offset)
-                        }}
-                    ><i className="pi pi-angle-right" style={{fontSize: "2em"}}></i>
-                    </button> : <div></div>}
-                </div>
-
-
-
-
+                <MyModal
+                    ref={modal}
+                    isShowing={showModal}
+                    close={() => setShowModal(false)}
+                    title={`Мир ${selectedWorld}`}
+                    subTitle={`Выберите машину:`}
+                    modalId="selectCar"
+                    showConfirmButton={false}
+                    confirmButtonText={`Поехали`}
+                    confirmButtonAction={async () => {
+                    }}
+                >
+                    {/*{cars.map(car =>*/}
+                    {/*    <div key={car.id}>*/}
+                    {/*        <h1 className="text-light">{car.model}</h1>*/}
+                    {/*        <MyButton onClick={() => navigate(`/race/${car.id}`)}>Поехали</MyButton>*/}
+                    {/*    </div>*/}
+                    {/*)}*/}
+                    <MyDataView items={getCarsOnLevel(cars, (selectedWorld - 1) * 10)} layout="grid"
+                                itemsType="car"/>
+                </MyModal>
             </div>
-            <MyModal
-                ref={modal}
-                title={`Мир ${selectedWorld}`}
-                subTitle={`Выберите машину:`}
-                modalId="selectCar"
-                showConfirmButton={false}
-                confirmButtonText={`Поехали`}
-                confirmButtonAction={async () => {
-                }}
-            >
-                {/*{cars.map(car =>*/}
-                {/*    <div key={car.id}>*/}
-                {/*        <h1 className="text-light">{car.model}</h1>*/}
-                {/*        <MyButton onClick={() => navigate(`/race/${car.id}`)}>Поехали</MyButton>*/}
-                {/*    </div>*/}
-                {/*)}*/}
-                <MyDataView items={getCarsOnLevel(cars, (selectedWorld - 1) * 10)} layout="grid"
-                            itemsType="car"/>
-            </MyModal>
-        </div>
     );
 };
 

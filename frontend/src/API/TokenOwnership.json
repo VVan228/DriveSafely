@@ -500,6 +500,11 @@
   {
     "inputs": [
       {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
         "internalType": "uint256",
         "name": "carId",
         "type": "uint256"
@@ -1000,6 +1005,11 @@
         "internalType": "struct RaceHandler.Cross",
         "name": "cross",
         "type": "tuple"
+      },
+      {
+        "internalType": "uint256",
+        "name": "roomSeed",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -1081,11 +1091,85 @@
     "constant": true
   },
   {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "reciever",
+        "type": "address"
+      }
+    ],
+    "name": "payToWinner",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function",
+    "payable": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "playersToCars",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "playersToRooms",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
     "inputs": [],
     "name": "renounceOwnership",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "roomIdToRoomDNA",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [

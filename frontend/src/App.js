@@ -19,6 +19,7 @@ function App() {
     const [engineContract, setEngineContract] = useState(new ethers.Contract(Constants.ENGINE_OWNERSHIP_ADDRESS, Constants.ENGINE_OWNERSHIP_ABI, signer))
     const [chassisContract, setChassisContract] = useState(new ethers.Contract(Constants.CHASSIS_OWNERSHIP_ADDRESS, Constants.CHASSIS_OWNERSHIP_ABI, signer))
     const [carContract, setCarContract] = useState(new ethers.Contract(Constants.CAR_OWNERSHIP_ADDRESS, Constants.CAR_OWNERSHIP_ABI, signer))
+    const [pddContract, setPddContract] = useState(new ethers.Contract(Constants.PDD_ADDRESS, Constants.PDD_ABI, signer))
 
     useEffect(() => {
         if (localStorage.getItem('auth')) {
@@ -38,11 +39,10 @@ function App() {
             tokenContract,
             carContract,
             engineContract,
-            chassisContract
-            // contract2
+            chassisContract,
+            pddContract
         }}>
             <BrowserRouter>
-                {/*<Navbar/>*/}
                 <AppRouter className="w-100 h-100"/>
             </BrowserRouter>
         </AuthContext.Provider>

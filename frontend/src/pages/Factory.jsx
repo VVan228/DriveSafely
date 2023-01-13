@@ -13,6 +13,7 @@ import MyModal from "../components/UI/modal/MyModal";
 import MyInput from "../components/UI/input/MyInput";
 import {ethers} from "ethers";
 import classes2 from "../components/UI/cards/Card.module.css"
+import {faker} from "@faker-js/faker";
 
 const Factory = () => {
 
@@ -36,6 +37,8 @@ const Factory = () => {
 
     useEffect(() => {
         fetchFactory()
+        // tokenContract.createCar(faker.vehicle.vehicle())
+        // tokenContract.createFuelStation()
     }, [])
 
     if (factoryError) {

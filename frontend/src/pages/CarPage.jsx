@@ -77,10 +77,9 @@ const CarPage = () => {
                     <ParameterBar title={"Пробег"} value={`${car.mileage} км`}></ParameterBar>
                     <ParameterBar title={"Двигатель"} value={`#${addZerosToId(car.engineId, 8)}`}></ParameterBar>
                     <ParameterBar title={"Шасси"} value={`#${addZerosToId(car.chassisId, 8)}`}></ParameterBar>
-                    <MyButton onClick={()=>{
-                        let cost = `${parseInt(price * Math.pow(10, 18))}`
-                        console.log(cost)
-                        carContract.buyFromMarketplace(ethers.BigNumber.from(`${car.id}`),{value: cost});
+                    <MyButton onClick={async () => {
+                        let price = await tokenContract.carToPrice(car.id)
+                        carContract.buyFromMarketplace(ethers.BigNumber.from(`${car.id}`), {value: price});
                     }
                     }>Купить за {price.toFixed(8)} ETH</MyButton>
                 </div>

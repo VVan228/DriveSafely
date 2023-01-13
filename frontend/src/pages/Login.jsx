@@ -14,7 +14,7 @@ import {faker} from "@faker-js/faker";
 const Login = () => {
 
     const {carContract} = useContext(AuthContext)
-    const {isAuth, setIsAuth, isMetamaskSet, setIsMetamaskSet} = useContext(AuthContext)
+    const {isAuth, setIsAuth} = useContext(AuthContext)
     const [account, setAccount] = useState(null)
     const [balance, setBalance] = useState(null)
     const [errorMessage, setErrorMessage] = useState("")
@@ -25,7 +25,6 @@ const Login = () => {
         if (window.ethereum) {
             window.ethereum.request({method: 'eth_requestAccounts'}).then(result => {
                     setAccount(result[0])
-                    setIsMetamaskSet(true)
                 }
             )
         } else {

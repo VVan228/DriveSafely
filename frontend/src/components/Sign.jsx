@@ -16,8 +16,6 @@ const Sign = (props) => {
         }>
             <img src={props.isMain? mainSign : noMainSign} width="100%" alt=""/>
             </div>
-
-
     );
 };
 
