@@ -5,6 +5,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import Loader from "../components/UI/loader/Loader";
 import {convertToObj} from "../utils/battleResult";
 import MyButton from "../components/UI/button/MyButton";
+import MyDataView from "../components/UI/dataview/MyDataView";
 
 const BattleResult = () => {
 
@@ -28,12 +29,12 @@ const BattleResult = () => {
 
     return (
         isResultsLoading ? <Loader/> :
-            <div className={"row d-flex align-items-center justify-content-evenly w-100 h-100 flex-column"}>
+            <div className={"row d-flex align-items-center justify-content-evenly w-100 h-100 flex-wrap bg-dark"}>
                 {result.map(answer =>
-                    <div className={"card col-2"}>
+                    <div className={["card col-2 text-light m-5 border-0", answer.isCorrect === "true" ? "bg-success" : "bg-danger"].join(" ")}>
                         <span className={"h3"}>ID Машины: {answer.carId}</span>
                         <span>{answer.isCorrect === "true" ? "Правильный" : "Неправильный"} ответ</span>
-                        <span>{answer.time}</span>
+                        <span>{new Date(parseInt(answer.time)).toLocaleDateString('en-US')}</span>
                         <span>{answer.playerAddress}</span>
                     </div>)}
                 <div className={"col-3"}>
